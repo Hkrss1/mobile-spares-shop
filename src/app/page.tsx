@@ -1,8 +1,20 @@
 import ProductGrid from "@/components/ProductGrid";
 import { prisma } from "@/lib/prisma";
 
+// Force dynamic rendering to avoid build-time database queries
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
+
 export default async function Home() {
-  const products = await prisma.product.findMany();
+  let products: Awaited<ReturnType<typeof prisma.product.findMany>> = [];
+
+  try {
+    products = await prisma.product.findMany();
+  } catch (error) {
+    console.error('Failed to fetch products:', error);
+    // Return empty array if database is not available
+    products = [];
+  }
 
   // Cast specs to match Product interface
   const formattedProducts = products.map(p => ({
