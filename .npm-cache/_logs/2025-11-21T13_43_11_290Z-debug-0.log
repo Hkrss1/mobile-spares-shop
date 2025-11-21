@@ -1,0 +1,904 @@
+0 verbose cli C:\Program Files\nodejs\node.exe C:\ProgramData\npm\npm\node_modules\npm\bin\npm-cli.js
+1 info using npm@11.6.3
+2 info using node@v22.15.0
+3 silly config load:file:C:\ProgramData\npm\npm\node_modules\npm\npmrc
+4 silly config load:file:C:\Users\ankit\.gemini\antigravity\scratch\mobile-spares-shop\.npmrc
+5 silly config load:file:C:\Users\ankit\.npmrc
+6 silly config load:file:C:\Users\ankit\AppData\Roaming\npm\etc\npmrc
+7 verbose title npm install prisma@5 @prisma/client@5
+8 verbose argv "install" "prisma@5" "@prisma/client@5" "--cache" ".npm-cache"
+9 verbose logfile logs-max:10 dir:C:\Users\ankit\.gemini\antigravity\scratch\mobile-spares-shop\.npm-cache\_logs\2025-11-21T13_43_11_290Z-
+10 verbose logfile C:\Users\ankit\.gemini\antigravity\scratch\mobile-spares-shop\.npm-cache\_logs\2025-11-21T13_43_11_290Z-debug-0.log
+11 silly logfile done cleaning log files
+12 silly packumentCache heap:4345298944 maxSize:1086324736 maxEntrySize:543162368
+13 verbose shrinkwrap failed to load node_modules/.package-lock.json out of date, updated: node_modules
+14 silly idealTree buildDeps
+15 silly fetch manifest @prisma/client@5
+16 silly packumentCache full:https://registry.npmjs.org/@prisma%2fclient cache-miss
+17 http cache https://registry.npmjs.org/@prisma%2fclient 185ms (cache hit)
+18 silly packumentCache full:https://registry.npmjs.org/@prisma%2fclient set size:65176615 disposed:false
+19 silly fetch manifest prisma@5
+20 silly packumentCache full:https://registry.npmjs.org/prisma cache-miss
+21 http cache https://registry.npmjs.org/prisma 254ms (cache hit)
+22 silly packumentCache full:https://registry.npmjs.org/prisma set size:41483068 disposed:false
+23 silly placeDep ROOT @prisma/client@5.22.0 REPLACE for: mobile-spares-shop@0.1.0 want: 5
+24 silly placeDep ROOT prisma@5.22.0 REPLACE for: mobile-spares-shop@0.1.0 want: 5
+25 silly fetch manifest @prisma/engines@5.22.0
+26 silly packumentCache full:https://registry.npmjs.org/@prisma%2fengines cache-miss
+27 silly fetch manifest fsevents@2.3.3
+28 silly packumentCache full:https://registry.npmjs.org/fsevents cache-miss
+29 http cache https://registry.npmjs.org/@prisma%2fengines 146ms (cache hit)
+30 silly packumentCache full:https://registry.npmjs.org/@prisma%2fengines set size:20967075 disposed:false
+31 http fetch GET 200 https://registry.npmjs.org/fsevents 479ms (cache miss)
+32 silly packumentCache full:https://registry.npmjs.org/fsevents set size:undefined disposed:false
+33 silly placeDep ROOT @prisma/engines@5.22.0 OK for: prisma@5.22.0 want: 5.22.0
+34 silly placeDep ROOT fsevents@2.3.3 OK for: prisma@5.22.0 want: 2.3.3
+35 silly fetch manifest @prisma/debug@5.22.0
+36 silly packumentCache full:https://registry.npmjs.org/@prisma%2fdebug cache-miss
+37 silly fetch manifest @prisma/fetch-engine@5.22.0
+38 silly packumentCache full:https://registry.npmjs.org/@prisma%2ffetch-engine cache-miss
+39 silly fetch manifest @prisma/get-platform@5.22.0
+40 silly packumentCache full:https://registry.npmjs.org/@prisma%2fget-platform cache-miss
+41 silly fetch manifest @prisma/engines-version@5.22.0-44.605197351a3c8bdd595af2d2a9bc3025bca48ea2
+42 silly packumentCache full:https://registry.npmjs.org/@prisma%2fengines-version cache-miss
+43 http cache https://registry.npmjs.org/@prisma%2fdebug 79ms (cache hit)
+44 silly packumentCache full:https://registry.npmjs.org/@prisma%2fdebug set size:27947518 disposed:false
+45 http cache https://registry.npmjs.org/@prisma%2fengines-version 272ms (cache hit)
+46 silly packumentCache full:https://registry.npmjs.org/@prisma%2fengines-version set size:9733190 disposed:false
+47 http cache https://registry.npmjs.org/@prisma%2fget-platform 417ms (cache hit)
+48 silly packumentCache full:https://registry.npmjs.org/@prisma%2fget-platform set size:27586946 disposed:false
+49 http cache https://registry.npmjs.org/@prisma%2ffetch-engine 712ms (cache hit)
+50 silly packumentCache full:https://registry.npmjs.org/@prisma%2ffetch-engine set size:31417731 disposed:false
+51 silly placeDep ROOT @prisma/debug@5.22.0 OK for: @prisma/engines@5.22.0 want: 5.22.0
+52 silly placeDep ROOT @prisma/engines-version@5.22.0-44.605197351a3c8bdd595af2d2a9bc3025bca48ea2 OK for: @prisma/engines@5.22.0 want: 5.22.0-44.605197351a3c8bdd595af2d2a9bc3025bca48ea2
+53 silly placeDep ROOT @prisma/fetch-engine@5.22.0 OK for: @prisma/engines@5.22.0 want: 5.22.0
+54 silly placeDep ROOT @prisma/get-platform@5.22.0 OK for: @prisma/engines@5.22.0 want: 5.22.0
+55 silly reify mark retired [
+55 silly reify   'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\aws-ssl-profiles'
+55 silly reify ]
+56 silly reify mark retired [
+56 silly reify   'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\c12'
+56 silly reify ]
+57 silly reify mark retired [
+57 silly reify   'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\chevrotain'
+57 silly reify ]
+58 silly reify mark retired [
+58 silly reify   'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\chokidar'
+58 silly reify ]
+59 silly reify mark retired [
+59 silly reify   'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\citty'
+59 silly reify ]
+60 silly reify mark retired [
+60 silly reify   'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\confbox'
+60 silly reify ]
+61 silly reify mark retired [
+61 silly reify   'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\consola'
+61 silly reify ]
+62 silly reify mark retired [
+62 silly reify   'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\deepmerge-ts'
+62 silly reify ]
+63 silly reify mark retired [
+63 silly reify   'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\defu'
+63 silly reify ]
+64 silly reify mark retired [
+64 silly reify   'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\destr'
+64 silly reify ]
+65 silly reify mark retired [
+65 silly reify   'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\dotenv'
+65 silly reify ]
+66 silly reify mark retired [
+66 silly reify   'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\effect'
+66 silly reify ]
+67 silly reify mark retired [
+67 silly reify   'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\denque'
+67 silly reify ]
+68 silly reify mark retired [
+68 silly reify   'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\empathic'
+68 silly reify ]
+69 silly reify mark retired [
+69 silly reify   'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\exsolve'
+69 silly reify ]
+70 silly reify mark retired [
+70 silly reify   'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\fast-check'
+70 silly reify ]
+71 silly reify mark retired [
+71 silly reify   'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\foreground-child'
+71 silly reify ]
+72 silly reify mark retired [
+72 silly reify   'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\generate-function'
+72 silly reify ]
+73 silly reify mark retired [
+73 silly reify   'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\get-port-please'
+73 silly reify ]
+74 silly reify mark retired [
+74 silly reify   'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\giget',
+74 silly reify   'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\.bin\\giget',
+74 silly reify   'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\.bin\\giget.cmd',
+74 silly reify   'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\.bin\\giget.ps1'
+74 silly reify ]
+75 silly reify mark retired [
+75 silly reify   'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\graceful-fs'
+75 silly reify ]
+76 silly reify mark retired [
+76 silly reify   'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\grammex'
+76 silly reify ]
+77 silly reify mark retired [
+77 silly reify   'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\hono'
+77 silly reify ]
+78 silly reify mark retired [
+78 silly reify   'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\http-status-codes'
+78 silly reify ]
+79 silly reify mark retired [
+79 silly reify   'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\iconv-lite'
+79 silly reify ]
+80 silly reify mark retired [
+80 silly reify   'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\is-property'
+80 silly reify ]
+81 silly reify mark retired [
+81 silly reify   'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\jiti',
+81 silly reify   'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\.bin\\jiti',
+81 silly reify   'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\.bin\\jiti.cmd',
+81 silly reify   'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\.bin\\jiti.ps1'
+81 silly reify ]
+82 silly reify mark retired [
+82 silly reify   'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\lilconfig'
+82 silly reify ]
+83 silly reify mark retired [
+83 silly reify   'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\lodash'
+83 silly reify ]
+84 silly reify mark retired [
+84 silly reify   'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\long'
+84 silly reify ]
+85 silly reify mark retired [
+85 silly reify   'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\mysql2'
+85 silly reify ]
+86 silly reify mark retired [
+86 silly reify   'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\named-placeholders'
+86 silly reify ]
+87 silly reify mark retired [
+87 silly reify   'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\lru.min'
+87 silly reify ]
+88 silly reify mark retired [
+88 silly reify   'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\node-fetch-native'
+88 silly reify ]
+89 silly reify mark retired [
+89 silly reify   'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\nypm',
+89 silly reify   'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\.bin\\nypm',
+89 silly reify   'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\.bin\\nypm.cmd',
+89 silly reify   'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\.bin\\nypm.ps1'
+89 silly reify ]
+90 silly reify mark retired [
+90 silly reify   'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\ohash'
+90 silly reify ]
+91 silly reify mark retired [
+91 silly reify   'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\pathe'
+91 silly reify ]
+92 silly reify mark retired [
+92 silly reify   'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\perfect-debounce'
+92 silly reify ]
+93 silly reify mark retired [
+93 silly reify   'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\pkg-types'
+93 silly reify ]
+94 silly reify mark retired [
+94 silly reify   'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\prisma',
+94 silly reify   'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\.bin\\prisma',
+94 silly reify   'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\.bin\\prisma.cmd',
+94 silly reify   'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\.bin\\prisma.ps1'
+94 silly reify ]
+95 silly reify mark retired [
+95 silly reify   'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\postgres'
+95 silly reify ]
+96 silly reify mark retired [
+96 silly reify   'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\proper-lockfile'
+96 silly reify ]
+97 silly reify mark retired [
+97 silly reify   'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\pure-rand'
+97 silly reify ]
+98 silly reify mark retired [
+98 silly reify   'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\rc9'
+98 silly reify ]
+99 silly reify mark retired [
+99 silly reify   'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\readdirp'
+99 silly reify ]
+100 silly reify mark retired [
+100 silly reify   'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\regexp-to-ast'
+100 silly reify ]
+101 silly reify mark retired [
+101 silly reify   'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\retry'
+101 silly reify ]
+102 silly reify mark retired [
+102 silly reify   'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\remeda'
+102 silly reify ]
+103 silly reify mark retired [
+103 silly reify   'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\safer-buffer'
+103 silly reify ]
+104 silly reify mark retired [
+104 silly reify   'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\seq-queue'
+104 silly reify ]
+105 silly reify mark retired [
+105 silly reify   'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\signal-exit'
+105 silly reify ]
+106 silly reify mark retired [
+106 silly reify   'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\sqlstring'
+106 silly reify ]
+107 silly reify mark retired [
+107 silly reify   'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\std-env'
+107 silly reify ]
+108 silly reify mark retired [
+108 silly reify   'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\tinyexec'
+108 silly reify ]
+109 silly reify mark retired [
+109 silly reify   'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\type-fest'
+109 silly reify ]
+110 silly reify mark retired [
+110 silly reify   'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\valibot'
+110 silly reify ]
+111 silly reify mark retired [
+111 silly reify   'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\zeptomatch'
+111 silly reify ]
+112 silly reify mark retired [
+112 silly reify   'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\@chevrotain\\cst-dts-gen'
+112 silly reify ]
+113 silly reify mark retired [
+113 silly reify   'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\@chevrotain\\gast'
+113 silly reify ]
+114 silly reify mark retired [
+114 silly reify   'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\@chevrotain\\types'
+114 silly reify ]
+115 silly reify mark retired [
+115 silly reify   'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\@chevrotain\\utils'
+115 silly reify ]
+116 silly reify mark retired [
+116 silly reify   'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\@electric-sql\\pglite'
+116 silly reify ]
+117 silly reify mark retired [
+117 silly reify   'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\@electric-sql\\pglite-tools'
+117 silly reify ]
+118 silly reify mark retired [
+118 silly reify   'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\@electric-sql\\pglite-socket',
+118 silly reify   'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\.bin\\pglite-server',
+118 silly reify   'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\.bin\\pglite-server.cmd',
+118 silly reify   'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\.bin\\pglite-server.ps1'
+118 silly reify ]
+119 silly reify mark retired [
+119 silly reify   'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\@hono\\node-server'
+119 silly reify ]
+120 silly reify mark retired [
+120 silly reify   'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\@mrleebo\\prisma-ast'
+120 silly reify ]
+121 silly reify mark retired [
+121 silly reify   'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\@prisma\\client'
+121 silly reify ]
+122 silly reify mark retired [
+122 silly reify   'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\@prisma\\config'
+122 silly reify ]
+123 silly reify mark retired [
+123 silly reify   'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\@prisma\\dev'
+123 silly reify ]
+124 silly reify mark retired [
+124 silly reify   'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\@prisma\\debug'
+124 silly reify ]
+125 silly reify mark retired [
+125 silly reify   'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\@prisma\\client-runtime-utils'
+125 silly reify ]
+126 silly reify mark retired [
+126 silly reify   'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\@prisma\\engines'
+126 silly reify ]
+127 silly reify mark retired [
+127 silly reify   'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\@prisma\\get-platform'
+127 silly reify ]
+128 silly reify mark retired [
+128 silly reify   'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\@prisma\\engines-version'
+128 silly reify ]
+129 silly reify mark retired [
+129 silly reify   'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\@prisma\\fetch-engine'
+129 silly reify ]
+130 silly reify mark retired [
+130 silly reify   'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\@prisma\\query-plan-executor'
+130 silly reify ]
+131 silly reify mark retired [
+131 silly reify   'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\@prisma\\studio-core-licensed'
+131 silly reify ]
+132 silly reify mark retired [
+132 silly reify   'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\@standard-schema\\spec'
+132 silly reify ]
+133 silly reify moves {
+133 silly reify   'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\aws-ssl-profiles': 'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\.aws-ssl-profiles-QEyZlWE5',
+133 silly reify   'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\c12': 'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\.c12-lnTVdS68',
+133 silly reify   'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\chevrotain': 'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\.chevrotain-g8ozqzjz',
+133 silly reify   'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\chokidar': 'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\.chokidar-znGdLas7',
+133 silly reify   'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\citty': 'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\.citty-0mj1PVwP',
+133 silly reify   'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\confbox': 'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\.confbox-iIkgzZBD',
+133 silly reify   'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\consola': 'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\.consola-H12XwVDb',
+133 silly reify   'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\deepmerge-ts': 'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\.deepmerge-ts-fcWOJ1UT',
+133 silly reify   'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\defu': 'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\.defu-y7G7uNtJ',
+133 silly reify   'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\destr': 'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\.destr-5uD93Kmi',
+133 silly reify   'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\dotenv': 'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\.dotenv-6H3h9mgW',
+133 silly reify   'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\effect': 'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\.effect-q7yM64PB',
+133 silly reify   'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\denque': 'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\.denque-DGOrTwUy',
+133 silly reify   'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\empathic': 'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\.empathic-qqF8DEOd',
+133 silly reify   'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\exsolve': 'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\.exsolve-S1zFl04G',
+133 silly reify   'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\fast-check': 'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\.fast-check-ffzpspVC',
+133 silly reify   'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\foreground-child': 'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\.foreground-child-SAxJqGGn',
+133 silly reify   'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\generate-function': 'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\.generate-function-3GB2vWRb',
+133 silly reify   'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\get-port-please': 'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\.get-port-please-adcJbq7I',
+133 silly reify   'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\giget': 'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\.giget-Ibz0vUJt',
+133 silly reify   'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\.bin\\giget': 'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\.bin\\.giget-e7mxLSha',
+133 silly reify   'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\.bin\\giget.cmd': 'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\.bin\\.giget.cmd-Jt5Bq3R9',
+133 silly reify   'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\.bin\\giget.ps1': 'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\.bin\\.giget.ps1-qalHMX7h',
+133 silly reify   'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\graceful-fs': 'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\.graceful-fs-HZOfzfEo',
+133 silly reify   'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\grammex': 'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\.grammex-gS0q2o3g',
+133 silly reify   'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\hono': 'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\.hono-o6ehmE2e',
+133 silly reify   'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\http-status-codes': 'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\.http-status-codes-JE9wAblK',
+133 silly reify   'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\iconv-lite': 'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\.iconv-lite-rY1VZPxl',
+133 silly reify   'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\is-property': 'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\.is-property-LczRnx2E',
+133 silly reify   'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\jiti': 'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\.jiti-ixOO4Kq6',
+133 silly reify   'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\.bin\\jiti': 'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\.bin\\.jiti-7d1oA2t7',
+133 silly reify   'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\.bin\\jiti.cmd': 'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\.bin\\.jiti.cmd-GvqwHR9F',
+133 silly reify   'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\.bin\\jiti.ps1': 'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\.bin\\.jiti.ps1-1wtLPrzL',
+133 silly reify   'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\lilconfig': 'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\.lilconfig-e44b8ybk',
+133 silly reify   'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\lodash': 'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\.lodash-HF1WTMl1',
+133 silly reify   'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\long': 'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\.long-SEz2whEf',
+133 silly reify   'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\mysql2': 'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\.mysql2-nmYdeHoT',
+133 silly reify   'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\named-placeholders': 'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\.named-placeholders-kvZDn0WJ',
+133 silly reify   'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\lru.min': 'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\.lru.min-dTjtg6R1',
+133 silly reify   'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\node-fetch-native': 'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\.node-fetch-native-6DoCfmCo',
+133 silly reify   'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\nypm': 'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\.nypm-sxom4W3b',
+133 silly reify   'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\.bin\\nypm': 'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\.bin\\.nypm-Em4ZvNuv',
+133 silly reify   'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\.bin\\nypm.cmd': 'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\.bin\\.nypm.cmd-2pOvkAnm',
+133 silly reify   'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\.bin\\nypm.ps1': 'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\.bin\\.nypm.ps1-Caf2IIKc',
+133 silly reify   'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\ohash': 'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\.ohash-wLqE1FOj',
+133 silly reify   'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\pathe': 'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\.pathe-2dR3RgXq',
+133 silly reify   'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\perfect-debounce': 'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\.perfect-debounce-2xBUkK1E',
+133 silly reify   'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\pkg-types': 'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\.pkg-types-0X7mlX0b',
+133 silly reify   'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\prisma': 'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\.prisma-MWoaog2r',
+133 silly reify   'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\.bin\\prisma': 'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\.bin\\.prisma-o84bueze',
+133 silly reify   'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\.bin\\prisma.cmd': 'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\.bin\\.prisma.cmd-E1wIokrR',
+133 silly reify   'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\.bin\\prisma.ps1': 'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\.bin\\.prisma.ps1-0qkh4jXj',
+133 silly reify   'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\postgres': 'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\.postgres-ZCjZjG5B',
+133 silly reify   'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\proper-lockfile': 'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\.proper-lockfile-n5bjLtTe',
+133 silly reify   'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\pure-rand': 'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\.pure-rand-kOWcDBig',
+133 silly reify   'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\rc9': 'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\.rc9-uxUGBkxC',
+133 silly reify   'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\readdirp': 'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\.readdirp-ekt8n44o',
+133 silly reify   'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\regexp-to-ast': 'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\.regexp-to-ast-LOVfa0ee',
+133 silly reify   'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\retry': 'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\.retry-PvlQEgf2',
+133 silly reify   'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\remeda': 'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\.remeda-Di6zjqlC',
+133 silly reify   'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\safer-buffer': 'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\.safer-buffer-mbln66ET',
+133 silly reify   'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\seq-queue': 'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\.seq-queue-hMa3NMAf',
+133 silly reify   'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\signal-exit': 'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\.signal-exit-u36uEkrz',
+133 silly reify   'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\sqlstring': 'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\.sqlstring-vUf8855w',
+133 silly reify   'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\std-env': 'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\.std-env-WPGrH4JE',
+133 silly reify   'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\tinyexec': 'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\.tinyexec-wi6NUtKO',
+133 silly reify   'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\type-fest': 'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\.type-fest-cihcLsLw',
+133 silly reify   'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\valibot': 'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\.valibot-ddcjQAec',
+133 silly reify   'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\zeptomatch': 'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\.zeptomatch-cyfly7NS',
+133 silly reify   'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\@chevrotain\\cst-dts-gen': 'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\@chevrotain\\.cst-dts-gen-kX8KPfUp',
+133 silly reify   'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\@chevrotain\\gast': 'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\@chevrotain\\.gast-uLyGNJVJ',
+133 silly reify   'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\@chevrotain\\types': 'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\@chevrotain\\.types-x7tJfEom',
+133 silly reify   'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\@chevrotain\\utils': 'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\@chevrotain\\.utils-rGRkLD49',
+133 silly reify   'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\@electric-sql\\pglite': 'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\@electric-sql\\.pglite-53xECQfy',
+133 silly reify   'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\@electric-sql\\pglite-tools': 'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\@electric-sql\\.pglite-tools-e2cmeCna',
+133 silly reify   'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\@electric-sql\\pglite-socket': 'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\@electric-sql\\.pglite-socket-Zx4qPu6m',
+133 silly reify   'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\.bin\\pglite-server': 'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\.bin\\.pglite-server-0toDHyRe',
+133 silly reify   'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\.bin\\pglite-server.cmd': 'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\.bin\\.pglite-server.cmd-z2luJZri',
+133 silly reify   'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\.bin\\pglite-server.ps1': 'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\.bin\\.pglite-server.ps1-MeFHQGO0',
+133 silly reify   'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\@hono\\node-server': 'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\@hono\\.node-server-lDGflNFd',
+133 silly reify   'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\@mrleebo\\prisma-ast': 'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\@mrleebo\\.prisma-ast-eZhoIR71',
+133 silly reify   'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\@prisma\\client': 'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\@prisma\\.client-a0HSCr2B',
+133 silly reify   'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\@prisma\\config': 'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\@prisma\\.config-Py9EqIEK',
+133 silly reify   'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\@prisma\\dev': 'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\@prisma\\.dev-FIufExB9',
+133 silly reify   'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\@prisma\\debug': 'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\@prisma\\.debug-BmQpzCvF',
+133 silly reify   'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\@prisma\\client-runtime-utils': 'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\@prisma\\.client-runtime-utils-JgEqADLS',
+133 silly reify   'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\@prisma\\engines': 'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\@prisma\\.engines-UTJT7dRk',
+133 silly reify   'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\@prisma\\get-platform': 'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\@prisma\\.get-platform-vzx0QfKA',
+133 silly reify   'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\@prisma\\engines-version': 'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\@prisma\\.engines-version-07PfqOUo',
+133 silly reify   'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\@prisma\\fetch-engine': 'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\@prisma\\.fetch-engine-ibXAyf7O',
+133 silly reify   'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\@prisma\\query-plan-executor': 'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\@prisma\\.query-plan-executor-buBN0ddM',
+133 silly reify   'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\@prisma\\studio-core-licensed': 'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\@prisma\\.studio-core-licensed-SSDSnOzM',
+133 silly reify   'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\@standard-schema\\spec': 'C:\\Users\\ankit\\.gemini\\antigravity\\scratch\\mobile-spares-shop\\node_modules\\@standard-schema\\.spec-owdZjynC'
+133 silly reify }
+134 silly audit bulk request {
+134 silly audit   '@babel/code-frame': [ '7.27.1' ],
+134 silly audit   '@babel/compat-data': [ '7.28.5' ],
+134 silly audit   '@babel/core': [ '7.28.5' ],
+134 silly audit   '@babel/generator': [ '7.28.5' ],
+134 silly audit   '@babel/helper-compilation-targets': [ '7.27.2' ],
+134 silly audit   '@babel/helper-globals': [ '7.28.0' ],
+134 silly audit   '@babel/helper-module-imports': [ '7.27.1' ],
+134 silly audit   '@babel/helper-module-transforms': [ '7.28.3' ],
+134 silly audit   '@babel/helper-string-parser': [ '7.27.1' ],
+134 silly audit   '@babel/helper-validator-identifier': [ '7.28.5' ],
+134 silly audit   '@babel/helper-validator-option': [ '7.27.1' ],
+134 silly audit   '@babel/helpers': [ '7.28.4' ],
+134 silly audit   '@babel/parser': [ '7.28.5' ],
+134 silly audit   '@babel/template': [ '7.27.2' ],
+134 silly audit   '@babel/traverse': [ '7.28.5' ],
+134 silly audit   '@babel/types': [ '7.28.5' ],
+134 silly audit   '@emnapi/core': [ '1.7.1' ],
+134 silly audit   '@emnapi/runtime': [ '1.7.1' ],
+134 silly audit   '@emnapi/wasi-threads': [ '1.1.0' ],
+134 silly audit   '@eslint-community/eslint-utils': [ '4.9.0' ],
+134 silly audit   'eslint-visitor-keys': [ '3.4.3', '4.2.1' ],
+134 silly audit   '@eslint-community/regexpp': [ '4.12.2' ],
+134 silly audit   '@eslint/config-array': [ '0.21.1' ],
+134 silly audit   '@eslint/config-helpers': [ '0.4.2' ],
+134 silly audit   '@eslint/core': [ '0.17.0' ],
+134 silly audit   '@eslint/eslintrc': [ '3.3.1' ],
+134 silly audit   '@eslint/js': [ '9.39.1' ],
+134 silly audit   '@eslint/object-schema': [ '2.1.7' ],
+134 silly audit   '@eslint/plugin-kit': [ '0.4.1' ],
+134 silly audit   '@humanfs/core': [ '0.19.1' ],
+134 silly audit   '@humanfs/node': [ '0.16.7' ],
+134 silly audit   '@humanwhocodes/module-importer': [ '1.0.1' ],
+134 silly audit   '@humanwhocodes/retry': [ '0.4.3' ],
+134 silly audit   '@img/colour': [ '1.0.0' ],
+134 silly audit   '@img/sharp-darwin-arm64': [ '0.34.5' ],
+134 silly audit   '@img/sharp-darwin-x64': [ '0.34.5' ],
+134 silly audit   '@img/sharp-libvips-darwin-arm64': [ '1.2.4' ],
+134 silly audit   '@img/sharp-libvips-darwin-x64': [ '1.2.4' ],
+134 silly audit   '@img/sharp-libvips-linux-arm': [ '1.2.4' ],
+134 silly audit   '@img/sharp-libvips-linux-arm64': [ '1.2.4' ],
+134 silly audit   '@img/sharp-libvips-linux-ppc64': [ '1.2.4' ],
+134 silly audit   '@img/sharp-libvips-linux-riscv64': [ '1.2.4' ],
+134 silly audit   '@img/sharp-libvips-linux-s390x': [ '1.2.4' ],
+134 silly audit   '@img/sharp-libvips-linux-x64': [ '1.2.4' ],
+134 silly audit   '@img/sharp-libvips-linuxmusl-arm64': [ '1.2.4' ],
+134 silly audit   '@img/sharp-libvips-linuxmusl-x64': [ '1.2.4' ],
+134 silly audit   '@img/sharp-linux-arm': [ '0.34.5' ],
+134 silly audit   '@img/sharp-linux-arm64': [ '0.34.5' ],
+134 silly audit   '@img/sharp-linux-ppc64': [ '0.34.5' ],
+134 silly audit   '@img/sharp-linux-riscv64': [ '0.34.5' ],
+134 silly audit   '@img/sharp-linux-s390x': [ '0.34.5' ],
+134 silly audit   '@img/sharp-linux-x64': [ '0.34.5' ],
+134 silly audit   '@img/sharp-linuxmusl-arm64': [ '0.34.5' ],
+134 silly audit   '@img/sharp-linuxmusl-x64': [ '0.34.5' ],
+134 silly audit   '@img/sharp-wasm32': [ '0.34.5' ],
+134 silly audit   '@img/sharp-win32-arm64': [ '0.34.5' ],
+134 silly audit   '@img/sharp-win32-ia32': [ '0.34.5' ],
+134 silly audit   '@img/sharp-win32-x64': [ '0.34.5' ],
+134 silly audit   '@jridgewell/gen-mapping': [ '0.3.13' ],
+134 silly audit   '@jridgewell/remapping': [ '2.3.5' ],
+134 silly audit   '@jridgewell/resolve-uri': [ '3.1.2' ],
+134 silly audit   '@jridgewell/sourcemap-codec': [ '1.5.5' ],
+134 silly audit   '@jridgewell/trace-mapping': [ '0.3.31' ],
+134 silly audit   '@napi-rs/wasm-runtime': [ '0.2.12' ],
+134 silly audit   '@next/env': [ '16.0.3' ],
+134 silly audit   '@next/eslint-plugin-next': [ '16.0.3' ],
+134 silly audit   '@next/swc-darwin-arm64': [ '16.0.3' ],
+134 silly audit   '@next/swc-darwin-x64': [ '16.0.3' ],
+134 silly audit   '@next/swc-linux-arm64-gnu': [ '16.0.3' ],
+134 silly audit   '@next/swc-linux-arm64-musl': [ '16.0.3' ],
+134 silly audit   '@next/swc-linux-x64-gnu': [ '16.0.3' ],
+134 silly audit   '@next/swc-linux-x64-musl': [ '16.0.3' ],
+134 silly audit   '@next/swc-win32-arm64-msvc': [ '16.0.3' ],
+134 silly audit   '@next/swc-win32-x64-msvc': [ '16.0.3' ],
+134 silly audit   '@nodelib/fs.scandir': [ '2.1.5' ],
+134 silly audit   '@nodelib/fs.stat': [ '2.0.5' ],
+134 silly audit   '@nodelib/fs.walk': [ '1.2.8' ],
+134 silly audit   '@nolyfill/is-core-module': [ '1.0.39' ],
+134 silly audit   '@rtsao/scc': [ '1.1.0' ],
+134 silly audit   '@swc/helpers': [ '0.5.15' ],
+134 silly audit   '@tybys/wasm-util': [ '0.10.1' ],
+134 silly audit   '@types/estree': [ '1.0.8' ],
+134 silly audit   '@types/json-schema': [ '7.0.15' ],
+134 silly audit   '@types/json5': [ '0.0.29' ],
+134 silly audit   '@types/node': [ '20.19.25' ],
+134 silly audit   '@types/react': [ '19.2.6' ],
+134 silly audit   '@types/react-dom': [ '19.2.3' ],
+134 silly audit   '@typescript-eslint/eslint-plugin': [ '8.47.0' ],
+134 silly audit   ignore: [ '7.0.5', '5.3.2' ],
+134 silly audit   '@typescript-eslint/parser': [ '8.47.0' ],
+134 silly audit   '@typescript-eslint/project-service': [ '8.47.0' ],
+134 silly audit   '@typescript-eslint/scope-manager': [ '8.47.0' ],
+134 silly audit   '@typescript-eslint/tsconfig-utils': [ '8.47.0' ],
+134 silly audit   '@typescript-eslint/type-utils': [ '8.47.0' ],
+134 silly audit   '@typescript-eslint/types': [ '8.47.0' ],
+134 silly audit   '@typescript-eslint/typescript-estree': [ '8.47.0' ],
+134 silly audit   'brace-expansion': [ '2.0.2', '1.1.12' ],
+134 silly audit   'fast-glob': [ '3.3.3', '3.3.1' ],
+134 silly audit   'glob-parent': [ '5.1.2', '6.0.2' ],
+134 silly audit   minimatch: [ '9.0.5', '3.1.2' ],
+134 silly audit   semver: [ '7.7.3', '6.3.1' ],
+134 silly audit   '@typescript-eslint/utils': [ '8.47.0' ],
+134 silly audit   '@typescript-eslint/visitor-keys': [ '8.47.0' ],
+134 silly audit   '@unrs/resolver-binding-android-arm-eabi': [ '1.11.1' ],
+134 silly audit   '@unrs/resolver-binding-android-arm64': [ '1.11.1' ],
+134 silly audit   '@unrs/resolver-binding-darwin-arm64': [ '1.11.1' ],
+134 silly audit   '@unrs/resolver-binding-darwin-x64': [ '1.11.1' ],
+134 silly audit   '@unrs/resolver-binding-freebsd-x64': [ '1.11.1' ],
+134 silly audit   '@unrs/resolver-binding-linux-arm-gnueabihf': [ '1.11.1' ],
+134 silly audit   '@unrs/resolver-binding-linux-arm-musleabihf': [ '1.11.1' ],
+134 silly audit   '@unrs/resolver-binding-linux-arm64-gnu': [ '1.11.1' ],
+134 silly audit   '@unrs/resolver-binding-linux-arm64-musl': [ '1.11.1' ],
+134 silly audit   '@unrs/resolver-binding-linux-ppc64-gnu': [ '1.11.1' ],
+134 silly audit   '@unrs/resolver-binding-linux-riscv64-gnu': [ '1.11.1' ],
+134 silly audit   '@unrs/resolver-binding-linux-riscv64-musl': [ '1.11.1' ],
+134 silly audit   '@unrs/resolver-binding-linux-s390x-gnu': [ '1.11.1' ],
+134 silly audit   '@unrs/resolver-binding-linux-x64-gnu': [ '1.11.1' ],
+134 silly audit   '@unrs/resolver-binding-linux-x64-musl': [ '1.11.1' ],
+134 silly audit   '@unrs/resolver-binding-wasm32-wasi': [ '1.11.1' ],
+134 silly audit   '@unrs/resolver-binding-win32-arm64-msvc': [ '1.11.1' ],
+134 silly audit   '@unrs/resolver-binding-win32-ia32-msvc': [ '1.11.1' ],
+134 silly audit   '@unrs/resolver-binding-win32-x64-msvc': [ '1.11.1' ],
+134 silly audit   acorn: [ '8.15.0' ],
+134 silly audit   'acorn-jsx': [ '5.3.2' ],
+134 silly audit   ajv: [ '6.12.6' ],
+134 silly audit   'ansi-styles': [ '4.3.0' ],
+134 silly audit   argparse: [ '2.0.1' ],
+134 silly audit   'aria-query': [ '5.3.2' ],
+134 silly audit   'array-buffer-byte-length': [ '1.0.2' ],
+134 silly audit   'array-includes': [ '3.1.9' ],
+134 silly audit   'array.prototype.findlast': [ '1.2.5' ],
+134 silly audit   'array.prototype.findlastindex': [ '1.2.6' ],
+134 silly audit   'array.prototype.flat': [ '1.3.3' ],
+134 silly audit   'array.prototype.flatmap': [ '1.3.3' ],
+134 silly audit   'array.prototype.tosorted': [ '1.1.4' ],
+134 silly audit   'arraybuffer.prototype.slice': [ '1.0.4' ],
+134 silly audit   'ast-types-flow': [ '0.0.8' ],
+134 silly audit   'async-function': [ '1.0.0' ],
+134 silly audit   'available-typed-arrays': [ '1.0.7' ],
+134 silly audit   'axe-core': [ '4.11.0' ],
+134 silly audit   'axobject-query': [ '4.1.0' ],
+134 silly audit   'babel-plugin-react-compiler': [ '1.0.0' ],
+134 silly audit   'balanced-match': [ '1.0.2' ],
+134 silly audit   'baseline-browser-mapping': [ '2.8.30' ],
+134 silly audit   braces: [ '3.0.3' ],
+134 silly audit   browserslist: [ '4.28.0' ],
+134 silly audit   'call-bind': [ '1.0.8' ],
+134 silly audit   'call-bind-apply-helpers': [ '1.0.2' ],
+134 silly audit   'call-bound': [ '1.0.4' ],
+134 silly audit   callsites: [ '3.1.0' ],
+134 silly audit   'caniuse-lite': [ '1.0.30001756' ],
+134 silly audit   chalk: [ '4.1.2' ],
+134 silly audit   'client-only': [ '0.0.1' ],
+134 silly audit   'color-convert': [ '2.0.1' ],
+134 silly audit   'color-name': [ '1.1.4' ],
+134 silly audit   'concat-map': [ '0.0.1' ],
+134 silly audit   'convert-source-map': [ '2.0.0' ],
+134 silly audit   'cross-spawn': [ '7.0.6' ],
+134 silly audit   csstype: [ '3.2.3' ],
+134 silly audit   'damerau-levenshtein': [ '1.0.8' ],
+134 silly audit   'data-view-buffer': [ '1.0.2' ],
+134 silly audit   'data-view-byte-length': [ '1.0.2' ],
+134 silly audit   'data-view-byte-offset': [ '1.0.1' ],
+134 silly audit   debug: [ '4.4.3', '3.2.7' ],
+134 silly audit   'deep-is': [ '0.1.4' ],
+134 silly audit   'define-data-property': [ '1.1.4' ],
+134 silly audit   'define-properties': [ '1.2.1' ],
+134 silly audit   'detect-libc': [ '2.1.2' ],
+134 silly audit   doctrine: [ '2.1.0' ],
+134 silly audit   'dunder-proto': [ '1.0.1' ],
+134 silly audit   'electron-to-chromium': [ '1.5.259' ],
+134 silly audit   'emoji-regex': [ '9.2.2' ],
+134 silly audit   'es-abstract': [ '1.24.0' ],
+134 silly audit   'es-define-property': [ '1.0.1' ],
+134 silly audit   'es-errors': [ '1.3.0' ],
+134 silly audit   'es-iterator-helpers': [ '1.2.1' ],
+134 silly audit   'es-object-atoms': [ '1.1.1' ],
+134 silly audit   'es-set-tostringtag': [ '2.1.0' ],
+134 silly audit   'es-shim-unscopables': [ '1.1.0' ],
+134 silly audit   'es-to-primitive': [ '1.3.0' ],
+134 silly audit   escalade: [ '3.2.0' ],
+134 silly audit   'escape-string-regexp': [ '4.0.0' ],
+134 silly audit   eslint: [ '9.39.1' ],
+134 silly audit   'eslint-config-next': [ '16.0.3' ],
+134 silly audit   globals: [ '16.4.0', '14.0.0' ],
+134 silly audit   'eslint-import-resolver-node': [ '0.3.9' ],
+134 silly audit   'eslint-import-resolver-typescript': [ '3.10.1' ],
+134 silly audit   'eslint-module-utils': [ '2.12.1' ],
+134 silly audit   'eslint-plugin-import': [ '2.32.0' ],
+134 silly audit   'eslint-plugin-jsx-a11y': [ '6.10.2' ],
+134 silly audit   'eslint-plugin-react': [ '7.37.5' ],
+134 silly audit   'eslint-plugin-react-hooks': [ '7.0.1' ],
+134 silly audit   resolve: [ '2.0.0-next.5', '1.22.11' ],
+134 silly audit   'eslint-scope': [ '8.4.0' ],
+134 silly audit   espree: [ '10.4.0' ],
+134 silly audit   esquery: [ '1.6.0' ],
+134 silly audit   esrecurse: [ '4.3.0' ],
+134 silly audit   estraverse: [ '5.3.0' ],
+134 silly audit   esutils: [ '2.0.3' ],
+134 silly audit   'fast-deep-equal': [ '3.1.3' ],
+134 silly audit   'fast-json-stable-stringify': [ '2.1.0' ],
+134 silly audit   'fast-levenshtein': [ '2.0.6' ],
+134 silly audit   fastq: [ '1.19.1' ],
+134 silly audit   fdir: [ '6.5.0' ],
+134 silly audit   'file-entry-cache': [ '8.0.0' ],
+134 silly audit   'fill-range': [ '7.1.1' ],
+134 silly audit   'find-up': [ '5.0.0' ],
+134 silly audit   'flat-cache': [ '4.0.1' ],
+134 silly audit   flatted: [ '3.3.3' ],
+134 silly audit   'for-each': [ '0.3.5' ],
+134 silly audit   'function-bind': [ '1.1.2' ],
+134 silly audit   'function.prototype.name': [ '1.1.8' ],
+134 silly audit   'functions-have-names': [ '1.2.3' ],
+134 silly audit   'generator-function': [ '2.0.1' ],
+134 silly audit   gensync: [ '1.0.0-beta.2' ],
+134 silly audit   'get-intrinsic': [ '1.3.0' ],
+134 silly audit   'get-proto': [ '1.0.1' ],
+134 silly audit   'get-symbol-description': [ '1.1.0' ],
+134 silly audit   'get-tsconfig': [ '4.13.0' ],
+134 silly audit   globalthis: [ '1.0.4' ],
+134 silly audit   gopd: [ '1.2.0' ],
+134 silly audit   graphemer: [ '1.4.0' ],
+134 silly audit   'has-bigints': [ '1.1.0' ],
+134 silly audit   'has-flag': [ '4.0.0' ],
+134 silly audit   'has-property-descriptors': [ '1.0.2' ],
+134 silly audit   'has-proto': [ '1.2.0' ],
+134 silly audit   'has-symbols': [ '1.1.0' ],
+134 silly audit   'has-tostringtag': [ '1.0.2' ],
+134 silly audit   hasown: [ '2.0.2' ],
+134 silly audit   'hermes-estree': [ '0.25.1' ],
+134 silly audit   'hermes-parser': [ '0.25.1' ],
+134 silly audit   'import-fresh': [ '3.3.1' ],
+134 silly audit   imurmurhash: [ '0.1.4' ],
+134 silly audit   'internal-slot': [ '1.1.0' ],
+134 silly audit   'is-array-buffer': [ '3.0.5' ],
+134 silly audit   'is-async-function': [ '2.1.1' ],
+134 silly audit   'is-bigint': [ '1.1.0' ],
+134 silly audit   'is-boolean-object': [ '1.2.2' ],
+134 silly audit   'is-bun-module': [ '2.0.0' ],
+134 silly audit   'is-callable': [ '1.2.7' ],
+134 silly audit   'is-core-module': [ '2.16.1' ],
+134 silly audit   'is-data-view': [ '1.0.2' ],
+134 silly audit   'is-date-object': [ '1.1.0' ],
+134 silly audit   'is-extglob': [ '2.1.1' ],
+134 silly audit   'is-finalizationregistry': [ '1.1.1' ],
+134 silly audit   'is-generator-function': [ '1.1.2' ],
+134 silly audit   'is-glob': [ '4.0.3' ],
+134 silly audit   'is-map': [ '2.0.3' ],
+134 silly audit   'is-negative-zero': [ '2.0.3' ],
+134 silly audit   'is-number': [ '7.0.0' ],
+134 silly audit   'is-number-object': [ '1.1.1' ],
+134 silly audit   'is-regex': [ '1.2.1' ],
+134 silly audit   'is-set': [ '2.0.3' ],
+134 silly audit   'is-shared-array-buffer': [ '1.0.4' ],
+134 silly audit   'is-string': [ '1.1.1' ],
+134 silly audit   'is-symbol': [ '1.1.1' ],
+134 silly audit   'is-typed-array': [ '1.1.15' ],
+134 silly audit   'is-weakmap': [ '2.0.2' ],
+134 silly audit   'is-weakref': [ '1.1.1' ],
+134 silly audit   'is-weakset': [ '2.0.4' ],
+134 silly audit   isarray: [ '2.0.5' ],
+134 silly audit   isexe: [ '2.0.0' ],
+134 silly audit   'iterator.prototype': [ '1.1.5' ],
+134 silly audit   'js-tokens': [ '4.0.0' ],
+134 silly audit   'js-yaml': [ '4.1.1' ],
+134 silly audit   jsesc: [ '3.1.0' ],
+134 silly audit   'json-buffer': [ '3.0.1' ],
+134 silly audit   'json-schema-traverse': [ '0.4.1' ],
+134 silly audit   'json-stable-stringify-without-jsonify': [ '1.0.1' ],
+134 silly audit   json5: [ '2.2.3', '1.0.2' ],
+134 silly audit   'jsx-ast-utils': [ '3.3.5' ],
+134 silly audit   keyv: [ '4.5.4' ],
+134 silly audit   'language-subtag-registry': [ '0.3.23' ],
+134 silly audit   'language-tags': [ '1.0.9' ],
+134 silly audit   levn: [ '0.4.1' ],
+134 silly audit   'locate-path': [ '6.0.0' ],
+134 silly audit   'lodash.merge': [ '4.6.2' ],
+134 silly audit   'loose-envify': [ '1.4.0' ],
+134 silly audit   'lru-cache': [ '5.1.1' ],
+134 silly audit   'math-intrinsics': [ '1.1.0' ],
+134 silly audit   merge2: [ '1.4.1' ],
+134 silly audit   micromatch: [ '4.0.8' ],
+134 silly audit   minimist: [ '1.2.8' ],
+134 silly audit   ms: [ '2.1.3' ],
+134 silly audit   nanoid: [ '3.3.11' ],
+134 silly audit   'napi-postinstall': [ '0.3.4' ],
+134 silly audit   'natural-compare': [ '1.4.0' ],
+134 silly audit   next: [ '16.0.3' ],
+134 silly audit   'node-releases': [ '2.0.27' ],
+134 silly audit   'object-assign': [ '4.1.1' ],
+134 silly audit   'object-inspect': [ '1.13.4' ],
+134 silly audit   'object-keys': [ '1.1.1' ],
+134 silly audit   'object.assign': [ '4.1.7' ],
+134 silly audit   'object.entries': [ '1.1.9' ],
+134 silly audit   'object.fromentries': [ '2.0.8' ],
+134 silly audit   'object.groupby': [ '1.0.3' ],
+134 silly audit   'object.values': [ '1.2.1' ],
+134 silly audit   optionator: [ '0.9.4' ],
+134 silly audit   'own-keys': [ '1.0.1' ],
+134 silly audit   'p-limit': [ '3.1.0' ],
+134 silly audit   'p-locate': [ '5.0.0' ],
+134 silly audit   'parent-module': [ '1.0.1' ],
+134 silly audit   'path-exists': [ '4.0.0' ],
+134 silly audit   'path-key': [ '3.1.1' ],
+134 silly audit   'path-parse': [ '1.0.7' ],
+134 silly audit   picocolors: [ '1.1.1' ],
+134 silly audit   picomatch: [ '2.3.1', '4.0.3' ],
+134 silly audit   'possible-typed-array-names': [ '1.1.0' ],
+134 silly audit   postcss: [ '8.4.31' ],
+134 silly audit   'prelude-ls': [ '1.2.1' ],
+134 silly audit   'prop-types': [ '15.8.1' ],
+134 silly audit   punycode: [ '2.3.1' ],
+134 silly audit   'queue-microtask': [ '1.2.3' ],
+134 silly audit   react: [ '19.2.0' ],
+134 silly audit   'react-dom': [ '19.2.0' ],
+134 silly audit   'react-is': [ '16.13.1' ],
+134 silly audit   'reflect.getprototypeof': [ '1.0.10' ],
+134 silly audit   'regexp.prototype.flags': [ '1.5.4' ],
+134 silly audit   'resolve-from': [ '4.0.0' ],
+134 silly audit   'resolve-pkg-maps': [ '1.0.0' ],
+134 silly audit   reusify: [ '1.1.0' ],
+134 silly audit   'run-parallel': [ '1.2.0' ],
+134 silly audit   'safe-array-concat': [ '1.1.3' ],
+134 silly audit   'safe-push-apply': [ '1.0.0' ],
+134 silly audit   'safe-regex-test': [ '1.1.0' ],
+134 silly audit   scheduler: [ '0.27.0' ],
+134 silly audit   'set-function-length': [ '1.2.2' ],
+134 silly audit   'set-function-name': [ '2.0.2' ],
+134 silly audit   'set-proto': [ '1.0.0' ],
+134 silly audit   sharp: [ '0.34.5' ],
+134 silly audit   'shebang-command': [ '2.0.0' ],
+134 silly audit   'shebang-regex': [ '3.0.0' ],
+134 silly audit   'side-channel': [ '1.1.0' ],
+134 silly audit   'side-channel-list': [ '1.0.0' ],
+134 silly audit   'side-channel-map': [ '1.0.1' ],
+134 silly audit   'side-channel-weakmap': [ '1.0.2' ],
+134 silly audit   'source-map-js': [ '1.2.1' ],
+134 silly audit   'stable-hash': [ '0.0.5' ],
+134 silly audit   'stop-iteration-iterator': [ '1.1.0' ],
+134 silly audit   'string.prototype.includes': [ '2.0.1' ],
+134 silly audit   'string.prototype.matchall': [ '4.0.12' ],
+134 silly audit   'string.prototype.repeat': [ '1.0.0' ],
+134 silly audit   'string.prototype.trim': [ '1.2.10' ],
+134 silly audit   'string.prototype.trimend': [ '1.0.9' ],
+134 silly audit   'string.prototype.trimstart': [ '1.0.8' ],
+134 silly audit   'strip-bom': [ '3.0.0' ],
+134 silly audit   'strip-json-comments': [ '3.1.1' ],
+134 silly audit   'styled-jsx': [ '5.1.6' ],
+134 silly audit   'supports-color': [ '7.2.0' ],
+134 silly audit   'supports-preserve-symlinks-flag': [ '1.0.0' ],
+134 silly audit   tinyglobby: [ '0.2.15' ],
+134 silly audit   'to-regex-range': [ '5.0.1' ],
+134 silly audit   'ts-api-utils': [ '2.1.0' ],
+134 silly audit   'tsconfig-paths': [ '3.15.0' ],
+134 silly audit   tslib: [ '2.8.1' ],
+134 silly audit   'type-check': [ '0.4.0' ],
+134 silly audit   'typed-array-buffer': [ '1.0.3' ],
+134 silly audit   'typed-array-byte-length': [ '1.0.3' ],
+134 silly audit   'typed-array-byte-offset': [ '1.0.4' ],
+134 silly audit   'typed-array-length': [ '1.0.7' ],
+134 silly audit   typescript: [ '5.9.3' ],
+134 silly audit   'typescript-eslint': [ '8.47.0' ],
+134 silly audit   'unbox-primitive': [ '1.1.0' ],
+134 silly audit   'undici-types': [ '6.21.0' ],
+134 silly audit   'unrs-resolver': [ '1.11.1' ],
+134 silly audit   'update-browserslist-db': [ '1.1.4' ],
+134 silly audit   'uri-js': [ '4.4.1' ],
+134 silly audit   which: [ '2.0.2' ],
+134 silly audit   'which-boxed-primitive': [ '1.1.1' ],
+134 silly audit   'which-builtin-type': [ '1.2.1' ],
+134 silly audit   'which-collection': [ '1.0.2' ],
+134 silly audit   'which-typed-array': [ '1.1.19' ],
+134 silly audit   'word-wrap': [ '1.2.5' ],
+134 silly audit   yallist: [ '3.1.1' ],
+134 silly audit   'yocto-queue': [ '0.1.0' ],
+134 silly audit   zod: [ '4.1.12' ],
+134 silly audit   'zod-validation-error': [ '4.0.2' ],
+134 silly audit   '@prisma/client': [ '5.22.0' ],
+134 silly audit   prisma: [ '5.22.0' ],
+134 silly audit   '@prisma/engines': [ '5.22.0' ],
+134 silly audit   fsevents: [ '2.3.3' ],
+134 silly audit   '@prisma/debug': [ '5.22.0' ],
+134 silly audit   '@prisma/engines-version': [ '5.22.0-44.605197351a3c8bdd595af2d2a9bc3025bca48ea2' ],
+134 silly audit   '@prisma/fetch-engine': [ '5.22.0' ],
+134 silly audit   '@prisma/get-platform': [ '5.22.0' ]
+134 silly audit }
+135 http cache @prisma/fetch-engine@https://registry.npmjs.org/@prisma/fetch-engine/-/fetch-engine-5.22.0.tgz 0ms (cache hit)
+136 http cache @prisma/get-platform@https://registry.npmjs.org/@prisma/get-platform/-/get-platform-5.22.0.tgz 0ms (cache hit)
+137 http cache @prisma/engines@https://registry.npmjs.org/@prisma/engines/-/engines-5.22.0.tgz 0ms (cache hit)
+138 silly tarball no local data for @prisma/fetch-engine@https://registry.npmjs.org/@prisma/fetch-engine/-/fetch-engine-5.22.0.tgz. Extracting by manifest.
+139 http cache @prisma/engines-version@https://registry.npmjs.org/@prisma/engines-version/-/engines-version-5.22.0-44.605197351a3c8bdd595af2d2a9bc3025bca48ea2.tgz 0ms (cache hit)
+140 http cache prisma@https://registry.npmjs.org/prisma/-/prisma-5.22.0.tgz 0ms (cache hit)
+141 http cache @prisma/client@https://registry.npmjs.org/@prisma/client/-/client-5.22.0.tgz 0ms (cache hit)
+142 http cache @prisma/debug@https://registry.npmjs.org/@prisma/debug/-/debug-5.22.0.tgz 0ms (cache hit)
+143 silly tarball no local data for @prisma/get-platform@https://registry.npmjs.org/@prisma/get-platform/-/get-platform-5.22.0.tgz. Extracting by manifest.
+144 silly tarball no local data for @prisma/engines@https://registry.npmjs.org/@prisma/engines/-/engines-5.22.0.tgz. Extracting by manifest.
+145 silly tarball no local data for @prisma/engines-version@https://registry.npmjs.org/@prisma/engines-version/-/engines-version-5.22.0-44.605197351a3c8bdd595af2d2a9bc3025bca48ea2.tgz. Extracting by manifest.
+146 silly tarball no local data for prisma@https://registry.npmjs.org/prisma/-/prisma-5.22.0.tgz. Extracting by manifest.
+147 silly tarball no local data for @prisma/client@https://registry.npmjs.org/@prisma/client/-/client-5.22.0.tgz. Extracting by manifest.
+148 silly tarball no local data for @prisma/debug@https://registry.npmjs.org/@prisma/debug/-/debug-5.22.0.tgz. Extracting by manifest.
+149 http fetch POST 200 https://registry.npmjs.org/-/npm/v1/security/advisories/bulk 358ms
+150 silly audit report {}
+151 http fetch GET 200 https://registry.npmjs.org/@prisma/engines-version/-/engines-version-5.22.0-44.605197351a3c8bdd595af2d2a9bc3025bca48ea2.tgz 364ms (cache miss)
+152 http fetch GET 200 https://registry.npmjs.org/@prisma/engines/-/engines-5.22.0.tgz 400ms (cache miss)
+153 http fetch GET 200 https://registry.npmjs.org/@prisma/debug/-/debug-5.22.0.tgz 474ms (cache miss)
+154 http fetch GET 200 https://registry.npmjs.org/@prisma/get-platform/-/get-platform-5.22.0.tgz 705ms (cache miss)
+155 http fetch GET 200 https://registry.npmjs.org/@prisma/fetch-engine/-/fetch-engine-5.22.0.tgz 721ms (cache miss)
+156 http fetch GET 200 https://registry.npmjs.org/@prisma/client/-/client-5.22.0.tgz 892ms (cache miss)
+157 http fetch GET 200 https://registry.npmjs.org/prisma/-/prisma-5.22.0.tgz 1488ms (cache miss)
+158 info run prisma@5.22.0 preinstall node_modules/prisma node scripts/preinstall-entry.js
+159 info run prisma@5.22.0 preinstall { code: 0, signal: null }
+160 info run @prisma/client@5.22.0 postinstall node_modules/@prisma/client node scripts/postinstall.js
+161 info run @prisma/engines@5.22.0 postinstall node_modules/@prisma/engines node scripts/postinstall.js
+162 info run @prisma/engines@5.22.0 postinstall { code: 0, signal: null }
+163 info run @prisma/client@5.22.0 postinstall { code: 0, signal: null }
+164 silly REMOVE node_modules/@standard-schema/spec
+165 silly REMOVE node_modules/@prisma/studio-core-licensed
+166 silly REMOVE node_modules/@prisma/query-plan-executor
+167 silly CHANGE node_modules/@prisma/fetch-engine
+168 silly REMOVE node_modules/@prisma/fetch-engine/node_modules/@prisma/get-platform
+169 silly CHANGE node_modules/@prisma/engines-version
+170 silly CHANGE node_modules/@prisma/get-platform
+171 silly REMOVE node_modules/@prisma/get-platform/node_modules/@prisma/debug
+172 silly CHANGE node_modules/@prisma/engines
+173 silly REMOVE node_modules/@prisma/engines/node_modules/@prisma/get-platform
+174 silly REMOVE node_modules/@prisma/client-runtime-utils
+175 silly CHANGE node_modules/@prisma/debug
+176 silly REMOVE node_modules/@prisma/dev
+177 silly REMOVE node_modules/@prisma/config
+178 silly CHANGE node_modules/@prisma/client
+179 silly REMOVE node_modules/@mrleebo/prisma-ast
+180 silly REMOVE node_modules/@hono/node-server
+181 silly REMOVE node_modules/@electric-sql/pglite-socket
+182 silly REMOVE node_modules/@electric-sql/pglite-tools
+183 silly REMOVE node_modules/@electric-sql/pglite
+184 silly REMOVE node_modules/@chevrotain/utils
+185 silly REMOVE node_modules/@chevrotain/types
+186 silly REMOVE node_modules/@chevrotain/gast
+187 silly REMOVE node_modules/@chevrotain/cst-dts-gen
+188 silly REMOVE node_modules/zeptomatch
+189 silly REMOVE node_modules/valibot
+190 silly REMOVE node_modules/type-fest
+191 silly REMOVE node_modules/tinyexec
+192 silly REMOVE node_modules/std-env
+193 silly REMOVE node_modules/sqlstring
+194 silly REMOVE node_modules/signal-exit
+195 silly REMOVE node_modules/seq-queue
+196 silly REMOVE node_modules/safer-buffer
+197 silly REMOVE node_modules/remeda
+198 silly REMOVE node_modules/retry
+199 silly REMOVE node_modules/regexp-to-ast
+200 silly REMOVE node_modules/readdirp
+201 silly REMOVE node_modules/rc9
+202 silly REMOVE node_modules/pure-rand
+203 silly REMOVE node_modules/proper-lockfile
+204 silly REMOVE node_modules/proper-lockfile/node_modules/signal-exit
+205 silly REMOVE node_modules/postgres
+206 silly CHANGE node_modules/prisma
+207 silly REMOVE node_modules/pkg-types
+208 silly REMOVE node_modules/perfect-debounce
+209 silly REMOVE node_modules/pathe
+210 silly REMOVE node_modules/ohash
+211 silly REMOVE node_modules/nypm
+212 silly REMOVE node_modules/node-fetch-native
+213 silly REMOVE node_modules/lru.min
+214 silly REMOVE node_modules/named-placeholders
+215 silly REMOVE node_modules/named-placeholders/node_modules/lru-cache
+216 silly REMOVE node_modules/mysql2
+217 silly REMOVE node_modules/long
+218 silly REMOVE node_modules/lodash
+219 silly REMOVE node_modules/lilconfig
+220 silly REMOVE node_modules/jiti
+221 silly REMOVE node_modules/is-property
+222 silly REMOVE node_modules/iconv-lite
+223 silly REMOVE node_modules/http-status-codes
+224 silly REMOVE node_modules/hono
+225 silly REMOVE node_modules/grammex
+226 silly REMOVE node_modules/graceful-fs
+227 silly REMOVE node_modules/giget
+228 silly REMOVE node_modules/get-port-please
+229 silly REMOVE node_modules/generate-function
+230 silly REMOVE node_modules/foreground-child
+231 silly REMOVE node_modules/fast-check
+232 silly REMOVE node_modules/exsolve
+233 silly REMOVE node_modules/empathic
+234 silly REMOVE node_modules/denque
+235 silly REMOVE node_modules/effect
+236 silly REMOVE node_modules/dotenv
+237 silly REMOVE node_modules/destr
+238 silly REMOVE node_modules/defu
+239 silly REMOVE node_modules/deepmerge-ts
+240 silly REMOVE node_modules/consola
+241 silly REMOVE node_modules/confbox
+242 silly REMOVE node_modules/citty
+243 silly REMOVE node_modules/chokidar
+244 silly REMOVE node_modules/chevrotain
+245 silly REMOVE node_modules/c12
+246 silly REMOVE node_modules/aws-ssl-profiles
+247 verbose cwd C:\Users\ankit\.gemini\antigravity\scratch\mobile-spares-shop
+248 verbose os Windows_NT 10.0.26100
+249 verbose node v22.15.0
+250 verbose npm  v11.6.3
+251 verbose exit 0
+252 info ok

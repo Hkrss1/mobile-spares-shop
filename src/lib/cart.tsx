@@ -29,7 +29,7 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
         const savedCart = localStorage.getItem('mss_cart');
         if (savedCart) {
             try {
-                setItems(JSON.parse(savedCart));
+                setItems(JSON.parse(savedCart) as CartItem[]);
             } catch (error) {
                 console.error('Failed to parse cart data:', error);
                 localStorage.removeItem('mss_cart');

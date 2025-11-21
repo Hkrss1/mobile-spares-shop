@@ -1,13 +1,13 @@
 "use client";
 
 import React from 'react';
-import { PRODUCTS } from '@/lib/products';
+import { useProducts } from '@/lib/products';
 import { useOrders } from '@/lib/orders';
 import Link from 'next/link';
 
 export default function AdminDashboard() {
     const { orders } = useOrders();
-    const products = PRODUCTS;
+    const { products } = useProducts();
 
     // Calculate statistics
     const totalProducts = products.length;

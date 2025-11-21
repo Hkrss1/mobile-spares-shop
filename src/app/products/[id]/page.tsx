@@ -1,5 +1,5 @@
 import React from 'react';
-import { getProduct } from '@/lib/products';
+import { prisma } from '@/lib/prisma';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import AddToCartButton from '@/components/AddToCartButton';
@@ -7,7 +7,10 @@ import Image from 'next/image';
 
 export default async function ProductPage({ params }: { params: Promise<{ id: string }> }) {
     const { id } = await params;
-    const product = getProduct(id);
+
+    const product = await prisma.product.findUnique({
+        where: { id }
+    });
 
     if (!product) {
         notFound();
@@ -110,7 +113,7 @@ export default async function ProductPage({ params }: { params: Promise<{ id: st
                     </p>
 
                     {product.stock > 0 ? (
-                        <AddToCartButton product={product} />
+                        <AddToCartButton product={{ ...product, specs: product.specs as Record<string, string> }} />
                     ) : (
                         <div style={{
                             padding: '0.875rem 2rem',
@@ -129,7 +132,7 @@ export default async function ProductPage({ params }: { params: Promise<{ id: st
                     <div style={{ borderTop: '1px solid hsl(var(--border))', paddingTop: '2rem' }}>
                         <h3 style={{ fontSize: '1.25rem', fontWeight: 600, marginBottom: '1rem' }}>Specifications</h3>
                         <dl style={{ display: 'grid', gridTemplateColumns: '1fr 2fr', gap: '1rem' }}>
-                            {Object.entries(product.specs).map(([key, value]) => (
+                            {product.specs && Object.entries(product.specs as Record<string, string>).map(([key, value]) => (
                                 <React.Fragment key={key}>
                                     <dt style={{ color: 'hsl(var(--muted-foreground))' }}>{key}</dt>
                                     <dd style={{ fontWeight: 500 }}>{value}</dd>

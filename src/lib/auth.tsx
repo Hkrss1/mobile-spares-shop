@@ -40,47 +40,43 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     }, []);
 
     const login = async (mobile: string, password: string) => {
-        await new Promise(resolve => setTimeout(resolve, 1000));
+        try {
+            const res = await fetch('/api/auth/login', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ mobile, password }),
+            });
 
-        // Check against stored users
-        const storedUsers = JSON.parse(localStorage.getItem('mss_users') || '[]');
-        const foundUser = storedUsers.find((u: any) => u.mobile === mobile && u.password === password);
+            if (!res.ok) return false;
 
-        if (foundUser) {
-            const userData: User = { mobile: foundUser.mobile, name: foundUser.name, role: foundUser.role || 'user' };
+            const userData = await res.json();
             setUser(userData);
             localStorage.setItem("mss_user", JSON.stringify(userData));
             return true;
+        } catch (error) {
+            console.error('Login failed:', error);
+            return false;
         }
-
-        // Admin login with mobile number
-        if (mobile === "9999999999" && password === "admin123") {
-            const adminUser: User = { mobile, name: "Admin", role: "admin" };
-            setUser(adminUser);
-            localStorage.setItem("mss_user", JSON.stringify(adminUser));
-            return true;
-        }
-
-        return false;
     };
 
     const signup = async (mobile: string, password: string, name: string) => {
-        await new Promise(resolve => setTimeout(resolve, 1000));
+        try {
+            const res = await fetch('/api/auth/signup', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ mobile, password, name }),
+            });
 
-        const storedUsers = JSON.parse(localStorage.getItem('mss_users') || '[]');
-        if (storedUsers.find((u: any) => u.mobile === mobile)) {
-            return false; // User already exists
+            if (!res.ok) return false;
+
+            const userData = await res.json();
+            setUser(userData);
+            localStorage.setItem("mss_user", JSON.stringify(userData));
+            return true;
+        } catch (error) {
+            console.error('Signup failed:', error);
+            return false;
         }
-
-        const newUser = { mobile, password, name, role: 'user', createdAt: new Date().toISOString() };
-        storedUsers.push(newUser);
-        localStorage.setItem('mss_users', JSON.stringify(storedUsers));
-
-        // Auto login after signup
-        const userData: User = { mobile, name, role: 'user' };
-        setUser(userData);
-        localStorage.setItem("mss_user", JSON.stringify(userData));
-        return true;
     };
 
     const logout = () => {

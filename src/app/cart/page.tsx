@@ -144,7 +144,7 @@ export default function CartPage() {
                         <button
                             className="btn btn-primary"
                             style={{ width: '100%' }}
-                            onClick={() => {
+                            onClick={async () => {
                                 if (!user) {
                                     alert('Please login to place an order');
                                     window.location.href = '/login';
@@ -160,26 +160,30 @@ export default function CartPage() {
                                     image: item.image
                                 }));
 
-                                const order = createOrder(user.name, user.mobile, orderItems, total);
+                                const order = await createOrder(user.name, user.mobile, orderItems, total);
 
-                                // Format order details for WhatsApp
-                                const orderDetails = items.map((item, index) =>
-                                    `${index + 1}. ${item.name}\n   Qty: ${item.quantity} × ₹${item.price.toFixed(2)} = ₹${(item.quantity * item.price).toFixed(2)}`
-                                ).join('\n\n');
+                                if (order) {
+                                    // Format order details for WhatsApp
+                                    const orderDetails = items.map((item, index) =>
+                                        `${index + 1}. ${item.name}\n   Qty: ${item.quantity} × ₹${item.price.toFixed(2)} = ₹${(item.quantity * item.price).toFixed(2)}`
+                                    ).join('\n\n');
 
-                                const message = `🛒 *New Order from QuikFix*\n\n*Order #${order.orderNumber}*\n*Customer:* ${user.name}\n*Mobile:* +91${user.mobile}\n\n${orderDetails}\n\n━━━━━━━━━━━━━━━━\n💰 *Total: ₹${total.toFixed(2)}*\n\nPlease confirm my order and provide payment details.`;
+                                    const message = `🛒 *New Order from QuikFix*\n\n*Order #${order.orderNumber}*\n*Customer:* ${user.name}\n*Mobile:* +91${user.mobile}\n\n${orderDetails}\n\n━━━━━━━━━━━━━━━━\n💰 *Total: ₹${total.toFixed(2)}*\n\nPlease confirm my order and provide payment details.`;
 
-                                // Encode message for URL
-                                const encodedMessage = encodeURIComponent(message);
+                                    // Encode message for URL
+                                    const encodedMessage = encodeURIComponent(message);
 
-                                // WhatsApp API URL
-                                const whatsappURL = `https://wa.me/917488177051?text=${encodedMessage}`;
+                                    // WhatsApp API URL
+                                    const whatsappURL = `https://wa.me/917488177051?text=${encodedMessage}`;
 
-                                // Clear cart after order
-                                clearCart();
+                                    // Clear cart after order
+                                    clearCart();
 
-                                // Redirect to WhatsApp (more reliable than window.open on mobile)
-                                window.location.href = whatsappURL;
+                                    // Redirect to WhatsApp (more reliable than window.open on mobile)
+                                    window.location.href = whatsappURL;
+                                } else {
+                                    alert('Failed to create order. Please try again.');
+                                }
                             }}
                         >
                             Proceed to Checkout via WhatsApp
@@ -196,6 +200,6 @@ export default function CartPage() {
                     </div>
                 </div>
             </div>
-        </div>
+        </div >
     );
 }

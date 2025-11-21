@@ -26,7 +26,7 @@ export interface Order {
 
 interface OrderContextType {
     orders: Order[];
-    createOrder: (customerName: string, customerMobile: string, items: OrderItem[], total: number) => Order;
+    createOrder: (customerName: string, customerMobile: string, items: OrderItem[], total: number) => Promise<Order | null>;
     updateOrderStatus: (orderId: string, status: Order['status'], trackingLink?: string) => void;
     cancelOrder: (orderId: string, cancelledBy: 'user' | 'admin') => void;
     getUserOrders: (mobile: string) => Order[];
@@ -37,47 +37,54 @@ const OrderContext = createContext<OrderContextType | undefined>(undefined);
 export function OrderProvider({ children }: { children: React.ReactNode }) {
     const [orders, setOrders] = useState<Order[]>([]);
 
-    // Load orders from localStorage
+    // Load orders on mount and when user changes
     useEffect(() => {
-        const savedOrders = localStorage.getItem('fixquik_orders');
-        if (savedOrders) {
+        async function fetchOrders() {
             try {
-                setOrders(JSON.parse(savedOrders));
+                const user = JSON.parse(localStorage.getItem('mss_user') || 'null');
+                const mobile = user?.mobile;
+
+                let url = '/api/orders';
+                if (mobile && user.role !== 'admin') {
+                    url += `?mobile=${mobile}`;
+                }
+
+                const res = await fetch(url);
+                if (res.ok) {
+                    const data = await res.json();
+                    setOrders(data);
+                }
             } catch (error) {
-                console.error('Failed to parse orders:', error);
-                localStorage.removeItem('fixquik_orders');
+                console.error('Failed to fetch orders:', error);
             }
         }
+
+        fetchOrders();
     }, []);
 
-    // Save orders to localStorage
-    useEffect(() => {
-        const timeoutId = setTimeout(() => {
-            localStorage.setItem('fixquik_orders', JSON.stringify(orders));
-        }, 300);
+    const createOrder = useCallback(async (customerName: string, customerMobile: string, items: OrderItem[], total: number): Promise<Order | null> => {
+        try {
+            const res = await fetch('/api/orders', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    customerName,
+                    customerMobile,
+                    items,
+                    total
+                }),
+            });
 
-        return () => clearTimeout(timeoutId);
-    }, [orders]);
-
-    const createOrder = useCallback((customerName: string, customerMobile: string, items: OrderItem[], total: number): Order => {
-        const order: Order = {
-            id: `order-${Date.now()}`,
-            orderNumber: `ORD-${Date.now().toString().substring(5)}`,
-            customerName,
-            customerMobile,
-            items,
-            total,
-            status: 'processing',
-            createdAt: new Date().toISOString()
-        };
-
-        setOrders(currentOrders => {
-            const updatedOrders = [...currentOrders, order];
-            localStorage.setItem('fixquik_orders', JSON.stringify(updatedOrders));
-            return updatedOrders;
-        });
-
-        return order;
+            if (res.ok) {
+                const newOrder = await res.json();
+                setOrders(prev => [newOrder, ...prev]);
+                return newOrder;
+            }
+            return null;
+        } catch (error) {
+            console.error('Failed to create order:', error);
+            return null;
+        }
     }, []);
 
     const updateOrderStatus = useCallback((orderId: string, status: Order['status'], trackingLink?: string) => {

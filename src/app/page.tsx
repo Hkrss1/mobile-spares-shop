@@ -1,7 +1,15 @@
 import ProductGrid from "@/components/ProductGrid";
-import { PRODUCTS } from "@/lib/products";
+import { prisma } from "@/lib/prisma";
 
-export default function Home() {
+export default async function Home() {
+  const products = await prisma.product.findMany();
+
+  // Cast specs to match Product interface
+  const formattedProducts = products.map(p => ({
+    ...p,
+    specs: p.specs as Record<string, string>
+  }));
+
   return (
     <div className="animate-fade-in">
       {/* Hero Section */}
@@ -53,7 +61,7 @@ export default function Home() {
             <a href="/products" style={{ color: 'hsl(var(--primary))', fontWeight: 500 }}>View All &rarr;</a>
           </div>
 
-          <ProductGrid products={PRODUCTS} />
+          <ProductGrid products={formattedProducts} />
         </div>
       </section>
     </div>

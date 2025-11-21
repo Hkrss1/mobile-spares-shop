@@ -1,12 +1,12 @@
 "use client";
 
 import React, { useState } from 'react';
-import { PRODUCTS, Product } from '@/lib/products';
+import { useProducts, addProduct } from '@/lib/products';
 import Image from 'next/image';
 import Link from 'next/link';
 
 export default function AdminInventoryPage() {
-    const [products, setProducts] = useState<Product[]>(PRODUCTS);
+    const { products } = useProducts();
     const [isAdding, setIsAdding] = useState(false);
     const [newProduct, setNewProduct] = useState({
         name: '',
@@ -17,11 +17,10 @@ export default function AdminInventoryPage() {
         stock: ''
     });
 
-    const handleAddProduct = (e: React.FormEvent) => {
+    const handleAddProduct = async (e: React.FormEvent) => {
         e.preventDefault();
 
-        const product: Product = {
-            id: `prod-${Date.now().toString().substring(8)}`,
+        const productData = {
             name: newProduct.name,
             price: parseFloat(newProduct.price),
             category: newProduct.category,
@@ -31,15 +30,16 @@ export default function AdminInventoryPage() {
             specs: {}
         };
 
-        setProducts([...products, product]);
-        setNewProduct({ name: '', price: '', category: 'Screen', description: '', image: '', stock: '' });
-        setIsAdding(false);
+        await addProduct(productData);
+        // In a real app, we'd re-fetch or update local state. 
+        // For now, reloading the page is a simple way to see changes.
+        window.location.reload();
     };
 
-    const updateStock = (productId: string, newStock: number) => {
-        setProducts(products.map(p =>
-            p.id === productId ? { ...p, stock: newStock } : p
-        ));
+    const updateStock = async (productId: string, newStock: number) => {
+        // TODO: Implement API endpoint for updating stock
+        console.log('Update stock:', productId, newStock);
+        alert('Stock update feature coming soon!');
     };
 
     const getStockStatus = (stock: number) => {
