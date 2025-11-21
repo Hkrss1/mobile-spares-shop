@@ -7,12 +7,26 @@ export async function POST(request: Request) {
         const { name, mobile, password } = body;
 
         console.log('[SIGNUP] Received request:', { name, mobile, passwordLength: password?.length });
+        console.log('[SIGNUP] DATABASE_URL exists:', !!process.env.DATABASE_URL);
+        console.log('[SIGNUP] DATABASE_URL starts with:', process.env.DATABASE_URL?.substring(0, 20));
 
         if (!name || !mobile || !password) {
             console.log('[SIGNUP] Missing fields');
             return NextResponse.json(
                 { error: 'Missing required fields' },
                 { status: 400 }
+            );
+        }
+
+        // Test database connection
+        try {
+            await prisma.$queryRaw`SELECT 1`;
+            console.log('[SIGNUP] Database connection successful');
+        } catch (dbError) {
+            console.error('[SIGNUP] Database connection failed:', dbError);
+            return NextResponse.json(
+                { error: 'Database connection failed', details: dbError instanceof Error ? dbError.message : 'Unknown error' },
+                { status: 500 }
             );
         }
 
