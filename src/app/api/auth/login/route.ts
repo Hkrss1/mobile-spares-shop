@@ -6,7 +6,10 @@ export async function POST(request: Request) {
         const body = await request.json();
         const { mobile, password } = body;
 
+        console.log('[LOGIN] Received request:', { mobile, passwordLength: password?.length });
+
         if (!mobile || !password) {
+            console.log('[LOGIN] Missing credentials');
             return NextResponse.json(
                 { error: 'Missing credentials' },
                 { status: 400 }
@@ -15,6 +18,7 @@ export async function POST(request: Request) {
 
         // Hardcoded Admin Check (for backward compatibility)
         if (mobile === '9999999999' && password === 'admin123') {
+            console.log('[LOGIN] Admin login successful');
             return NextResponse.json({
                 id: 'admin-id',
                 name: 'Admin',
@@ -28,12 +32,20 @@ export async function POST(request: Request) {
             where: { mobile },
         });
 
+        console.log('[LOGIN] User found:', user ? 'Yes' : 'No');
+        if (user) {
+            console.log('[LOGIN] Password match:', user.password === password);
+        }
+
         if (!user || user.password !== password) {
+            console.log('[LOGIN] Authentication failed');
             return NextResponse.json(
                 { error: 'Invalid credentials' },
                 { status: 401 }
             );
         }
+
+        console.log('[LOGIN] Login successful:', user.id);
 
         return NextResponse.json({
             id: user.id,
@@ -42,9 +54,9 @@ export async function POST(request: Request) {
             role: user.role,
         });
     } catch (error) {
-        console.error('Login error:', error);
+        console.error('[LOGIN] Error:', error);
         return NextResponse.json(
-            { error: 'Internal server error' },
+            { error: 'Internal server error', details: error instanceof Error ? error.message : 'Unknown error' },
             { status: 500 }
         );
     }

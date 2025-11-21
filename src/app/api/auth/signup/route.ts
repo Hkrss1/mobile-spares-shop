@@ -6,7 +6,10 @@ export async function POST(request: Request) {
         const body = await request.json();
         const { name, mobile, password } = body;
 
+        console.log('[SIGNUP] Received request:', { name, mobile, passwordLength: password?.length });
+
         if (!name || !mobile || !password) {
+            console.log('[SIGNUP] Missing fields');
             return NextResponse.json(
                 { error: 'Missing required fields' },
                 { status: 400 }
@@ -19,6 +22,7 @@ export async function POST(request: Request) {
         });
 
         if (existingUser) {
+            console.log('[SIGNUP] User already exists:', mobile);
             return NextResponse.json(
                 { error: 'User already exists' },
                 { status: 409 }
@@ -35,6 +39,8 @@ export async function POST(request: Request) {
             },
         });
 
+        console.log('[SIGNUP] User created successfully:', user.id);
+
         return NextResponse.json({
             id: user.id,
             name: user.name,
@@ -42,9 +48,9 @@ export async function POST(request: Request) {
             role: user.role,
         });
     } catch (error) {
-        console.error('Signup error:', error);
+        console.error('[SIGNUP] Error:', error);
         return NextResponse.json(
-            { error: 'Internal server error' },
+            { error: 'Internal server error', details: error instanceof Error ? error.message : 'Unknown error' },
             { status: 500 }
         );
     }
