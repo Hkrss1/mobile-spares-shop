@@ -21,9 +21,8 @@ interface AuthContextType {
     deleteAccount: () => Promise<boolean>;
 }
 
-// SECURITY WARNING: This authentication system uses localStorage for demonstration purposes.
-// In a production environment, this must be replaced with a secure backend session management system (e.g., NextAuth.js, Firebase, or custom backend).
-// Client-side storage is not secure for sensitive data or access control.
+// NOTE: Authentication now uses database for user management.
+// Only the current session (user object) is stored in localStorage for persistence.
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
@@ -93,40 +92,52 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
             return false;
         }
 
-        await new Promise(resolve => setTimeout(resolve, 1000));
+        try {
+            const res = await fetch('/api/auth/delete', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ mobile: user.mobile }),
+            });
 
-        const storedUsers = JSON.parse(localStorage.getItem('mss_users') || '[]');
-        const updatedUsers = storedUsers.filter((u: any) => u.mobile !== user.mobile);
+            if (!res.ok) return false;
 
-        localStorage.setItem('mss_users', JSON.stringify(updatedUsers));
-        logout();
-        return true;
+            logout();
+            return true;
+        } catch (error) {
+            console.error('Delete account failed:', error);
+            return false;
+        }
     };
 
     const sendPasswordReset = async (mobile: string) => {
-        await new Promise(resolve => setTimeout(resolve, 500));
+        try {
+            const res = await fetch('/api/auth/reset-password', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ mobile }),
+            });
 
-        // Check if user exists
-        const storedUsers = JSON.parse(localStorage.getItem('mss_users') || '[]');
-        const foundUser = storedUsers.find((u: any) => u.mobile === mobile);
+            if (!res.ok) return false;
 
-        if (!foundUser) {
+            const userData = await res.json();
+
+            // Format mobile with +91
+            const formattedMobile = formatMobileNumber(mobile);
+
+            // Create WhatsApp message
+            const message = `🔐 *Password Reset Request - QuikFix*\\n\\nHello ${userData.name},\\n\\nYou requested to reset your password for mobile number: ${formattedMobile}\\n\\nYour current password is: ${userData.password}\\n\\nFor security, please change your password after logging in.\\n\\n- QuikFix Team`;
+
+            const encodedMessage = encodeURIComponent(message);
+            const whatsappURL = `https://wa.me/${formattedMobile.replace('+', '')}?text=${encodedMessage}`;
+
+            // Open WhatsApp
+            window.open(whatsappURL, '_blank');
+
+            return true;
+        } catch (error) {
+            console.error('Password reset failed:', error);
             return false;
         }
-
-        // Format mobile with +91
-        const formattedMobile = formatMobileNumber(mobile);
-
-        // Create WhatsApp message
-        const message = `🔐 *Password Reset Request - QuikFix*\n\nHello ${foundUser.name},\n\nYou requested to reset your password for mobile number: ${formattedMobile}\n\nYour current password is: ${foundUser.password}\n\nFor security, please change your password after logging in.\n\n- QuikFix Team`;
-
-        const encodedMessage = encodeURIComponent(message);
-        const whatsappURL = `https://wa.me/${formattedMobile.replace('+', '')}?text=${encodedMessage}`;
-
-        // Open WhatsApp
-        window.open(whatsappURL, '_blank');
-
-        return true;
     };
 
     return (
