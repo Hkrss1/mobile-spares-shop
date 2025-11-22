@@ -8,11 +8,13 @@ export const revalidate = 0;
 
 export default async function Home() {
   let products: Awaited<ReturnType<typeof prisma.product.findMany>> = [];
+  let dbError: string | null = null;
 
   try {
     products = await prisma.product.findMany();
   } catch (error) {
     console.error('Failed to fetch products:', error);
+    dbError = error instanceof Error ? error.message : 'Database connection failed';
     // Return empty array if database is not available
     products = [];
   }
@@ -73,6 +75,20 @@ export default async function Home() {
             </div>
             <Link href="/products" style={{ color: 'hsl(var(--primary))', fontWeight: 500 }}>View All &rarr;</Link>
           </div>
+
+          {dbError && (
+            <div style={{
+              padding: '1rem',
+              backgroundColor: '#fef2f2',
+              border: '1px solid #fecaca',
+              borderRadius: 'var(--radius)',
+              color: '#991b1b',
+              marginBottom: '2rem',
+              textAlign: 'center'
+            }}>
+              ⚠️ Database connection issue. Please contact support if this persists.
+            </div>
+          )}
 
           <ProductGrid products={formattedProducts} />
         </div>
