@@ -87,20 +87,50 @@ export function OrderProvider({ children }: { children: React.ReactNode }) {
         }
     }, []);
 
-    const updateOrderStatus = useCallback((orderId: string, status: Order['status'], trackingLink?: string) => {
-        setOrders(currentOrders => currentOrders.map(order =>
-            order.id === orderId
-                ? { ...order, status, trackingLink: trackingLink || order.trackingLink }
-                : order
-        ));
+    const updateOrderStatus = useCallback(async (orderId: string, status: Order['status'], trackingLink?: string) => {
+        try {
+            const res = await fetch(`/api/orders/${orderId}`, {
+                method: 'PATCH',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ status, trackingLink }),
+            });
+
+            if (res.ok) {
+                const updatedOrder = await res.json();
+                setOrders(currentOrders => currentOrders.map(order =>
+                    order.id === orderId ? updatedOrder : order
+                ));
+            } else {
+                console.error('Failed to update order status');
+                alert('Failed to update order status. Please try again.');
+            }
+        } catch (error) {
+            console.error('Failed to update order status:', error);
+            alert('Failed to update order status. Please try again.');
+        }
     }, []);
 
-    const cancelOrder = useCallback((orderId: string, cancelledBy: 'user' | 'admin') => {
-        setOrders(currentOrders => currentOrders.map(order =>
-            order.id === orderId
-                ? { ...order, status: 'cancelled', cancelledBy }
-                : order
-        ));
+    const cancelOrder = useCallback(async (orderId: string, cancelledBy: 'user' | 'admin') => {
+        try {
+            const res = await fetch(`/api/orders/${orderId}`, {
+                method: 'PATCH',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ status: 'cancelled', cancelledBy }),
+            });
+
+            if (res.ok) {
+                const updatedOrder = await res.json();
+                setOrders(currentOrders => currentOrders.map(order =>
+                    order.id === orderId ? updatedOrder : order
+                ));
+            } else {
+                console.error('Failed to cancel order');
+                alert('Failed to cancel order. Please try again.');
+            }
+        } catch (error) {
+            console.error('Failed to cancel order:', error);
+            alert('Failed to cancel order. Please try again.');
+        }
     }, []);
 
     const getUserOrders = useCallback((mobile: string) => {

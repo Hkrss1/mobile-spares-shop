@@ -48,3 +48,16 @@ export async function addProduct(productData: Omit<Product, 'id'>) {
     });
     return res.json();
 }
+
+// Helper to update product (Admin)
+export async function updateProduct(id: string, updates: Partial<Omit<Product, 'id'>>) {
+    const res = await fetch(`/api/products/${id}`, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(updates),
+    });
+    if (!res.ok) {
+        throw new Error('Failed to update product');
+    }
+    return res.json();
+}

@@ -36,9 +36,24 @@ export default function AdminInventoryPage() {
     };
 
     const updateStock = async (productId: string, newStock: number) => {
-        // TODO: Implement API endpoint for updating stock
-        console.log('Update stock:', productId, newStock);
-        alert('Stock update feature coming soon!');
+        try {
+            const res = await fetch(`/api/products/${productId}`, {
+                method: 'PATCH',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ stock: newStock }),
+            });
+
+            if (res.ok) {
+                // Refresh the page to show updated stock
+                window.location.reload();
+            } else {
+                const error = await res.json();
+                alert(`Failed to update stock: ${error.details || 'Unknown error'}`);
+            }
+        } catch (error) {
+            console.error('Failed to update stock:', error);
+            alert('Failed to update stock. Please try again.');
+        }
     };
 
     const getStockStatus = (stock: number) => {
