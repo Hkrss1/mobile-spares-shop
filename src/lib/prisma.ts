@@ -1,27 +1,33 @@
-import { PrismaClient } from '@prisma/client';
+import { PrismaClient } from "@prisma/client";
 
 const globalForPrisma = global as unknown as { prisma: PrismaClient };
 
 // Log environment variable status for debugging
 if (!process.env.DATABASE_URL) {
-    console.error('❌ DATABASE_URL is not defined!');
-    console.error('Available env vars:', Object.keys(process.env).filter(k => k.includes('DATABASE')));
+  console.error("❌ DATABASE_URL is not defined!");
+  console.error(
+    "Available env vars:",
+    Object.keys(process.env).filter((k) => k.includes("DATABASE")),
+  );
 }
 
 export const prisma =
-    globalForPrisma.prisma ||
-    new PrismaClient({
-        log: process.env.NODE_ENV === 'development' ? ['query', 'error', 'warn'] : ['error'],
-        datasources: {
-            db: {
-                url: process.env.DATABASE_URL,
-            },
-        },
-    });
+  globalForPrisma.prisma ||
+  new PrismaClient({
+    log:
+      process.env.NODE_ENV === "development"
+        ? ["query", "error", "warn"]
+        : ["error"],
+    datasources: {
+      db: {
+        url: process.env.DATABASE_URL,
+      },
+    },
+  });
 
-if (process.env.NODE_ENV !== 'production') globalForPrisma.prisma = prisma;
+if (process.env.NODE_ENV !== "production") globalForPrisma.prisma = prisma;
 
 // Ensure connection is established
 prisma.$connect().catch((err) => {
-    console.error('Failed to connect to database:', err);
+  console.error("Failed to connect to database:", err);
 });

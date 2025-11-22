@@ -22,12 +22,25 @@ export default function RootLayout({
           <OrderProvider>
             <CartProvider>
               <Navbar />
-              <main style={{ minHeight: 'calc(100vh - 140px)' }}>
+              <main style={{ minHeight: "calc(100vh - 140px)" }}>
                 {children}
               </main>
 
-              <footer style={{ borderTop: '1px solid hsl(var(--border))', padding: '2rem 0', marginTop: '4rem' }}>
-                <div className="container" style={{ textAlign: 'center', color: 'hsl(var(--muted-foreground))', fontSize: '0.875rem' }}>
+              <footer
+                style={{
+                  borderTop: "1px solid hsl(var(--border))",
+                  padding: "2rem 0",
+                  marginTop: "4rem",
+                }}
+              >
+                <div
+                  className="container"
+                  style={{
+                    textAlign: "center",
+                    color: "hsl(var(--muted-foreground))",
+                    fontSize: "0.875rem",
+                  }}
+                >
                   © 2025 QuikFix. All rights reserved.
                 </div>
               </footer>

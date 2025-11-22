@@ -8,12 +8,26 @@ datasource db {
   directUrl = env("DIRECT_URL")
 }
 
+enum Role {
+  ADMIN
+  STAFF
+  USER
+}
+
+enum TransactionType {
+  INWARD
+  OUTWARD
+  RETURN
+  ADJUSTMENT
+}
+
 model User {
   id        String   @id @default(cuid())
   mobile    String   @unique
   name      String
   password  String
-  role      String   @default("user") // "admin" | "user"
+  role      Role     @default(USER)
+  isActive  Boolean  @default(true)
   createdAt DateTime @default(now())
 }
 
@@ -41,10 +55,64 @@ model Product {
   brandId     String?
   description String
   image       String
-  stock       Int
+  // stock    Int // Deprecated in favor of StockLevel
   specs       Json?
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
+  
+  stockLevels StockLevel[]
+  transactions InventoryTransaction[]
+}
+
+model Supplier {
+  id            String   @id @default(cuid())
+  name          String
+  contactPerson String?
+  mobile        String?
+  email         String?
+  address       String?
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  transactions  InventoryTransaction[]
+}
+
+model Location {
+  id          String   @id @default(cuid())
+  name        String   @unique // e.g., "Main Warehouse", "Shop Floor"
+  address     String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  stocks      StockLevel[]
+  transactions InventoryTransaction[]
+}
+
+model StockLevel {
+  id          String   @id @default(cuid())
+  productId   String
+  product     Product  @relation(fields: [productId], references: [id])
+  locationId  String
+  location    Location @relation(fields: [locationId], references: [id])
+  quantity    Int      @default(0)
+  updatedAt   DateTime @updatedAt
+
+  @@unique([productId, locationId])
+}
+
+model InventoryTransaction {
+  id          String          @id @default(cuid())
+  type        TransactionType
+  quantity    Int
+  productId   String
+  product     Product         @relation(fields: [productId], references: [id])
+  locationId  String
+  location    Location        @relation(fields: [locationId], references: [id])
+  supplierId  String?
+  supplier    Supplier?       @relation(fields: [supplierId], references: [id])
+  orderId     String? 
+  order       Order?          @relation(fields: [orderId], references: [id])
+  performedBy String // User ID
+  notes       String?
+  createdAt   DateTime        @default(now())
 }
 
 model Order {
@@ -58,6 +126,7 @@ model Order {
   trackingLink   String?
   createdAt      DateTime    @default(now())
   items          OrderItem[]
+  transactions   InventoryTransaction[]
 }
 
 model OrderItem {
@@ -68,4 +137,14 @@ model OrderItem {
   price     Float
   quantity  Int
   image     String
+}
+
+model AuditLog {
+  id        String   @id @default(cuid())
+  action    String
+  entity    String   // e.g., "Product", "Order"
+  entityId  String
+  userId    String
+  details   Json?
+  createdAt DateTime @default(now())
 }

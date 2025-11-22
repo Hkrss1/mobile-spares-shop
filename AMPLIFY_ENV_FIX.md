@@ -29,8 +29,11 @@ Added logging to help diagnose env var issues:
 
 ```typescript
 if (!process.env.DATABASE_URL) {
-    console.error('❌ DATABASE_URL is not defined!');
-    console.error('Available env vars:', Object.keys(process.env).filter(k => k.includes('DATABASE')));
+  console.error("❌ DATABASE_URL is not defined!");
+  console.error(
+    "Available env vars:",
+    Object.keys(process.env).filter((k) => k.includes("DATABASE")),
+  );
 }
 ```
 
