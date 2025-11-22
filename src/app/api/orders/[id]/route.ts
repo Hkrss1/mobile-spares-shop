@@ -7,9 +7,10 @@ export const dynamic = 'force-dynamic';
 
 export async function PATCH(
     request: Request,
-    { params }: { params: { id: string } }
+    context: { params: Promise<{ id: string }> }
 ) {
     try {
+        const params = await context.params;
         const body = await request.json();
         const { status, trackingLink, cancelledBy } = body;
 
