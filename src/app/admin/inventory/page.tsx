@@ -3,7 +3,6 @@
 import React, { useState } from 'react';
 import { useProducts, addProduct } from '@/lib/products';
 import Image from 'next/image';
-import Link from 'next/link';
 
 export default function AdminInventoryPage() {
     const { products } = useProducts();

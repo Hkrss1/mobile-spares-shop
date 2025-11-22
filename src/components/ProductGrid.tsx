@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import { Product } from '@/lib/products';
 import ProductCard from './ProductCard';
 
@@ -48,7 +48,7 @@ export default function ProductGrid({ products }: ProductGridProps) {
     }, [filteredProducts, currentPage]);
 
     // Reset page when filters change
-    useMemo(() => {
+    useEffect(() => {
         setCurrentPage(1);
     }, [debouncedSearchQuery, selectedCategory]);
 

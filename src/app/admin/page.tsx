@@ -5,6 +5,43 @@ import { useProducts } from '@/lib/products';
 import { useOrders } from '@/lib/orders';
 import Link from 'next/link';
 
+interface StatCardProps {
+    title: string;
+    value: string | number;
+    subtitle?: string;
+    color: string;
+    icon: string;
+}
+
+const StatCard = ({ title, value, subtitle, color, icon }: StatCardProps) => (
+    <div style={{
+        backgroundColor: 'hsl(var(--card))',
+        border: '1px solid hsl(var(--border))',
+        borderRadius: 'var(--radius)',
+        padding: '1.5rem',
+        display: 'flex',
+        flexDirection: 'column',
+        gap: '0.5rem'
+    }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'start' }}>
+            <div>
+                <p style={{ fontSize: '0.875rem', color: 'hsl(var(--muted-foreground))', marginBottom: '0.5rem' }}>
+                    {title}
+                </p>
+                <h3 style={{ fontSize: '2rem', fontWeight: 700, color }}>
+                    {value}
+                </h3>
+                {subtitle && (
+                    <p style={{ fontSize: '0.75rem', color: 'hsl(var(--muted-foreground))', marginTop: '0.25rem' }}>
+                        {subtitle}
+                    </p>
+                )}
+            </div>
+            <span style={{ fontSize: '2rem' }}>{icon}</span>
+        </div>
+    </div>
+);
+
 export default function AdminDashboard() {
     const { orders } = useOrders();
     const { products } = useProducts();
@@ -27,35 +64,6 @@ export default function AdminDashboard() {
     const users = JSON.parse(localStorage.getItem('mss_users') || '[]');
     const totalUsers = users.length;
     const recentOrders = orders.slice(0, 5);
-
-    const StatCard = ({ title, value, subtitle, color, icon }: any) => (
-        <div style={{
-            backgroundColor: 'hsl(var(--card))',
-            border: '1px solid hsl(var(--border))',
-            borderRadius: 'var(--radius)',
-            padding: '1.5rem',
-            display: 'flex',
-            flexDirection: 'column',
-            gap: '0.5rem'
-        }}>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'start' }}>
-                <div>
-                    <p style={{ fontSize: '0.875rem', color: 'hsl(var(--muted-foreground))', marginBottom: '0.5rem' }}>
-                        {title}
-                    </p>
-                    <h3 style={{ fontSize: '2rem', fontWeight: 700, color }}>
-                        {value}
-                    </h3>
-                    {subtitle && (
-                        <p style={{ fontSize: '0.75rem', color: 'hsl(var(--muted-foreground))', marginTop: '0.25rem' }}>
-                            {subtitle}
-                        </p>
-                    )}
-                </div>
-                <span style={{ fontSize: '2rem' }}>{icon}</span>
-            </div>
-        </div>
-    );
 
     return (
         <div className="container animate-fade-in" style={{ padding: '4rem 1rem' }}>

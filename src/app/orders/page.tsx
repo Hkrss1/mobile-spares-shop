@@ -55,7 +55,7 @@ export default function OrdersPage() {
 
             {userOrders.length === 0 ? (
                 <div style={{ textAlign: 'center', padding: '4rem 1rem' }}>
-                    <p style={{ color: 'hsl(var(--muted-foreground))', marginBottom: '2rem' }}>You haven't placed any orders yet.</p>
+                    <p style={{ color: 'hsl(var(--muted-foreground))', marginBottom: '2rem' }}>You haven&apos;t placed any orders yet.</p>
                     <Link href="/" className="btn btn-primary">
                         Start Shopping
                     </Link>

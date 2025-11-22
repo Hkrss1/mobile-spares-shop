@@ -16,7 +16,7 @@ export default function CartPage() {
         return (
             <div className="container animate-fade-in" style={{ padding: '4rem 1rem', textAlign: 'center' }}>
                 <h1 style={{ fontSize: '2rem', fontWeight: 700, marginBottom: '1rem' }}>Your Cart is Empty</h1>
-                <p style={{ color: 'hsl(var(--muted-foreground))', marginBottom: '2rem' }}>Looks like you haven't added any parts yet.</p>
+                <p style={{ color: 'hsl(var(--muted-foreground))', marginBottom: '2rem' }}>Looks like you haven&apos;t added any parts yet.</p>
                 <Link href="/" className="btn btn-primary">
                     Start Shopping
                 </Link>
@@ -195,7 +195,7 @@ export default function CartPage() {
                             color: 'hsl(var(--muted-foreground))',
                             textAlign: 'center'
                         }}>
-                            You'll be redirected to WhatsApp to complete your order
+                            You&apos;ll be redirected to WhatsApp to complete your order
                         </p>
                     </div>
                 </div>

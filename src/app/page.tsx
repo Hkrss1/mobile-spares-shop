@@ -1,5 +1,6 @@
 import ProductGrid from "@/components/ProductGrid";
 import { prisma } from "@/lib/prisma";
+import Link from "next/link";
 
 // Force dynamic rendering to avoid build-time database queries
 export const dynamic = 'force-dynamic';
@@ -70,7 +71,7 @@ export default async function Home() {
               <h2 style={{ fontSize: '2rem', fontWeight: 700, marginBottom: '0.5rem' }}>Featured Products</h2>
               <p style={{ color: 'hsl(var(--muted-foreground))' }}>Top-rated components for popular devices</p>
             </div>
-            <a href="/products" style={{ color: 'hsl(var(--primary))', fontWeight: 500 }}>View All &rarr;</a>
+            <Link href="/products" style={{ color: 'hsl(var(--primary))', fontWeight: 500 }}>View All &rarr;</Link>
           </div>
 
           <ProductGrid products={formattedProducts} />

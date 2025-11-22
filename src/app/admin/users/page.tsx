@@ -1,10 +1,16 @@
 "use client";
 
 import React from 'react';
-import { useAuth } from '@/lib/auth';
+
+interface UserData {
+    name: string;
+    email: string;
+    role: string;
+    createdAt?: string;
+}
 
 export default function AdminUsersPage() {
-    const users = JSON.parse(localStorage.getItem('mss_users') || '[]');
+    const users: UserData[] = JSON.parse(localStorage.getItem('mss_users') || '[]');
 
     return (
         <div className="container animate-fade-in" style={{ padding: '4rem 1rem' }}>
@@ -28,7 +34,7 @@ export default function AdminUsersPage() {
                         </tr>
                     </thead>
                     <tbody>
-                        {users.length > 0 ? users.map((user: any, index: number) => (
+                        {users.length > 0 ? users.map((user, index: number) => (
                             <tr key={index} style={{ borderBottom: '1px solid hsl(var(--border))' }}>
                                 <td style={{ padding: '1rem' }}>{user.name}</td>
                                 <td style={{ padding: '1rem' }}>{user.email}</td>

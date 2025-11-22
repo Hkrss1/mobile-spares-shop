@@ -34,7 +34,7 @@ export default function AdminLayout({
                     Access Denied
                 </h1>
                 <p style={{ color: 'hsl(var(--muted-foreground))', marginBottom: '2rem' }}>
-                    You don't have permission to access this page.
+                    You don&apos;t have permission to access this page.
                 </p>
                 <Link href="/" className="btn btn-primary">
                     Go to Homepage

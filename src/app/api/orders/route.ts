@@ -32,6 +32,13 @@ export async function GET(request: Request) {
     }
 }
 
+interface OrderItemInput {
+    name: string;
+    price: number;
+    quantity: number;
+    image: string;
+}
+
 export async function POST(request: Request) {
     try {
         const body = await request.json();
@@ -53,10 +60,10 @@ export async function POST(request: Request) {
                 total: parseFloat(total),
                 status: 'processing',
                 items: {
-                    create: items.map((item: any) => ({
+                    create: items.map((item: OrderItemInput) => ({
                         name: item.name,
-                        price: parseFloat(item.price),
-                        quantity: parseInt(item.quantity),
+                        price: parseFloat(String(item.price)),
+                        quantity: parseInt(String(item.quantity)),
                         image: item.image,
                     })),
                 },

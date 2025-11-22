@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from 'react';
-import { useOrders } from '@/lib/orders';
+import { useOrders, Order } from '@/lib/orders';
 import Link from 'next/link';
 
 export default function AdminOrdersPage() {
@@ -77,7 +77,7 @@ export default function AdminOrdersPage() {
                                             <div style={{ display: 'flex', flexDirection: 'column', gap: '0.25rem' }}>
                                                 <select
                                                     value={order.status}
-                                                    onChange={(e) => updateOrderStatus(order.id, e.target.value as any)}
+                                                    onChange={(e) => updateOrderStatus(order.id, e.target.value as Order['status'])}
                                                     disabled={order.status === 'cancelled'}
                                                     style={{
                                                         padding: '0.5rem',

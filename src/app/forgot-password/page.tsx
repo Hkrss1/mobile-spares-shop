@@ -163,7 +163,7 @@ export default function ForgotPasswordPage() {
                 }}>
                     <strong>📱 How it works:</strong><br />
                     1. Enter your registered mobile number<br />
-                    2. Click "Send Reset Link"<br />
+                    2. Click &quot;Send Reset Link&quot;<br />
                     3. WhatsApp will open with your password<br />
                     4. Use the password to login
                 </div>
