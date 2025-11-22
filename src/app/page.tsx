@@ -6,12 +6,24 @@ import Link from "next/link";
 export const dynamic = 'force-dynamic';
 export const revalidate = 0;
 
+import { Prisma } from "@prisma/client";
+
+type ProductWithRelations = Prisma.ProductGetPayload<{
+  include: { category: true; brand: true }
+}>;
+
 export default async function Home() {
-  let products: Awaited<ReturnType<typeof prisma.product.findMany>> = [];
+  let products: ProductWithRelations[] = [];
   let dbError: string | null = null;
 
   try {
-    products = await prisma.product.findMany();
+    products = await prisma.product.findMany({
+      include: {
+        category: true,
+        brand: true
+      },
+      orderBy: { createdAt: 'desc' }
+    });
   } catch (error) {
     console.error('Failed to fetch products:', error);
     dbError = error instanceof Error ? error.message : 'Database connection failed';
@@ -22,7 +34,9 @@ export default async function Home() {
   // Cast specs to match Product interface
   const formattedProducts = products.map(p => ({
     ...p,
-    specs: p.specs as Record<string, string>
+    specs: p.specs as Record<string, string>,
+    categoryId: p.categoryId, // Ensure categoryId is passed
+    category: p.category // Ensure category relation is passed
   }));
 
   return (

@@ -17,11 +17,28 @@ model User {
   createdAt DateTime @default(now())
 }
 
+model Brand {
+  id        String    @id @default(cuid())
+  name      String    @unique
+  createdAt DateTime  @default(now())
+  products  Product[]
+}
+
+model Category {
+  id        String    @id @default(cuid())
+  name      String    @unique
+  createdAt DateTime  @default(now())
+  products  Product[]
+}
+
 model Product {
   id          String   @id @default(cuid())
   name        String
   price       Float
-  category    String
+  category    Category @relation(fields: [categoryId], references: [id])
+  categoryId  String
+  brand       Brand?   @relation(fields: [brandId], references: [id])
+  brandId     String?
   description String
   image       String
   stock       Int

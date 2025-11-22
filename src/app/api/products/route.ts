@@ -4,6 +4,10 @@ import { prisma } from '@/lib/prisma';
 export async function GET() {
     try {
         const products = await prisma.product.findMany({
+            include: {
+                category: true,
+                brand: true
+            },
             orderBy: { createdAt: 'desc' },
         });
         return NextResponse.json(products);
@@ -19,9 +23,9 @@ export async function GET() {
 export async function POST(request: Request) {
     try {
         const body = await request.json();
-        const { name, price, category, description, image, stock, specs } = body;
+        const { name, price, categoryId, brandId, description, image, stock, specs } = body;
 
-        if (!name || !price || !category || !image || stock === undefined) {
+        if (!name || !price || !categoryId || !image || stock === undefined) {
             return NextResponse.json(
                 { error: 'Missing required fields' },
                 { status: 400 }
@@ -32,19 +36,24 @@ export async function POST(request: Request) {
             data: {
                 name,
                 price: parseFloat(price),
-                category,
+                categoryId,
+                brandId: brandId || null,
                 description: description || '',
                 image,
                 stock: parseInt(stock),
                 specs: specs || {},
             },
+            include: {
+                category: true,
+                brand: true
+            }
         });
 
         return NextResponse.json(product);
     } catch (error) {
         console.error('Error creating product:', error);
         return NextResponse.json(
-            { error: 'Internal server error' },
+            { error: 'Internal server error', details: error instanceof Error ? error.message : 'Unknown error' },
             { status: 500 }
         );
     }

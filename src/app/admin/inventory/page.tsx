@@ -1,20 +1,109 @@
 "use client";
 
-import React, { useState } from 'react';
-import { useProducts, addProduct } from '@/lib/products';
+import React, { useState, useEffect } from 'react';
+import { useProducts, Brand, Category } from '@/lib/products';
 import Image from 'next/image';
 
 export default function AdminInventoryPage() {
     const { products } = useProducts();
+    const [brands, setBrands] = useState<(Brand & { _count?: { products: number } })[]>([]);
+    const [categories, setCategories] = useState<(Category & { _count?: { products: number } })[]>([]);
     const [isAdding, setIsAdding] = useState(false);
+    const [showAddBrand, setShowAddBrand] = useState(false);
+    const [showAddCategory, setShowAddCategory] = useState(false);
+    const [selectedBrand, setSelectedBrand] = useState('');
+    const [newBrandName, setNewBrandName] = useState('');
+    const [newCategoryName, setNewCategoryName] = useState('');
     const [newProduct, setNewProduct] = useState({
         name: '',
         price: '',
-        category: 'Screen',
+        categoryId: '',
+        brandId: '',
         description: '',
         image: '',
         stock: ''
     });
+
+    // Fetch brands and categories
+    useEffect(() => {
+        fetchBrands();
+        fetchCategories();
+    }, []);
+
+    const fetchBrands = async () => {
+        try {
+            const res = await fetch('/api/brands');
+            if (res.ok) {
+                const data = await res.json();
+                setBrands(data);
+            }
+        } catch (error) {
+            console.error('Failed to fetch brands:', error);
+        }
+    };
+
+    const fetchCategories = async () => {
+        try {
+            const res = await fetch('/api/categories');
+            if (res.ok) {
+                const data = await res.json();
+                setCategories(data);
+            }
+        } catch (error) {
+            console.error('Failed to fetch categories:', error);
+        }
+    };
+
+    const handleAddBrand = async () => {
+        if (!newBrandName.trim()) return;
+
+        try {
+            const res = await fetch('/api/brands', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ name: newBrandName }),
+            });
+
+            if (res.ok) {
+                setNewBrandName('');
+                setShowAddBrand(false);
+                fetchBrands();
+            } else {
+                const error = await res.json();
+                alert(error.error || 'Failed to add brand');
+            }
+        } catch (error) {
+            console.error('Failed to add brand:', error);
+            alert('Failed to add brand');
+        }
+    };
+
+    const handleAddCategory = async () => {
+        if (!newCategoryName.trim()) return;
+
+        try {
+            const res = await fetch('/api/categories', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ name: newCategoryName }),
+            });
+
+            if (res.ok) {
+                const newCat = await res.json();
+                setNewCategoryName('');
+                setShowAddCategory(false);
+                fetchCategories();
+                // Auto-select the new category
+                setNewProduct({ ...newProduct, categoryId: newCat.id });
+            } else {
+                const error = await res.json();
+                alert(error.error || 'Failed to add category');
+            }
+        } catch (error) {
+            console.error('Failed to add category:', error);
+            alert('Failed to add category');
+        }
+    };
 
     const handleAddProduct = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -22,17 +111,31 @@ export default function AdminInventoryPage() {
         const productData = {
             name: newProduct.name,
             price: parseFloat(newProduct.price),
-            category: newProduct.category,
+            categoryId: newProduct.categoryId,
+            brandId: newProduct.brandId || null,
             description: newProduct.description,
             image: newProduct.image || '/placeholder.png',
             stock: parseInt(newProduct.stock),
             specs: {}
         };
 
-        await addProduct(productData);
-        // In a real app, we'd re-fetch or update local state. 
-        // For now, reloading the page is a simple way to see changes.
-        window.location.reload();
+        try {
+            const res = await fetch('/api/products', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(productData),
+            });
+
+            if (res.ok) {
+                window.location.reload();
+            } else {
+                const error = await res.json();
+                alert(`Failed to add product: ${error.details || 'Unknown error'}`);
+            }
+        } catch (error) {
+            console.error('Failed to add product:', error);
+            alert('Failed to add product');
+        }
     };
 
     const updateStock = async (productId: string, newStock: number) => {
@@ -44,7 +147,6 @@ export default function AdminInventoryPage() {
             });
 
             if (res.ok) {
-                // Refresh the page to show updated stock
                 window.location.reload();
             } else {
                 const error = await res.json();
@@ -62,6 +164,11 @@ export default function AdminInventoryPage() {
         return { label: 'In Stock', color: '#10b981', bg: '#10b98120' };
     };
 
+    // Filter products by brand
+    const filteredProducts = selectedBrand
+        ? products.filter(p => p.brandId === selectedBrand)
+        : products;
+
     return (
         <div className="container animate-fade-in" style={{ padding: '4rem 1rem' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2rem' }}>
@@ -74,6 +181,74 @@ export default function AdminInventoryPage() {
                 </button>
             </div>
 
+            {/* Brand Management Section */}
+            <div style={{
+                backgroundColor: 'hsl(var(--card))',
+                border: '1px solid hsl(var(--border))',
+                borderRadius: 'var(--radius)',
+                padding: '1.5rem',
+                marginBottom: '2rem'
+            }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
+                    <h2 style={{ fontSize: '1.25rem', fontWeight: 600 }}>Brand Management</h2>
+                    <button
+                        className="btn btn-outline"
+                        onClick={() => setShowAddBrand(!showAddBrand)}
+                        style={{ fontSize: '0.875rem', padding: '0.5rem 1rem' }}
+                    >
+                        + Add Brand
+                    </button>
+                </div>
+
+                {showAddBrand && (
+                    <div style={{ marginBottom: '1rem', display: 'flex', gap: '0.5rem' }}>
+                        <input
+                            type="text"
+                            value={newBrandName}
+                            onChange={(e) => setNewBrandName(e.target.value)}
+                            placeholder="Brand name (e.g., Apple, Samsung)"
+                            style={{
+                                flex: 1,
+                                padding: '0.5rem',
+                                borderRadius: 'var(--radius)',
+                                border: '1px solid hsl(var(--border))',
+                                backgroundColor: 'hsl(var(--background))',
+                                color: 'hsl(var(--foreground))'
+                            }}
+                        />
+                        <button className="btn btn-primary" onClick={handleAddBrand}>
+                            Create
+                        </button>
+                        <button className="btn btn-outline" onClick={() => setShowAddBrand(false)}>
+                            Cancel
+                        </button>
+                    </div>
+                )}
+
+                <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
+                    {brands.map(brand => (
+                        <div
+                            key={brand.id}
+                            style={{
+                                padding: '0.5rem 1rem',
+                                borderRadius: 'var(--radius)',
+                                border: '1px solid hsl(var(--border))',
+                                backgroundColor: 'hsl(var(--muted))',
+                                fontSize: '0.875rem'
+                            }}
+                        >
+                            {brand.name} ({brand._count?.products || 0})
+                        </div>
+                    ))}
+                    {brands.length === 0 && (
+                        <p style={{ color: 'hsl(var(--muted-foreground))', fontSize: '0.875rem' }}>
+                            No brands yet. Add your first brand!
+                        </p>
+                    )}
+                </div>
+            </div>
+
+            {/* Add Product Form */}
             {isAdding && (
                 <div style={{
                     backgroundColor: 'hsl(var(--card))',
@@ -108,9 +283,63 @@ export default function AdminInventoryPage() {
                                 <label style={{ display: 'block', marginBottom: '0.5rem', fontSize: '0.875rem', fontWeight: 500 }}>
                                     Category *
                                 </label>
+                                <div style={{ display: 'flex', gap: '0.5rem' }}>
+                                    <select
+                                        required
+                                        value={newProduct.categoryId}
+                                        onChange={(e) => setNewProduct({ ...newProduct, categoryId: e.target.value })}
+                                        style={{
+                                            flex: 1,
+                                            padding: '0.75rem',
+                                            borderRadius: 'var(--radius)',
+                                            border: '1px solid hsl(var(--border))',
+                                            backgroundColor: 'hsl(var(--background))',
+                                            color: 'hsl(var(--foreground))'
+                                        }}
+                                    >
+                                        <option value="">Select Category</option>
+                                        {categories.map(cat => (
+                                            <option key={cat.id} value={cat.id}>{cat.name}</option>
+                                        ))}
+                                    </select>
+                                    <button
+                                        type="button"
+                                        className="btn btn-outline"
+                                        onClick={() => setShowAddCategory(!showAddCategory)}
+                                        style={{ padding: '0.75rem' }}
+                                    >
+                                        +
+                                    </button>
+                                </div>
+                                {showAddCategory && (
+                                    <div style={{ marginTop: '0.5rem', display: 'flex', gap: '0.5rem' }}>
+                                        <input
+                                            type="text"
+                                            value={newCategoryName}
+                                            onChange={(e) => setNewCategoryName(e.target.value)}
+                                            placeholder="New category name"
+                                            style={{
+                                                flex: 1,
+                                                padding: '0.5rem',
+                                                borderRadius: 'var(--radius)',
+                                                border: '1px solid hsl(var(--border))',
+                                                backgroundColor: 'hsl(var(--background))',
+                                                color: 'hsl(var(--foreground))'
+                                            }}
+                                        />
+                                        <button type="button" className="btn btn-primary" onClick={handleAddCategory}>
+                                            Add
+                                        </button>
+                                    </div>
+                                )}
+                            </div>
+                            <div>
+                                <label style={{ display: 'block', marginBottom: '0.5rem', fontSize: '0.875rem', fontWeight: 500 }}>
+                                    Brand
+                                </label>
                                 <select
-                                    value={newProduct.category}
-                                    onChange={(e) => setNewProduct({ ...newProduct, category: e.target.value })}
+                                    value={newProduct.brandId}
+                                    onChange={(e) => setNewProduct({ ...newProduct, brandId: e.target.value })}
                                     style={{
                                         width: '100%',
                                         padding: '0.75rem',
@@ -120,11 +349,10 @@ export default function AdminInventoryPage() {
                                         color: 'hsl(var(--foreground))'
                                     }}
                                 >
-                                    <option value="Screen">Screen</option>
-                                    <option value="Battery">Battery</option>
-                                    <option value="Camera">Camera</option>
-                                    <option value="Charging Port">Charging Port</option>
-                                    <option value="Back Panel">Back Panel</option>
+                                    <option value="">No Brand</option>
+                                    {brands.map(brand => (
+                                        <option key={brand.id} value={brand.id}>{brand.name}</option>
+                                    ))}
                                 </select>
                             </div>
                             <div>
@@ -137,11 +365,7 @@ export default function AdminInventoryPage() {
                                     min="0"
                                     required
                                     value={newProduct.price}
-                                    onChange={(e) => {
-                                        const val = parseFloat(e.target.value);
-                                        if (val < 0) return;
-                                        setNewProduct({ ...newProduct, price: e.target.value })
-                                    }}
+                                    onChange={(e) => setNewProduct({ ...newProduct, price: e.target.value })}
                                     style={{
                                         width: '100%',
                                         padding: '0.75rem',
@@ -161,11 +385,27 @@ export default function AdminInventoryPage() {
                                     min="0"
                                     required
                                     value={newProduct.stock}
-                                    onChange={(e) => {
-                                        const val = parseInt(e.target.value);
-                                        if (val < 0) return;
-                                        setNewProduct({ ...newProduct, stock: e.target.value })
+                                    onChange={(e) => setNewProduct({ ...newProduct, stock: e.target.value })}
+                                    style={{
+                                        width: '100%',
+                                        padding: '0.75rem',
+                                        borderRadius: 'var(--radius)',
+                                        border: '1px solid hsl(var(--border))',
+                                        backgroundColor: 'hsl(var(--background))',
+                                        color: 'hsl(var(--foreground))'
                                     }}
+                                />
+                            </div>
+                            <div>
+                                <label style={{ display: 'block', marginBottom: '0.5rem', fontSize: '0.875rem', fontWeight: 500 }}>
+                                    Image URL *
+                                </label>
+                                <input
+                                    type="text"
+                                    required
+                                    value={newProduct.image}
+                                    onChange={(e) => setNewProduct({ ...newProduct, image: e.target.value })}
+                                    placeholder="https://example.com/image.jpg"
                                     style={{
                                         width: '100%',
                                         padding: '0.75rem',
@@ -179,67 +419,9 @@ export default function AdminInventoryPage() {
                         </div>
                         <div style={{ marginBottom: '1rem' }}>
                             <label style={{ display: 'block', marginBottom: '0.5rem', fontSize: '0.875rem', fontWeight: 500 }}>
-                                Product Image *
-                            </label>
-                            <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
-                                <div style={{ flex: 1 }}>
-                                    <input
-                                        type="file"
-                                        accept="image/*"
-                                        onChange={(e) => {
-                                            const file = e.target.files?.[0];
-                                            if (file) {
-                                                if (file.size > 500 * 1024) { // 500KB limit
-                                                    alert('Image size must be less than 500KB');
-                                                    e.target.value = ''; // Reset input
-                                                    return;
-                                                }
-
-                                                const reader = new FileReader();
-                                                reader.onloadend = () => {
-                                                    setNewProduct({ ...newProduct, image: reader.result as string });
-                                                };
-                                                reader.readAsDataURL(file);
-                                            }
-                                        }}
-                                        style={{
-                                            width: '100%',
-                                            padding: '0.75rem',
-                                            borderRadius: 'var(--radius)',
-                                            border: '1px solid hsl(var(--border))',
-                                            backgroundColor: 'hsl(var(--background))',
-                                            color: 'hsl(var(--foreground))'
-                                        }}
-                                    />
-                                    <p style={{ fontSize: '0.75rem', color: 'hsl(var(--muted-foreground))', marginTop: '0.25rem' }}>
-                                        Max size: 500KB. Formats: JPG, PNG, WEBP.
-                                    </p>
-                                </div>
-                                {newProduct.image && (
-                                    <div style={{
-                                        width: '60px',
-                                        height: '60px',
-                                        position: 'relative',
-                                        border: '1px solid hsl(var(--border))',
-                                        borderRadius: 'var(--radius)',
-                                        overflow: 'hidden'
-                                    }}>
-                                        <Image
-                                            src={newProduct.image}
-                                            alt="Preview"
-                                            fill
-                                            style={{ objectFit: 'contain', padding: '2px' }}
-                                        />
-                                    </div>
-                                )}
-                            </div>
-                        </div>
-                        <div style={{ marginBottom: '1.5rem' }}>
-                            <label style={{ display: 'block', marginBottom: '0.5rem', fontSize: '0.875rem', fontWeight: 500 }}>
-                                Description *
+                                Description
                             </label>
                             <textarea
-                                required
                                 value={newProduct.description}
                                 onChange={(e) => setNewProduct({ ...newProduct, description: e.target.value })}
                                 rows={3}
@@ -261,67 +443,83 @@ export default function AdminInventoryPage() {
                 </div>
             )}
 
-            {/* Products Table */}
+            {/* Brand Filter */}
+            <div style={{ marginBottom: '1.5rem' }}>
+                <label style={{ display: 'block', marginBottom: '0.5rem', fontSize: '0.875rem', fontWeight: 500 }}>
+                    Filter by Brand
+                </label>
+                <select
+                    value={selectedBrand}
+                    onChange={(e) => setSelectedBrand(e.target.value)}
+                    style={{
+                        padding: '0.5rem 1rem',
+                        borderRadius: 'var(--radius)',
+                        border: '1px solid hsl(var(--border))',
+                        backgroundColor: 'hsl(var(--background))',
+                        color: 'hsl(var(--foreground))'
+                    }}
+                >
+                    <option value="">All Brands</option>
+                    {brands.map(brand => (
+                        <option key={brand.id} value={brand.id}>{brand.name}</option>
+                    ))}
+                </select>
+            </div>
+
+            {/* Products List */}
             <div style={{
                 backgroundColor: 'hsl(var(--card))',
-                borderRadius: 'var(--radius)',
                 border: '1px solid hsl(var(--border))',
+                borderRadius: 'var(--radius)',
                 overflow: 'hidden'
             }}>
-                <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left' }}>
-                    <thead>
-                        <tr style={{ borderBottom: '1px solid hsl(var(--border))', backgroundColor: 'hsl(var(--muted))' }}>
-                            <th style={{ padding: '1rem' }}>Image</th>
-                            <th style={{ padding: '1rem' }}>Product</th>
-                            <th style={{ padding: '1rem' }}>Category</th>
-                            <th style={{ padding: '1rem' }}>Price</th>
-                            <th style={{ padding: '1rem' }}>Stock</th>
-                            <th style={{ padding: '1rem' }}>Status</th>
-                            <th style={{ padding: '1rem' }}>Update Stock</th>
+                <table style={{ width: '100%', borderCollapse: 'collapse' }}>
+                    <thead style={{ backgroundColor: 'hsl(var(--muted))' }}>
+                        <tr>
+                            <th style={{ padding: '1rem', textAlign: 'left', fontWeight: 600 }}>Product</th>
+                            <th style={{ padding: '1rem', textAlign: 'left', fontWeight: 600 }}>Brand</th>
+                            <th style={{ padding: '1rem', textAlign: 'left', fontWeight: 600 }}>Category</th>
+                            <th style={{ padding: '1rem', textAlign: 'left', fontWeight: 600 }}>Price</th>
+                            <th style={{ padding: '1rem', textAlign: 'left', fontWeight: 600 }}>Stock</th>
+                            <th style={{ padding: '1rem', textAlign: 'left', fontWeight: 600 }}>Status</th>
                         </tr>
                     </thead>
                     <tbody>
-                        {products.map(product => {
-                            const status = getStockStatus(product.stock);
+                        {filteredProducts.map((product, index) => {
+                            const stockStatus = getStockStatus(product.stock);
                             return (
-                                <tr key={product.id} style={{ borderBottom: '1px solid hsl(var(--border))' }}>
+                                <tr
+                                    key={product.id}
+                                    style={{
+                                        borderTop: index > 0 ? '1px solid hsl(var(--border))' : 'none'
+                                    }}
+                                >
                                     <td style={{ padding: '1rem' }}>
-                                        <div style={{ width: '50px', height: '50px', position: 'relative', backgroundColor: '#1a1a1a', borderRadius: 'var(--radius)' }}>
+                                        <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
                                             <Image
                                                 src={product.image}
                                                 alt={product.name}
-                                                fill
-                                                style={{ objectFit: 'contain', padding: '0.25rem' }}
-                                                sizes="50px"
+                                                width={50}
+                                                height={50}
+                                                style={{ borderRadius: 'var(--radius)', objectFit: 'cover' }}
                                             />
+                                            <span style={{ fontWeight: 500 }}>{product.name}</span>
                                         </div>
                                     </td>
-                                    <td style={{ padding: '1rem', fontWeight: 600 }}>{product.name}</td>
-                                    <td style={{ padding: '1rem' }}>{product.category}</td>
-                                    <td style={{ padding: '1rem', fontWeight: 600 }}>₹{product.price.toFixed(2)}</td>
-                                    <td style={{ padding: '1rem' }}>{product.stock}</td>
                                     <td style={{ padding: '1rem' }}>
-                                        <span style={{
-                                            padding: '0.25rem 0.75rem',
-                                            borderRadius: '9999px',
-                                            fontSize: '0.75rem',
-                                            fontWeight: 600,
-                                            backgroundColor: status.bg,
-                                            color: status.color
-                                        }}>
-                                            {status.label}
-                                        </span>
+                                        {product.brand?.name || '-'}
+                                    </td>
+                                    <td style={{ padding: '1rem' }}>
+                                        {product.category.name}
+                                    </td>
+                                    <td style={{ padding: '1rem', fontWeight: 600 }}>
+                                        ₹{product.price.toFixed(2)}
                                     </td>
                                     <td style={{ padding: '1rem' }}>
                                         <input
                                             type="number"
-                                            min="0"
                                             value={product.stock}
-                                            onChange={(e) => {
-                                                const val = parseInt(e.target.value);
-                                                if (val < 0) return;
-                                                updateStock(product.id, val || 0);
-                                            }}
+                                            onChange={(e) => updateStock(product.id, parseInt(e.target.value))}
                                             style={{
                                                 width: '80px',
                                                 padding: '0.5rem',
@@ -332,11 +530,28 @@ export default function AdminInventoryPage() {
                                             }}
                                         />
                                     </td>
+                                    <td style={{ padding: '1rem' }}>
+                                        <span style={{
+                                            padding: '0.25rem 0.75rem',
+                                            borderRadius: 'var(--radius)',
+                                            fontSize: '0.875rem',
+                                            fontWeight: 500,
+                                            backgroundColor: stockStatus.bg,
+                                            color: stockStatus.color
+                                        }}>
+                                            {stockStatus.label}
+                                        </span>
+                                    </td>
                                 </tr>
                             );
                         })}
                     </tbody>
                 </table>
+                {filteredProducts.length === 0 && (
+                    <div style={{ padding: '3rem', textAlign: 'center', color: 'hsl(var(--muted-foreground))' }}>
+                        {selectedBrand ? 'No products found for this brand' : 'No products yet. Add your first product!'}
+                    </div>
+                )}
             </div>
         </div>
     );

@@ -9,7 +9,11 @@ export default async function ProductPage({ params }: { params: Promise<{ id: st
     const { id } = await params;
 
     const product = await prisma.product.findUnique({
-        where: { id }
+        where: { id },
+        include: {
+            category: true,
+            brand: true
+        }
     });
 
     if (!product) {
@@ -52,7 +56,7 @@ export default async function ProductPage({ params }: { params: Promise<{ id: st
                         textTransform: 'uppercase',
                         letterSpacing: '0.05em'
                     }}>
-                        {product.category}
+                        {product.category.name}
                     </div>
                     <h1 style={{ fontSize: '2.5rem', fontWeight: 800, marginBottom: '1rem', lineHeight: 1.1 }}>
                         {product.name}
@@ -113,7 +117,12 @@ export default async function ProductPage({ params }: { params: Promise<{ id: st
                     </p>
 
                     {product.stock > 0 ? (
-                        <AddToCartButton product={{ ...product, specs: product.specs as Record<string, string> }} />
+                        <AddToCartButton product={{
+                            ...product,
+                            specs: product.specs as Record<string, string>,
+                            categoryId: product.categoryId,
+                            category: product.category
+                        }} />
                     ) : (
                         <div style={{
                             padding: '0.875rem 2rem',

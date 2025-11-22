@@ -7,7 +7,7 @@ const products = [
         id: '1',
         name: 'iPhone 13 Pro OLED Display',
         price: 129.99,
-        category: 'Display',
+        categoryName: 'Display',
         image: '/images/iphone-screen.png',
         description: 'High-quality OLED replacement screen for iPhone 13 Pro. Supports 120Hz ProMotion and True Tone.',
         specs: {
@@ -22,7 +22,7 @@ const products = [
         id: '2',
         name: 'Samsung S21 Battery Replacement',
         price: 29.99,
-        category: 'Battery',
+        categoryName: 'Battery',
         image: '/images/samsung-battery.png',
         description: 'Original capacity replacement battery for Samsung Galaxy S21. Fixes fast draining issues.',
         specs: {
@@ -37,7 +37,7 @@ const products = [
         id: '3',
         name: 'Google Pixel 6 Charging Port',
         price: 19.99,
-        category: 'Charging',
+        categoryName: 'Charging',
         image: '/images/pixel-port.png',
         description: 'Replacement USB-C charging port flex cable for Google Pixel 6. Solves charging and data transfer problems.',
         specs: {
@@ -52,7 +52,7 @@ const products = [
         id: '4',
         name: 'OnePlus 9 Back Glass',
         price: 34.99,
-        category: 'Housing',
+        categoryName: 'Housing',
         image: '/images/oneplus-back.png',
         description: 'OEM quality back glass replacement for OnePlus 9. Includes pre-installed adhesive.',
         specs: {
@@ -67,7 +67,7 @@ const products = [
         id: '5',
         name: 'iPhone 12 Mini Camera Module',
         price: 59.99,
-        category: 'Camera',
+        categoryName: 'Camera',
         image: '/images/iphone-camera.png',
         description: 'Rear main camera module replacement for iPhone 12 Mini. Restores focus and image quality.',
         specs: {
@@ -82,7 +82,7 @@ const products = [
         id: '6',
         name: 'Xiaomi Mi 11 Speaker Unit',
         price: 14.99,
-        category: 'Audio',
+        categoryName: 'Audio',
         image: '/images/xiaomi-speaker.png',
         description: 'Loudspeaker module replacement for Xiaomi Mi 11. Fixes distorted or no sound issues.',
         specs: {
@@ -97,11 +97,30 @@ const products = [
 
 async function main() {
     console.log('Start seeding ...');
+
     for (const p of products) {
+        // Create or connect category
+        const category = await prisma.category.upsert({
+            where: { name: p.categoryName },
+            update: {},
+            create: { name: p.categoryName }
+        });
+
+        const productData = {
+            id: p.id,
+            name: p.name,
+            price: p.price,
+            image: p.image,
+            description: p.description,
+            specs: p.specs,
+            stock: p.stock,
+            categoryId: category.id
+        };
+
         const product = await prisma.product.upsert({
             where: { id: p.id },
-            update: {},
-            create: p,
+            update: productData,
+            create: productData,
         });
         console.log(`Created product with id: ${product.id}`);
     }

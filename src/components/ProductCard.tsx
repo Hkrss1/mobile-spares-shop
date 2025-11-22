@@ -60,7 +60,7 @@ const ProductCard: React.FC<ProductCardProps> = React.memo(({ product }) => {
                         textTransform: 'uppercase',
                         letterSpacing: '0.05em'
                     }}>
-                        {product.category}
+                        {product.category.name}
                     </div>
                     <h3 style={{
                         fontSize: '1.125rem',

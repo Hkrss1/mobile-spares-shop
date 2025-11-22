@@ -68,7 +68,7 @@ export default function CartPage() {
                                     <span style={{ fontWeight: 700 }}>₹{(item.price * item.quantity).toFixed(2)}</span>
                                 </div>
                                 <p style={{ fontSize: '0.875rem', color: 'hsl(var(--muted-foreground))', marginBottom: '1rem' }}>
-                                    {item.category}
+                                    {item.category.name}
                                     {item.quantity >= item.stock && (
                                         <span style={{ marginLeft: '0.5rem', color: '#f59e0b', fontWeight: 600 }}>
                                             • Max stock reached

@@ -2,11 +2,24 @@
 
 import { useEffect, useState } from 'react';
 
+export interface Brand {
+    id: string;
+    name: string;
+}
+
+export interface Category {
+    id: string;
+    name: string;
+}
+
 export interface Product {
     id: string;
     name: string;
     price: number;
-    category: string;
+    category: Category;
+    categoryId: string;
+    brand?: Brand | null;
+    brandId?: string | null;
     image: string;
     description: string;
     specs: Record<string, string>;

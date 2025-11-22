@@ -29,7 +29,18 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
         const savedCart = localStorage.getItem('mss_cart');
         if (savedCart) {
             try {
-                setItems(JSON.parse(savedCart) as CartItem[]);
+                const parsedCart = JSON.parse(savedCart);
+                // Validate that items have new schema (category is object)
+                const isValid = Array.isArray(parsedCart) && parsedCart.every(item =>
+                    item.category && typeof item.category === 'object' && 'name' in item.category
+                );
+
+                if (isValid) {
+                    setItems(parsedCart as CartItem[]);
+                } else {
+                    console.warn('Old cart format detected, clearing cart');
+                    localStorage.removeItem('mss_cart');
+                }
             } catch (error) {
                 console.error('Failed to parse cart data:', error);
                 localStorage.removeItem('mss_cart');

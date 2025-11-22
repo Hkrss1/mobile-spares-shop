@@ -17,14 +17,14 @@ export default function ProductGrid({ products }: ProductGridProps) {
 
     // Extract unique categories
     const categories = useMemo(() => {
-        const cats = new Set(products.map(p => p.category));
+        const cats = new Set(products.map(p => p.category.name));
         return ['All', ...Array.from(cats)];
     }, [products]);
 
     const [debouncedSearchQuery, setDebouncedSearchQuery] = useState('');
 
     // Debounce search query
-    useMemo(() => {
+    useEffect(() => {
         const timer = setTimeout(() => {
             setDebouncedSearchQuery(searchQuery);
         }, 300);
@@ -35,7 +35,7 @@ export default function ProductGrid({ products }: ProductGridProps) {
     const filteredProducts = useMemo(() => {
         return products.filter(product => {
             const matchesSearch = product.name.toLowerCase().includes(debouncedSearchQuery.toLowerCase());
-            const matchesCategory = selectedCategory === 'All' || product.category === selectedCategory;
+            const matchesCategory = selectedCategory === 'All' || product.category.name === selectedCategory;
             return matchesSearch && matchesCategory;
         });
     }, [products, debouncedSearchQuery, selectedCategory]);
