@@ -1,47 +1,0 @@
-timestamp,message
-1763825310222,"START RequestId: c7f14ae0-e312-40b6-a5ad-96632a99b807 Version: $LATEST
-"
-1763825310223,"Starting request using compute deployment_id: 0b4ee05e-7802-484e-833c-94dfe4639c40 and compute version: $LATEST
-"
-1763825310304,"REPORT RequestId: c7f14ae0-e312-40b6-a5ad-96632a99b807	Duration: 81.11 ms	Billed Duration: 1224 ms	Memory Size: 1024 MB	Max Memory Used: 138 MB	Init Duration: 1142.51 ms	
-"
-1763825310976,"START RequestId: f6acfbe2-cb8a-4245-bc72-24c51adcc13c Version: $LATEST
-"
-1763825310977,"Starting request using compute deployment_id: 0b4ee05e-7802-484e-833c-94dfe4639c40 and compute version: $LATEST
-"
-1763825310988,"⨯ Error [PrismaClientConstructorValidationError]: Invalid value undefined for datasource ""db"" provided to PrismaClient constructor. It should have this form: { url: ""CONNECTION_STRING"" } Read more at https://pris.ly/d/client-constructor     at module evaluation (../../var/task/.next/server/chunks/[root-of-the-server]__9dfe3f23._.js:1:1126)     at instantiateModule (../../var/task/.next/server/chunks/[turbopack]_runtime.js:715:9)     at getOrInstantiateModuleFromParent (../../var/task/.next/server/chunks/[turbopack]_runtime.js:738:12)     at Context.esmImport [as i] (../../var/task/.next/server/chunks/[turbopack]_runtime.js:228:20)     at module evaluation (../../var/task/.next/server/chunks/[root-of-the-server]__9dfe3f23._.js:1:1597)     at instantiateModule (../../var/task/.next/server/chunks/[turbopack]_runtime.js:715:9)     at instantiateRuntimeModule (../../var/task/.next/server/chunks/[turbopack]_runtime.js:743:12)
-"
-1763825311000,"REPORT RequestId: f6acfbe2-cb8a-4245-bc72-24c51adcc13c	Duration: 23.70 ms	Billed Duration: 24 ms	Memory Size: 1024 MB	Max Memory Used: 138 MB	
-"
-1763825374733,"START RequestId: bdbb33f9-aa0a-49bb-8145-614320b9d246 Version: $LATEST
-"
-1763825374735,"Starting request using compute deployment_id: 0b4ee05e-7802-484e-833c-94dfe4639c40 and compute version: $LATEST
-"
-1763825374839,"⨯ Error [PrismaClientConstructorValidationError]: Invalid value undefined for datasource ""db"" provided to PrismaClient constructor. It should have this form: { url: ""CONNECTION_STRING"" } Read more at https://pris.ly/d/client-constructor     at module evaluation (../../var/task/.next/server/chunks/[root-of-the-server]__9dfe3f23._.js:1:1126)     at instantiateModule (../../var/task/.next/server/chunks/[turbopack]_runtime.js:715:9)     at getOrInstantiateModuleFromParent (../../var/task/.next/server/chunks/[turbopack]_runtime.js:738:12)     at Context.esmImport [as i] (../../var/task/.next/server/chunks/[turbopack]_runtime.js:228:20)     at module evaluation (../../var/task/.next/server/chunks/[root-of-the-server]__9dfe3f23._.js:1:1597)     at instantiateModule (../../var/task/.next/server/chunks/[turbopack]_runtime.js:715:9)     at instantiateRuntimeModule (../../var/task/.next/server/chunks/[turbopack]_runtime.js:743:12)
-"
-1763825374842,"REPORT RequestId: bdbb33f9-aa0a-49bb-8145-614320b9d246	Duration: 109.18 ms	Billed Duration: 110 ms	Memory Size: 1024 MB	Max Memory Used: 141 MB	
-"
-1763825376127,"START RequestId: 24422250-1b65-4ae1-92a5-683fc4b8241f Version: $LATEST
-"
-1763825376127,"Starting request using compute deployment_id: 0b4ee05e-7802-484e-833c-94dfe4639c40 and compute version: $LATEST
-"
-1763825376131,"⨯ Error [PrismaClientConstructorValidationError]: Invalid value undefined for datasource ""db"" provided to PrismaClient constructor. It should have this form: { url: ""CONNECTION_STRING"" } Read more at https://pris.ly/d/client-constructor     at module evaluation (../../var/task/.next/server/chunks/[root-of-the-server]__9dfe3f23._.js:1:1126)     at instantiateModule (../../var/task/.next/server/chunks/[turbopack]_runtime.js:715:9)     at getOrInstantiateModuleFromParent (../../var/task/.next/server/chunks/[turbopack]_runtime.js:738:12)     at Context.esmImport [as i] (../../var/task/.next/server/chunks/[turbopack]_runtime.js:228:20)     at module evaluation (../../var/task/.next/server/chunks/[root-of-the-server]__9dfe3f23._.js:1:1597)     at instantiateModule (../../var/task/.next/server/chunks/[turbopack]_runtime.js:715:9)     at instantiateRuntimeModule (../../var/task/.next/server/chunks/[turbopack]_runtime.js:743:12)
-"
-1763825376141,"REPORT RequestId: 24422250-1b65-4ae1-92a5-683fc4b8241f	Duration: 13.93 ms	Billed Duration: 14 ms	Memory Size: 1024 MB	Max Memory Used: 141 MB	
-"
-1763825376826,"START RequestId: 6d2a02bf-d518-4fe2-a058-f4e7f0e380a9 Version: $LATEST
-"
-1763825376827,"Starting request using compute deployment_id: 0b4ee05e-7802-484e-833c-94dfe4639c40 and compute version: $LATEST
-"
-1763825376863,"⨯ Error [PrismaClientConstructorValidationError]: Invalid value undefined for datasource ""db"" provided to PrismaClient constructor. It should have this form: { url: ""CONNECTION_STRING"" } Read more at https://pris.ly/d/client-constructor     at module evaluation (../../var/task/.next/server/chunks/[root-of-the-server]__9dfe3f23._.js:1:1126)     at instantiateModule (../../var/task/.next/server/chunks/[turbopack]_runtime.js:715:9)     at getOrInstantiateModuleFromParent (../../var/task/.next/server/chunks/[turbopack]_runtime.js:738:12)     at Context.esmImport [as i] (../../var/task/.next/server/chunks/[turbopack]_runtime.js:228:20)     at module evaluation (../../var/task/.next/server/chunks/[root-of-the-server]__9dfe3f23._.js:1:1597)     at instantiateModule (../../var/task/.next/server/chunks/[turbopack]_runtime.js:715:9)     at instantiateRuntimeModule (../../var/task/.next/server/chunks/[turbopack]_runtime.js:743:12)
-"
-1763825376879,"REPORT RequestId: 6d2a02bf-d518-4fe2-a058-f4e7f0e380a9	Duration: 52.51 ms	Billed Duration: 53 ms	Memory Size: 1024 MB	Max Memory Used: 141 MB	
-"
-1763825383493,"START RequestId: 603b6330-1296-4088-86cc-946cf87d054f Version: $LATEST
-"
-1763825383494,"Starting request using compute deployment_id: 0b4ee05e-7802-484e-833c-94dfe4639c40 and compute version: $LATEST
-"
-1763825383499,"⨯ Error [PrismaClientConstructorValidationError]: Invalid value undefined for datasource ""db"" provided to PrismaClient constructor. It should have this form: { url: ""CONNECTION_STRING"" } Read more at https://pris.ly/d/client-constructor     at module evaluation (../../var/task/.next/server/chunks/[root-of-the-server]__9dfe3f23._.js:1:1126)     at instantiateModule (../../var/task/.next/server/chunks/[turbopack]_runtime.js:715:9)     at getOrInstantiateModuleFromParent (../../var/task/.next/server/chunks/[turbopack]_runtime.js:738:12)     at Context.esmImport [as i] (../../var/task/.next/server/chunks/[turbopack]_runtime.js:228:20)     at module evaluation (../../var/task/.next/server/chunks/[root-of-the-server]__9dfe3f23._.js:1:1597)     at instantiateModule (../../var/task/.next/server/chunks/[turbopack]_runtime.js:715:9)     at instantiateRuntimeModule (../../var/task/.next/server/chunks/[turbopack]_runtime.js:743:12)
-"
-1763825383501,"REPORT RequestId: 603b6330-1296-4088-86cc-946cf87d054f	Duration: 7.75 ms	Billed Duration: 8 ms	Memory Size: 1024 MB	Max Memory Used: 141 MB	
-"
