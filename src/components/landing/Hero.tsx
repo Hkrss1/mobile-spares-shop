@@ -7,12 +7,6 @@ import { ArrowRight, ShieldCheck, Truck, Wrench } from 'lucide-react';
 const Hero: React.FC = () => {
     return (
         <section className="relative pt-32 pb-12 lg:pt-48 lg:pb-24 overflow-hidden">
-            {/* Background Blobs */}
-            <div className="absolute top-0 left-0 w-full h-full overflow-hidden -z-10 pointer-events-none">
-                <div className="absolute top-[-10%] right-[-5%] w-[500px] h-[500px] bg-primary/10 rounded-full blur-3xl" />
-                <div className="absolute bottom-[-10%] left-[-10%] w-[600px] h-[600px] bg-blue-500/5 rounded-full blur-3xl" />
-            </div>
-
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
 
@@ -75,8 +69,8 @@ const Hero: React.FC = () => {
                         className="relative lg:h-[600px] flex items-center justify-center"
                     >
                         {/* Abstract Phone Representation */}
-                        <div className="relative w-[300px] h-[600px] bg-card border-8 border-muted rounded-[3rem] shadow-2xl overflow-hidden flex flex-col items-center p-4">
-                            <div className="absolute top-0 left-1/2 -translate-x-1/2 h-6 w-32 bg-muted rounded-b-2xl z-20" />
+                        <div className="relative w-[300px] h-[600px] bg-transparent backdrop-blur-sm border-8 border-gray-300 dark:border-gray-700 rounded-[3rem] shadow-2xl overflow-hidden flex flex-col items-center p-4">
+                            <div className="absolute top-0 left-1/2 -translate-x-1/2 h-6 w-32 bg-gray-300 dark:bg-gray-700 rounded-b-2xl z-20" />
 
                             {/* Fixed positioning - components stay within phone border */}
                             <motion.div
@@ -116,7 +110,7 @@ const Hero: React.FC = () => {
                         <motion.div
                             animate={{ y: [-10, 10, -10] }}
                             transition={{ repeat: Infinity, duration: 3 }}
-                            className="absolute top-20 right-10 lg:right-0 bg-card p-4 rounded-2xl shadow-xl border border-border"
+                            className="absolute top-20 right-10 lg:right-0 bg-transparent backdrop-blur-sm p-4 rounded-2xl shadow-xl border border-border z-20"
                         >
                             <div className="flex items-center gap-3">
                                 <div className="bg-green-100 dark:bg-green-900/30 p-2 rounded-lg text-green-600 dark:text-green-400">
@@ -132,7 +126,7 @@ const Hero: React.FC = () => {
                         <motion.div
                             animate={{ y: [10, -10, 10] }}
                             transition={{ repeat: Infinity, duration: 4 }}
-                            className="absolute bottom-40 left-0 bg-card p-4 rounded-2xl shadow-xl border border-border"
+                            className="absolute bottom-40 left-6 bg-transparent backdrop-blur-sm p-4 rounded-2xl shadow-xl border border-border z-20"
                         >
                             <div className="flex items-center gap-3">
                                 <div className="bg-orange-100 dark:bg-orange-900/30 p-2 rounded-lg text-orange-600 dark:text-orange-400">

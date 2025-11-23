@@ -49,14 +49,14 @@ export default async function Home() {
   }));
 
   return (
-    <div className="min-h-screen bg-background text-foreground selection:bg-primary selection:text-primary-foreground">
-      <main className="flex flex-col gap-16 pb-20">
+    <div className="min-h-screen text-foreground selection:bg-primary selection:text-primary-foreground">
+      <div className="flex flex-col gap-16 pb-20">
         <Hero />
         <CategorySection />
         <ProductGrid title="Trending Replacements" products={formattedProducts} />
         <Features />
         <ProductGrid title="New Arrivals" products={formattedProducts} />
-      </main>
+      </div>
     </div>
   );
 }

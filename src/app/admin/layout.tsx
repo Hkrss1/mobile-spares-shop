@@ -38,7 +38,7 @@ export default function AdminLayout({
   const [isCollapsed, setIsCollapsed] = useState(false);
 
   return (
-    <div style={{ display: "flex", minHeight: "100vh", backgroundColor: "var(--background)" }}>
+    <div style={{ display: "flex", minHeight: "100vh" }}>
       {/* Sidebar */}
       <aside
         style={{

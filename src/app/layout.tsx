@@ -5,6 +5,7 @@ import { CartProvider } from "@/lib/cart";
 import { OrderProvider } from "@/lib/orders";
 import Navbar from "@/components/landing/Navbar";
 import Footer from "@/components/landing/Footer";
+import InteractiveBackground from "@/components/InteractiveBackground";
 
 export const metadata: Metadata = {
   title: "QuikFix - Mobile Spare Parts",
@@ -19,14 +20,17 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body style={{ display: "flex", flexDirection: "column", minHeight: "100vh" }}>
+        <InteractiveBackground />
         <AuthProvider>
           <OrderProvider>
             <CartProvider>
               <Navbar />
-              <main style={{ flex: "1" }}>
+              <main style={{ flex: "1", position: "relative", zIndex: 1 }}>
                 {children}
               </main>
-              <Footer />
+              <div style={{ position: "relative", zIndex: 1 }}>
+                <Footer />
+              </div>
             </CartProvider>
           </OrderProvider>
         </AuthProvider>
