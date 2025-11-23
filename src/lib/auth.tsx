@@ -31,9 +31,16 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const router = useRouter();
 
   useEffect(() => {
+    // Initialize user from localStorage
     const storedUser = localStorage.getItem("mss_user");
     if (storedUser) {
-      setUser(JSON.parse(storedUser));
+      try {
+        const parsedUser = JSON.parse(storedUser);
+        setUser(parsedUser);
+      } catch (error) {
+        console.error("Failed to parse stored user:", error);
+        localStorage.removeItem("mss_user");
+      }
     }
     setIsLoading(false);
   }, []);

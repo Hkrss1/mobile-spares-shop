@@ -39,7 +39,11 @@ export default function ProductGrid({ products }: ProductGridProps) {
 
   // Reset page when filters change
   useEffect(() => {
-    setCurrentPage(1);
+    // Reset to first page when category filter changes
+    if (currentPage !== 1) {
+      setCurrentPage(1);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedCategory]);
 
   return (

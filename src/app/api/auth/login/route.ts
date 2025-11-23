@@ -30,7 +30,7 @@ export async function POST(request: Request) {
         id: "admin-id",
         name: "Admin",
         mobile: "9999999999",
-        role: "admin",
+        role: "admin", // Lowercase for frontend compatibility
       });
     }
 
@@ -58,7 +58,7 @@ export async function POST(request: Request) {
       id: user.id,
       name: user.name,
       mobile: user.mobile,
-      role: user.role,
+      role: user.role.toLowerCase(),
     });
   } catch (error) {
     console.error("[LOGIN] Error:", error);

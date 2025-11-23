@@ -92,15 +92,19 @@ export default function AdminDashboard() {
   const processingOrders = orders.filter(
     (o) => o.status === "processing",
   ).length;
-  const inTransitOrders = orders.filter(
-    (o) => o.status === "in-transit",
-  ).length;
-  const deliveredOrders = orders.filter((o) => o.status === "delivered").length;
   const totalRevenue = orders.reduce((sum, o) => sum + o.total, 0);
 
-  // User statistics
-  const users = JSON.parse(localStorage.getItem("mss_users") || "[]");
-  const totalUsers = users.length;
+  // User statistics - only available on client side
+  const [totalUsers, setTotalUsers] = React.useState(0);
+  
+  React.useEffect(() => {
+    try {
+      const users = JSON.parse(localStorage.getItem("mss_users") || "[]");
+      setTotalUsers(users.length);
+    } catch (error) {
+      console.error("Failed to load users:", error);
+    }
+  }, []);
   const recentOrders = orders.slice(0, 5);
 
   return (
@@ -110,7 +114,7 @@ export default function AdminDashboard() {
           Dashboard Overview
         </h1>
         <p style={{ color: "hsl(var(--muted-foreground))", marginTop: "0.5rem" }}>
-          Welcome back! Here's what's happening with your store today.
+          Welcome back! Here&apos;s what&apos;s happening with your store today.
         </p>
       </header>
 

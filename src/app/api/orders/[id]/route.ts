@@ -27,7 +27,11 @@ export async function PATCH(
     }
 
     // Build update data
-    const updateData: any = {};
+    const updateData: {
+      status?: string;
+      trackingLink?: string;
+      cancelledBy?: string;
+    } = {};
     if (status !== undefined) updateData.status = status;
     if (trackingLink !== undefined) updateData.trackingLink = trackingLink;
     if (cancelledBy !== undefined) updateData.cancelledBy = cancelledBy;

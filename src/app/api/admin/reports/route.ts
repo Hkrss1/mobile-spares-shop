@@ -15,7 +15,12 @@ export async function GET() {
     });
 
     let totalStockValue = 0;
-    let lowStockItems = [];
+    const lowStockItems: Array<{
+      id: string;
+      name: string;
+      stock: number;
+      quantity: number;
+    }> = [];
     const LOW_STOCK_THRESHOLD = 5;
 
     for (const product of products) {
@@ -29,6 +34,7 @@ export async function GET() {
         lowStockItems.push({
           id: product.id,
           name: product.name,
+          stock: totalQty,
           quantity: totalQty,
         });
       }

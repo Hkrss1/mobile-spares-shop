@@ -33,6 +33,7 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
 
   // Load cart from local storage on mount
   useEffect(() => {
+    // Initialize cart from localStorage
     const savedCart = localStorage.getItem("mss_cart");
     if (savedCart) {
       try {

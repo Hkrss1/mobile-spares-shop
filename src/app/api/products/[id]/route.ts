@@ -17,7 +17,15 @@ export async function PATCH(
     console.log("[PRODUCT UPDATE] Updating product:", params.id, body);
 
     // Build update data object with only provided fields
-    const updateData: any = {};
+    const updateData: {
+      name?: string;
+      price?: number;
+      categoryId?: string;
+      brandId?: string | null;
+      description?: string;
+      image?: string;
+      specs?: Record<string, string>;
+    } = {};
     if (name !== undefined) updateData.name = name;
     if (price !== undefined) updateData.price = parseFloat(price);
     if (description !== undefined) updateData.description = description;

@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
+import { Prisma } from "@prisma/client";
 
 export async function GET(request: Request) {
   try {
@@ -7,8 +8,10 @@ export async function GET(request: Request) {
     const type = searchParams.get("type");
     const productId = searchParams.get("productId");
 
-    const where: any = {};
-    if (type) where.type = type;
+    const where: Prisma.InventoryTransactionWhereInput = {};
+    if (type) {
+      where.type = type as "INWARD" | "OUTWARD" | "RETURN" | "ADJUSTMENT";
+    }
     if (productId) where.productId = productId;
 
     const transactions = await prisma.inventoryTransaction.findMany({

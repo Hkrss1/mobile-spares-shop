@@ -73,7 +73,7 @@ export async function POST(request: Request) {
       id: user.id,
       name: user.name,
       mobile: user.mobile,
-      role: user.role,
+      role: user.role.toLowerCase(), // Normalize to lowercase for frontend
     });
   } catch (error) {
     console.error("[SIGNUP] Error:", error);

@@ -20,6 +20,7 @@ const Navbar: React.FC = () => {
 
     // Initialize dark mode from localStorage
     useEffect(() => {
+        // Initialize theme on mount
         const savedTheme = localStorage.getItem('theme');
         const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
         const shouldBeDark = savedTheme === 'dark' || (!savedTheme && prefersDark);

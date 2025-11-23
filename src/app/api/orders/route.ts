@@ -133,9 +133,9 @@ export async function POST(request: Request) {
     });
 
     return NextResponse.json(result);
-  } catch (error: any) {
+  } catch (error) {
     console.error("Error creating order:", error);
-    const message = error.message || "Internal server error";
+    const message = error instanceof Error ? error.message : "Internal server error";
     if (message.includes("Insufficient stock")) {
       return NextResponse.json({ error: message }, { status: 400 });
     }

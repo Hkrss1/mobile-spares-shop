@@ -26,7 +26,7 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: "User not found" }, { status: 404 });
     }
 
-    // Prevent admin deletion
+    // Prevent admin deletion (database uses uppercase ADMIN)
     if (user.role === "ADMIN") {
       return NextResponse.json(
         { error: "Cannot delete admin account" },

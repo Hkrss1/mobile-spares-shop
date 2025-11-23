@@ -15,7 +15,6 @@ import {
   BarChart3,
   ChevronLeft,
   ChevronRight,
-  LogOut,
 } from "lucide-react";
 
 const sidebarItems = [

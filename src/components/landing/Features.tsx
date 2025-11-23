@@ -25,7 +25,7 @@ const Features: React.FC = () => {
                         </div>
                         <h3 className="text-lg font-bold mb-2">Same Day Shipping</h3>
                         <p className="text-muted-foreground text-sm">
-                            Order before 2:00 PM EST and we'll ship your parts the very same day.
+                            Order before 2:00 PM EST and we&apos;ll ship your parts the very same day.
                         </p>
                     </div>
 

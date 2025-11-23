@@ -28,12 +28,6 @@ export default function AdminInventoryPage() {
     stock: "",
   });
 
-  // Fetch brands and categories
-  useEffect(() => {
-    fetchBrands();
-    fetchCategories();
-  }, []);
-
   const fetchBrands = async () => {
     try {
       const res = await fetch("/api/brands");
@@ -57,6 +51,13 @@ export default function AdminInventoryPage() {
       console.error("Failed to fetch categories:", error);
     }
   };
+
+  // Fetch brands and categories
+  useEffect(() => {
+    fetchBrands();
+    fetchCategories();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const handleAddBrand = async () => {
     if (!newBrandName.trim()) return;

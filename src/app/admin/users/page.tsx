@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useState, useEffect } from "react";
 
 interface UserData {
   name: string;
@@ -10,9 +10,18 @@ interface UserData {
 }
 
 export default function AdminUsersPage() {
-  const users: UserData[] = JSON.parse(
-    localStorage.getItem("mss_users") || "[]",
-  );
+  const [users, setUsers] = useState<UserData[]>([]);
+
+  useEffect(() => {
+    try {
+      const storedUsers = JSON.parse(
+        localStorage.getItem("mss_users") || "[]",
+      );
+      setUsers(storedUsers);
+    } catch (error) {
+      console.error("Failed to load users:", error);
+    }
+  }, []);
 
   return (
     <div className="container animate-fade-in" style={{ padding: "4rem 1rem" }}>

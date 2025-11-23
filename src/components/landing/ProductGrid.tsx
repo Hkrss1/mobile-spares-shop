@@ -2,6 +2,7 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
+import Link from 'next/link';
 import ProductCard from '@/components/ProductCard';
 import { Product } from '@/lib/products';
 
@@ -21,7 +22,7 @@ const ProductGrid: React.FC<ProductGridProps> = ({ title, products }) => {
                     <h2 className="text-3xl font-bold tracking-tight">{title}</h2>
                     <p className="text-muted-foreground mt-2">Top quality components selected for you</p>
                 </div>
-                <a href="/products" className="hidden sm:block text-primary font-semibold hover:underline">View All Products</a>
+                <Link href="/products" className="hidden sm:block text-primary font-semibold hover:underline">View All Products</Link>
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">

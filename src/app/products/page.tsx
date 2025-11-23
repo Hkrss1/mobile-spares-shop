@@ -1,6 +1,7 @@
 import ProductGrid from "@/components/ProductGrid";
 import { prisma } from "@/lib/prisma";
 import { Prisma } from "@prisma/client";
+import Link from "next/link";
 
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
@@ -79,12 +80,12 @@ export default async function ProductsPage({ searchParams }: PageProps) {
                         <p className="text-xl text-muted-foreground mb-4">
                             No products found{searchQuery && ` for "${searchQuery}"`}
                         </p>
-                        <a
+                        <Link
                             href="/products"
                             className="text-primary hover:underline font-medium"
                         >
                             View all products
-                        </a>
+                        </Link>
                     </div>
                 )}
             </div>

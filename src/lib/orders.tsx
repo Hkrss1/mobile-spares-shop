@@ -54,6 +54,7 @@ export function OrderProvider({ children }: { children: React.ReactNode }) {
 
   // Load orders on mount and when user changes
   useEffect(() => {
+    // Initialize orders from API
     async function fetchOrders() {
       try {
         const user = JSON.parse(localStorage.getItem("mss_user") || "null");
