@@ -11,7 +11,6 @@ interface ProductGridProps {
 const ITEMS_PER_PAGE = 15;
 
 export default function ProductGrid({ products }: ProductGridProps) {
-  const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [currentPage, setCurrentPage] = useState(1);
 
@@ -21,28 +20,15 @@ export default function ProductGrid({ products }: ProductGridProps) {
     return ["All", ...Array.from(cats)];
   }, [products]);
 
-  const [debouncedSearchQuery, setDebouncedSearchQuery] = useState("");
-
-  // Debounce search query
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setDebouncedSearchQuery(searchQuery);
-    }, 300);
-    return () => clearTimeout(timer);
-  }, [searchQuery]);
-
   // Filter and paginate products
   const filteredProducts = useMemo(() => {
     return products.filter((product) => {
-      const matchesSearch = product.name
-        .toLowerCase()
-        .includes(debouncedSearchQuery.toLowerCase());
       const matchesCategory =
         selectedCategory === "All" ||
         product.category.name === selectedCategory;
-      return matchesSearch && matchesCategory;
+      return matchesCategory;
     });
-  }, [products, debouncedSearchQuery, selectedCategory]);
+  }, [products, selectedCategory]);
 
   const totalPages = Math.ceil(filteredProducts.length / ITEMS_PER_PAGE);
 
@@ -54,92 +40,49 @@ export default function ProductGrid({ products }: ProductGridProps) {
   // Reset page when filters change
   useEffect(() => {
     setCurrentPage(1);
-  }, [debouncedSearchQuery, selectedCategory]);
+  }, [selectedCategory]);
 
   return (
     <div>
-      {/* Filters & Search */}
+      {/* Category Filter */}
       <div
         style={{
           marginBottom: "2rem",
           display: "flex",
-          flexDirection: "column",
-          gap: "1rem",
+          gap: "0.5rem",
+          flexWrap: "wrap",
+          justifyContent: "center",
         }}
       >
-        <div
-          style={{
-            display: "flex",
-            gap: "1rem",
-            flexWrap: "wrap",
-            alignItems: "center",
-            justifyContent: "space-between",
-          }}
-        >
-          {/* Search Box */}
-          <div style={{ position: "relative", flex: "1 1 300px" }}>
-            <input
-              type="text"
-              placeholder="Search products..."
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              style={{
-                width: "100%",
-                padding: "0.75rem 1rem",
-                paddingLeft: "2.5rem",
-                borderRadius: "var(--radius)",
-                border: "1px solid hsl(var(--border))",
-                backgroundColor: "hsl(var(--background))",
-                color: "hsl(var(--foreground))",
-                fontSize: "1rem",
-              }}
-            />
-            <span
-              style={{
-                position: "absolute",
-                left: "0.75rem",
-                top: "50%",
-                transform: "translateY(-50%)",
-                opacity: 0.5,
-              }}
-            >
-              🔍
-            </span>
-          </div>
-
-          {/* Category Buttons */}
-          <div style={{ display: "flex", gap: "0.5rem", flexWrap: "wrap" }}>
-            {categories.map((category) => (
-              <button
-                key={category}
-                onClick={() => setSelectedCategory(category)}
-                style={{
-                  padding: "0.5rem 1rem",
-                  borderRadius: "9999px",
-                  border: "1px solid",
-                  borderColor:
-                    selectedCategory === category
-                      ? "hsl(var(--primary))"
-                      : "hsl(var(--border))",
-                  backgroundColor:
-                    selectedCategory === category
-                      ? "hsl(var(--primary))"
-                      : "transparent",
-                  color:
-                    selectedCategory === category
-                      ? "white"
-                      : "hsl(var(--muted-foreground))",
-                  cursor: "pointer",
-                  fontSize: "0.875rem",
-                  fontWeight: 500,
-                  transition: "all 0.2s",
-                }}
-              >
-                {category}
-              </button>
-            ))}
-          </div>
-        </div>
+        {categories.map((category) => (
+          <button
+            key={category}
+            onClick={() => setSelectedCategory(category)}
+            style={{
+              padding: "0.5rem 1rem",
+              borderRadius: "9999px",
+              border: "1px solid",
+              borderColor:
+                selectedCategory === category
+                  ? "hsl(var(--primary))"
+                  : "hsl(var(--border))",
+              backgroundColor:
+                selectedCategory === category
+                  ? "hsl(var(--primary))"
+                  : "transparent",
+              color:
+                selectedCategory === category
+                  ? "white"
+                  : "hsl(var(--muted-foreground))",
+              cursor: "pointer",
+              fontSize: "0.875rem",
+              fontWeight: 500,
+              transition: "all 0.2s",
+            }}
+          >
+            {category}
+          </button>
+        ))}
       </div>
 
       {/* Products Grid */}
@@ -250,19 +193,20 @@ export default function ProductGrid({ products }: ProductGridProps) {
           </p>
           <button
             onClick={() => {
-              setSearchQuery("");
               setSelectedCategory("All");
+              setCurrentPage(1);
             }}
             style={{
-              marginTop: "1rem",
-              color: "hsl(var(--primary))",
-              background: "none",
+              padding: "0.5rem 1rem",
+              backgroundColor: "hsl(var(--secondary))",
+              color: "hsl(var(--secondary-foreground))",
               border: "none",
+              borderRadius: "var(--radius)",
               cursor: "pointer",
-              textDecoration: "underline",
+              fontSize: "0.875rem",
             }}
           >
-            Clear filters
+            Reset Filters
           </button>
         </div>
       )}

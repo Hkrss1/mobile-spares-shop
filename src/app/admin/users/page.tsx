@@ -22,9 +22,9 @@ export default function AdminUsersPage() {
 
       <div
         style={{
-          backgroundColor: "hsl(var(--card))",
+          backgroundColor: "var(--card)",
           borderRadius: "var(--radius)",
-          border: "1px solid hsl(var(--border))",
+          border: "1px solid var(--border)",
           overflow: "hidden",
         }}
       >
@@ -38,8 +38,8 @@ export default function AdminUsersPage() {
           <thead>
             <tr
               style={{
-                borderBottom: "1px solid hsl(var(--border))",
-                backgroundColor: "hsl(var(--muted))",
+                borderBottom: "1px solid var(--border)",
+                backgroundColor: "var(--muted)",
               }}
             >
               <th style={{ padding: "1rem" }}>Name</th>
@@ -53,7 +53,7 @@ export default function AdminUsersPage() {
               users.map((user, index: number) => (
                 <tr
                   key={index}
-                  style={{ borderBottom: "1px solid hsl(var(--border))" }}
+                  style={{ borderBottom: "1px solid var(--border)" }}
                 >
                   <td style={{ padding: "1rem" }}>{user.name}</td>
                   <td style={{ padding: "1rem" }}>{user.email}</td>
@@ -76,7 +76,7 @@ export default function AdminUsersPage() {
                     style={{
                       padding: "1rem",
                       fontSize: "0.875rem",
-                      color: "hsl(var(--muted-foreground))",
+                      color: "var(--muted-foreground)",
                     }}
                   >
                     {user.createdAt
@@ -92,7 +92,7 @@ export default function AdminUsersPage() {
                   style={{
                     padding: "2rem",
                     textAlign: "center",
-                    color: "hsl(var(--muted-foreground))",
+                    color: "var(--muted-foreground)",
                   }}
                 >
                   No users registered yet

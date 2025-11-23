@@ -69,12 +69,13 @@ export default async function ProductPage({
         {/* Image Section */}
         <div
           style={{
-            backgroundColor: "#1a1a1a",
-            borderRadius: "var(--radius)",
-            aspectRatio: "1/1",
             position: "relative",
-            border: "1px solid hsl(var(--border))",
+            aspectRatio: "1/1",
+            width: "100%",
+            maxWidth: "500px",
+            borderRadius: "var(--radius)",
             overflow: "hidden",
+            backgroundColor: "hsl(var(--muted) / 0.3)",
           }}
         >
           <Image
@@ -82,7 +83,6 @@ export default async function ProductPage({
             alt={product.name}
             fill
             style={{ objectFit: "contain", padding: "2rem" }}
-            priority
             sizes="(max-width: 768px) 100vw, 50vw"
           />
         </div>

@@ -32,66 +32,177 @@ export default function TransactionHistoryPage() {
   }, []);
 
   return (
-    <div className="p-6">
-      <h1 className="text-2xl font-bold mb-6">Inventory Transaction History</h1>
+    <div className="container animate-fade-in" style={{ padding: "4rem 1rem" }}>
+      <h1 style={{ fontSize: "2.5rem", fontWeight: 700, marginBottom: "2rem" }}>
+        Inventory Transaction History
+      </h1>
 
-      <div className="bg-white rounded-lg shadow-md overflow-hidden">
+      <div
+        style={{
+          backgroundColor: "var(--card)",
+          border: "1px solid var(--border)",
+          borderRadius: "var(--radius)",
+          overflow: "hidden",
+        }}
+      >
         {loading ? (
-          <div className="p-6">Loading...</div>
+          <div style={{ padding: "1.5rem" }}>Loading...</div>
         ) : (
-          <div className="overflow-x-auto">
-            <table className="min-w-full divide-y divide-gray-200">
-              <thead className="bg-gray-50">
-                <tr>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+          <div style={{ overflowX: "auto" }}>
+            <table style={{ width: "100%", borderCollapse: "collapse" }}>
+              <thead>
+                <tr
+                  style={{
+                    borderBottom: "1px solid var(--border)",
+                    backgroundColor: "var(--muted)",
+                  }}
+                >
+                  <th
+                    style={{
+                      padding: "0.75rem 1rem",
+                      textAlign: "left",
+                      fontSize: "0.75rem",
+                      fontWeight: 500,
+                      textTransform: "uppercase",
+                      color: "var(--muted-foreground)",
+                    }}
+                  >
                     Date
                   </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  <th
+                    style={{
+                      padding: "0.75rem 1rem",
+                      textAlign: "left",
+                      fontSize: "0.75rem",
+                      fontWeight: 500,
+                      textTransform: "uppercase",
+                      color: "var(--muted-foreground)",
+                    }}
+                  >
                     Type
                   </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  <th
+                    style={{
+                      padding: "0.75rem 1rem",
+                      textAlign: "left",
+                      fontSize: "0.75rem",
+                      fontWeight: 500,
+                      textTransform: "uppercase",
+                      color: "var(--muted-foreground)",
+                    }}
+                  >
                     Product
                   </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  <th
+                    style={{
+                      padding: "0.75rem 1rem",
+                      textAlign: "left",
+                      fontSize: "0.75rem",
+                      fontWeight: 500,
+                      textTransform: "uppercase",
+                      color: "var(--muted-foreground)",
+                    }}
+                  >
                     Qty
                   </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  <th
+                    style={{
+                      padding: "0.75rem 1rem",
+                      textAlign: "left",
+                      fontSize: "0.75rem",
+                      fontWeight: 500,
+                      textTransform: "uppercase",
+                      color: "var(--muted-foreground)",
+                    }}
+                  >
                     Location
                   </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  <th
+                    style={{
+                      padding: "0.75rem 1rem",
+                      textAlign: "left",
+                      fontSize: "0.75rem",
+                      fontWeight: 500,
+                      textTransform: "uppercase",
+                      color: "var(--muted-foreground)",
+                    }}
+                  >
                     Reference
                   </th>
                 </tr>
               </thead>
-              <tbody className="bg-white divide-y divide-gray-200">
+              <tbody>
                 {transactions.map((tx) => (
-                  <tr key={tx.id}>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                  <tr
+                    key={tx.id}
+                    style={{ borderBottom: "1px solid var(--border)" }}
+                  >
+                    <td
+                      style={{
+                        padding: "1rem",
+                        fontSize: "0.875rem",
+                        color: "var(--muted-foreground)",
+                      }}
+                    >
                       {new Date(tx.createdAt).toLocaleDateString()}
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap">
+                    <td style={{ padding: "1rem" }}>
                       <span
-                        className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${
-                          tx.type === "INWARD"
-                            ? "bg-green-100 text-green-800"
-                            : tx.type === "OUTWARD"
-                              ? "bg-blue-100 text-blue-800"
-                              : "bg-gray-100 text-gray-800"
-                        }`}
+                        style={{
+                          padding: "0.25rem 0.75rem",
+                          borderRadius: "9999px",
+                          fontSize: "0.75rem",
+                          fontWeight: 600,
+                          backgroundColor:
+                            tx.type === "INWARD"
+                              ? "#10b98120"
+                              : tx.type === "OUTWARD"
+                                ? "#3b82f620"
+                                : "#f3f4f6",
+                          color:
+                            tx.type === "INWARD"
+                              ? "#10b981"
+                              : tx.type === "OUTWARD"
+                                ? "#3b82f6"
+                                : "#1f2937",
+                        }}
                       >
                         {tx.type}
                       </span>
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                    <td
+                      style={{
+                        padding: "1rem",
+                        fontSize: "0.875rem",
+                        fontWeight: 500,
+                      }}
+                    >
                       {tx.product?.name}
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                    <td
+                      style={{
+                        padding: "1rem",
+                        fontSize: "0.875rem",
+                      }}
+                    >
                       {tx.quantity}
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                    <td
+                      style={{
+                        padding: "1rem",
+                        fontSize: "0.875rem",
+                        color: "var(--muted-foreground)",
+                      }}
+                    >
                       {tx.location?.name}
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                    <td
+                      style={{
+                        padding: "1rem",
+                        fontSize: "0.875rem",
+                        color: "var(--muted-foreground)",
+                      }}
+                    >
                       {tx.supplier
                         ? `Supplier: ${tx.supplier.name}`
                         : tx.order

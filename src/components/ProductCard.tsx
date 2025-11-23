@@ -26,23 +26,24 @@ const ProductCard: React.FC<ProductCardProps> = React.memo(({ product }) => {
       <div
         style={{
           backgroundColor: "hsl(var(--card))",
-          borderRadius: "var(--radius)",
-          border: "1px solid hsl(var(--border))",
+          borderRadius: "16px",
+          border: "none",
           overflow: "hidden",
-          transition: "transform 0.2s, box-shadow 0.2s",
+          transition: "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
           height: "100%",
           display: "flex",
           flexDirection: "column",
+          boxShadow: "0 0 0 0.5px rgba(0, 0, 0, 0.04), 0 1px 2px 0 rgba(0, 0, 0, 0.05)",
         }}
         className="product-card"
         onMouseEnter={(e) => {
-          e.currentTarget.style.transform = "translateY(-4px)";
+          e.currentTarget.style.transform = "translateY(-2px)";
           e.currentTarget.style.boxShadow =
-            "0 12px 24px -10px rgba(0, 0, 0, 0.3)";
+            "0 0 0 0.5px rgba(0, 0, 0, 0.08), 0 4px 12px 0 rgba(0, 0, 0, 0.08), 0 2px 4px 0 rgba(0, 0, 0, 0.03)";
         }}
         onMouseLeave={(e) => {
           e.currentTarget.style.transform = "translateY(0)";
-          e.currentTarget.style.boxShadow = "none";
+          e.currentTarget.style.boxShadow = "0 0 0 0.5px rgba(0, 0, 0, 0.04), 0 1px 2px 0 rgba(0, 0, 0, 0.05)";
         }}
       >
         <div
@@ -50,7 +51,7 @@ const ProductCard: React.FC<ProductCardProps> = React.memo(({ product }) => {
             position: "relative",
             aspectRatio: "1/1",
             width: "100%",
-            backgroundColor: "#1a1a1a",
+            backgroundColor: "hsl(var(--muted) / 0.3)",
           }}
         >
           <Image

@@ -68,7 +68,7 @@ export default function CartPage() {
                 style={{
                   width: "80px",
                   height: "80px",
-                  backgroundColor: "#1a1a1a",
+                  backgroundColor: "hsl(var(--muted) / 0.3)",
                   borderRadius: "var(--radius)",
                   position: "relative",
                   overflow: "hidden",

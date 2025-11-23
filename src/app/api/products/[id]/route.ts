@@ -12,16 +12,14 @@ export async function PATCH(
   try {
     const params = await context.params;
     const body = await request.json();
-    const { stock, name, price, category, description, image, specs } = body;
+    const { name, price, description, image, specs } = body;
 
     console.log("[PRODUCT UPDATE] Updating product:", params.id, body);
 
     // Build update data object with only provided fields
     const updateData: any = {};
-    if (stock !== undefined) updateData.stock = parseInt(stock);
     if (name !== undefined) updateData.name = name;
     if (price !== undefined) updateData.price = parseFloat(price);
-    if (category !== undefined) updateData.category = category;
     if (description !== undefined) updateData.description = description;
     if (image !== undefined) updateData.image = image;
     if (specs !== undefined) updateData.specs = specs;

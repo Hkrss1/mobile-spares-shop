@@ -119,7 +119,6 @@ export default function AdminInventoryPage() {
       brandId: newProduct.brandId || null,
       description: newProduct.description,
       image: newProduct.image || "/placeholder.png",
-      stock: parseInt(newProduct.stock),
       specs: {},
     };
 
@@ -131,6 +130,15 @@ export default function AdminInventoryPage() {
       });
 
       if (res.ok) {
+        const created = await res.json();
+        // Set initial stock if provided
+        if (newProduct.stock) {
+          await fetch(`/api/products/${created.id}/stock`, {
+            method: "PATCH",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ quantity: parseInt(newProduct.stock), locationId: "loc_main" }),
+          });
+        }
         window.location.reload();
       } else {
         const error = await res.json();
@@ -144,10 +152,10 @@ export default function AdminInventoryPage() {
 
   const updateStock = async (productId: string, newStock: number) => {
     try {
-      const res = await fetch(`/api/products/${productId}`, {
+      const res = await fetch(`/api/products/${productId}/stock`, {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ stock: newStock }),
+        body: JSON.stringify({ quantity: newStock, locationId: "loc_main" }),
       });
 
       if (res.ok) {
@@ -199,8 +207,8 @@ export default function AdminInventoryPage() {
       {/* Brand Management Section */}
       <div
         style={{
-          backgroundColor: "hsl(var(--card))",
-          border: "1px solid hsl(var(--border))",
+          backgroundColor: "var(--card)",
+          border: "1px solid var(--border)",
           borderRadius: "var(--radius)",
           padding: "1.5rem",
           marginBottom: "2rem",
@@ -237,9 +245,9 @@ export default function AdminInventoryPage() {
                 flex: 1,
                 padding: "0.5rem",
                 borderRadius: "var(--radius)",
-                border: "1px solid hsl(var(--border))",
-                backgroundColor: "hsl(var(--background))",
-                color: "hsl(var(--foreground))",
+                border: "1px solid var(--border)",
+                backgroundColor: "var(--background)",
+                color: "var(--foreground)",
               }}
             />
             <button className="btn btn-primary" onClick={handleAddBrand}>
@@ -261,8 +269,8 @@ export default function AdminInventoryPage() {
               style={{
                 padding: "0.5rem 1rem",
                 borderRadius: "var(--radius)",
-                border: "1px solid hsl(var(--border))",
-                backgroundColor: "hsl(var(--muted))",
+                border: "1px solid var(--border)",
+                backgroundColor: "var(--muted)",
                 fontSize: "0.875rem",
               }}
             >
@@ -272,7 +280,7 @@ export default function AdminInventoryPage() {
           {brands.length === 0 && (
             <p
               style={{
-                color: "hsl(var(--muted-foreground))",
+                color: "var(--muted-foreground)",
                 fontSize: "0.875rem",
               }}
             >
@@ -286,8 +294,8 @@ export default function AdminInventoryPage() {
       {isAdding && (
         <div
           style={{
-            backgroundColor: "hsl(var(--card))",
-            border: "1px solid hsl(var(--border))",
+            backgroundColor: "var(--card)",
+            border: "1px solid var(--border)",
             borderRadius: "var(--radius)",
             padding: "2rem",
             marginBottom: "2rem",
@@ -303,6 +311,53 @@ export default function AdminInventoryPage() {
             Add New Product
           </h2>
           <form onSubmit={handleAddProduct}>
+            {/* Image Upload */}
+            <div style={{ marginBottom: "1rem" }}>
+              <label
+                style={{
+                  display: "block",
+                  marginBottom: "0.5rem",
+                  fontSize: "0.875rem",
+                  fontWeight: 500,
+                }}
+              >
+                Product Image *
+              </label>
+              <input
+                type="file"
+                accept="image/*"
+                onChange={(e) => {
+                  const file = e.target.files?.[0];
+                  if (file) {
+                    const reader = new FileReader();
+                    reader.onloadend = () => {
+                      setNewProduct((prev) => ({ ...prev, image: reader.result as string }));
+                    };
+                    reader.readAsDataURL(file);
+                  }
+                }}
+                style={{
+                  width: "100%",
+                  padding: "0.75rem",
+                  borderRadius: "var(--radius)",
+                  border: "1px solid var(--border)",
+                  backgroundColor: "var(--background)",
+                  color: "var(--foreground)",
+                }}
+              />
+              {newProduct.image && (
+                <img
+                  src={newProduct.image}
+                  alt="Product preview"
+                  style={{
+                    maxWidth: "100%",
+                    marginTop: "0.5rem",
+                    borderRadius: "var(--radius)",
+                    border: "1px solid var(--border)",
+                  }}
+                />
+              )}
+            </div>
             <div
               style={{
                 display: "grid",
@@ -333,9 +388,9 @@ export default function AdminInventoryPage() {
                     width: "100%",
                     padding: "0.75rem",
                     borderRadius: "var(--radius)",
-                    border: "1px solid hsl(var(--border))",
-                    backgroundColor: "hsl(var(--background))",
-                    color: "hsl(var(--foreground))",
+                    border: "1px solid var(--border)",
+                    backgroundColor: "var(--background)",
+                    color: "var(--foreground)",
                   }}
                 />
               </div>
@@ -364,9 +419,9 @@ export default function AdminInventoryPage() {
                       flex: 1,
                       padding: "0.75rem",
                       borderRadius: "var(--radius)",
-                      border: "1px solid hsl(var(--border))",
-                      backgroundColor: "hsl(var(--background))",
-                      color: "hsl(var(--foreground))",
+                      border: "1px solid var(--border)",
+                      backgroundColor: "var(--background)",
+                      color: "var(--foreground)",
                     }}
                   >
                     <option value="">Select Category</option>
@@ -402,9 +457,9 @@ export default function AdminInventoryPage() {
                         flex: 1,
                         padding: "0.5rem",
                         borderRadius: "var(--radius)",
-                        border: "1px solid hsl(var(--border))",
-                        backgroundColor: "hsl(var(--background))",
-                        color: "hsl(var(--foreground))",
+                        border: "1px solid var(--border)",
+                        backgroundColor: "var(--background)",
+                        color: "var(--foreground)",
                       }}
                     />
                     <button
@@ -437,9 +492,9 @@ export default function AdminInventoryPage() {
                     width: "100%",
                     padding: "0.75rem",
                     borderRadius: "var(--radius)",
-                    border: "1px solid hsl(var(--border))",
-                    backgroundColor: "hsl(var(--background))",
-                    color: "hsl(var(--foreground))",
+                    border: "1px solid var(--border)",
+                    backgroundColor: "var(--background)",
+                    color: "var(--foreground)",
                   }}
                 >
                   <option value="">No Brand</option>
@@ -474,9 +529,9 @@ export default function AdminInventoryPage() {
                     width: "100%",
                     padding: "0.75rem",
                     borderRadius: "var(--radius)",
-                    border: "1px solid hsl(var(--border))",
-                    backgroundColor: "hsl(var(--background))",
-                    color: "hsl(var(--foreground))",
+                    border: "1px solid var(--border)",
+                    backgroundColor: "var(--background)",
+                    color: "var(--foreground)",
                   }}
                 />
               </div>
@@ -503,9 +558,9 @@ export default function AdminInventoryPage() {
                     width: "100%",
                     padding: "0.75rem",
                     borderRadius: "var(--radius)",
-                    border: "1px solid hsl(var(--border))",
-                    backgroundColor: "hsl(var(--background))",
-                    color: "hsl(var(--foreground))",
+                    border: "1px solid var(--border)",
+                    backgroundColor: "var(--background)",
+                    color: "var(--foreground)",
                   }}
                 />
               </div>
@@ -532,9 +587,9 @@ export default function AdminInventoryPage() {
                     width: "100%",
                     padding: "0.75rem",
                     borderRadius: "var(--radius)",
-                    border: "1px solid hsl(var(--border))",
-                    backgroundColor: "hsl(var(--background))",
-                    color: "hsl(var(--foreground))",
+                    border: "1px solid var(--border)",
+                    backgroundColor: "var(--background)",
+                    color: "var(--foreground)",
                   }}
                 />
               </div>
@@ -560,9 +615,9 @@ export default function AdminInventoryPage() {
                   width: "100%",
                   padding: "0.75rem",
                   borderRadius: "var(--radius)",
-                  border: "1px solid hsl(var(--border))",
-                  backgroundColor: "hsl(var(--background))",
-                  color: "hsl(var(--foreground))",
+                  border: "1px solid var(--border)",
+                  backgroundColor: "var(--background)",
+                  color: "var(--foreground)",
                   resize: "vertical",
                 }}
               />
@@ -592,9 +647,9 @@ export default function AdminInventoryPage() {
           style={{
             padding: "0.5rem 1rem",
             borderRadius: "var(--radius)",
-            border: "1px solid hsl(var(--border))",
-            backgroundColor: "hsl(var(--background))",
-            color: "hsl(var(--foreground))",
+            border: "1px solid var(--border)",
+            backgroundColor: "var(--background)",
+            color: "var(--foreground)",
           }}
         >
           <option value="">All Brands</option>
@@ -609,14 +664,14 @@ export default function AdminInventoryPage() {
       {/* Products List */}
       <div
         style={{
-          backgroundColor: "hsl(var(--card))",
-          border: "1px solid hsl(var(--border))",
+          backgroundColor: "var(--card)",
+          border: "1px solid var(--border)",
           borderRadius: "var(--radius)",
           overflow: "hidden",
         }}
       >
         <table style={{ width: "100%", borderCollapse: "collapse" }}>
-          <thead style={{ backgroundColor: "hsl(var(--muted))" }}>
+          <thead style={{ backgroundColor: "var(--muted)" }}>
             <tr>
               <th
                 style={{ padding: "1rem", textAlign: "left", fontWeight: 600 }}
@@ -658,7 +713,7 @@ export default function AdminInventoryPage() {
                   key={product.id}
                   style={{
                     borderTop:
-                      index > 0 ? "1px solid hsl(var(--border))" : "none",
+                      index > 0 ? "1px solid var(--border)" : "none",
                   }}
                 >
                   <td style={{ padding: "1rem" }}>
@@ -700,9 +755,9 @@ export default function AdminInventoryPage() {
                         width: "80px",
                         padding: "0.5rem",
                         borderRadius: "var(--radius)",
-                        border: "1px solid hsl(var(--border))",
-                        backgroundColor: "hsl(var(--background))",
-                        color: "hsl(var(--foreground))",
+                        border: "1px solid var(--border)",
+                        backgroundColor: "var(--background)",
+                        color: "var(--foreground)",
                       }}
                     />
                   </td>
@@ -730,7 +785,7 @@ export default function AdminInventoryPage() {
             style={{
               padding: "3rem",
               textAlign: "center",
-              color: "hsl(var(--muted-foreground))",
+              color: "var(--muted-foreground)",
             }}
           >
             {selectedBrand

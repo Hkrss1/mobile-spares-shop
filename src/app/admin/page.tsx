@@ -4,20 +4,31 @@ import React from "react";
 import { useProducts } from "@/lib/products";
 import { useOrders } from "@/lib/orders";
 import Link from "next/link";
+import {
+  Banknote,
+  Package,
+  Smartphone,
+  Users,
+  CheckCircle,
+  AlertTriangle,
+  XCircle,
+  Gem,
+  ArrowRight,
+} from "lucide-react";
 
 interface StatCardProps {
   title: string;
   value: string | number;
   subtitle?: string;
   color: string;
-  icon: string;
+  icon: React.ReactNode;
 }
 
 const StatCard = ({ title, value, subtitle, color, icon }: StatCardProps) => (
   <div
     style={{
-      backgroundColor: "hsl(var(--card))",
-      border: "1px solid hsl(var(--border))",
+      backgroundColor: "var(--card)",
+      border: "1px solid var(--border)",
       borderRadius: "var(--radius)",
       padding: "1.5rem",
       display: "flex",
@@ -36,7 +47,7 @@ const StatCard = ({ title, value, subtitle, color, icon }: StatCardProps) => (
         <p
           style={{
             fontSize: "0.875rem",
-            color: "hsl(var(--muted-foreground))",
+            color: "var(--muted-foreground)",
             marginBottom: "0.5rem",
           }}
         >
@@ -47,7 +58,7 @@ const StatCard = ({ title, value, subtitle, color, icon }: StatCardProps) => (
           <p
             style={{
               fontSize: "0.75rem",
-              color: "hsl(var(--muted-foreground))",
+              color: "var(--muted-foreground)",
               marginTop: "0.25rem",
             }}
           >
@@ -55,7 +66,7 @@ const StatCard = ({ title, value, subtitle, color, icon }: StatCardProps) => (
           </p>
         )}
       </div>
-      <span style={{ fontSize: "2rem" }}>{icon}</span>
+      <span style={{ color: color }}>{icon}</span>
     </div>
   </div>
 );
@@ -93,16 +104,21 @@ export default function AdminDashboard() {
   const recentOrders = orders.slice(0, 5);
 
   return (
-    <div className="container animate-fade-in" style={{ padding: "4rem 1rem" }}>
-      <h1 style={{ fontSize: "2.5rem", fontWeight: 700, marginBottom: "2rem" }}>
-        Admin Dashboard
-      </h1>
+    <div className="animate-fade-in">
+      <header style={{ marginBottom: "2rem" }}>
+        <h1 style={{ fontSize: "1.875rem", fontWeight: 700, color: "hsl(var(--foreground))" }}>
+          Dashboard Overview
+        </h1>
+        <p style={{ color: "hsl(var(--muted-foreground))", marginTop: "0.5rem" }}>
+          Welcome back! Here's what's happening with your store today.
+        </p>
+      </header>
 
       {/* Overview Stats */}
       <div
         style={{
           display: "grid",
-          gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))",
+          gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))",
           gap: "1.5rem",
           marginBottom: "3rem",
         }}
@@ -112,28 +128,28 @@ export default function AdminDashboard() {
           value={`₹${totalRevenue.toFixed(2)}`}
           subtitle={`From ${totalOrders} orders`}
           color="#10b981"
-          icon="💰"
+          icon={<Banknote size={32} />}
         />
         <StatCard
           title="Total Orders"
           value={totalOrders}
           subtitle={`${processingOrders} processing`}
           color="#3b82f6"
-          icon="📦"
+          icon={<Package size={32} />}
         />
         <StatCard
           title="Total Products"
           value={totalProducts}
           subtitle={`${inStockProducts} in stock`}
           color="#8b5cf6"
-          icon="📱"
+          icon={<Smartphone size={32} />}
         />
         <StatCard
           title="Registered Users"
           value={totalUsers}
           subtitle="Total customers"
           color="#f59e0b"
-          icon="👥"
+          icon={<Users size={32} />}
         />
       </div>
 
@@ -141,12 +157,13 @@ export default function AdminDashboard() {
       <div style={{ marginBottom: "3rem" }}>
         <h2
           style={{
-            fontSize: "1.5rem",
+            fontSize: "1.25rem",
             fontWeight: 600,
             marginBottom: "1.5rem",
+            color: "hsl(var(--foreground))",
           }}
         >
-          Inventory Overview
+          Inventory Status
         </h2>
         <div
           style={{
@@ -158,183 +175,84 @@ export default function AdminDashboard() {
           <div
             style={{
               backgroundColor: "hsl(var(--card))",
-              border: "1px solid hsl(var(--border))",
-              borderRadius: "var(--radius)",
+              border: "1px solid var(--border)",
+              borderRadius: "0.75rem",
               padding: "1.5rem",
-              textAlign: "center",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-between",
             }}
           >
-            <p
-              style={{
-                fontSize: "0.875rem",
-                color: "hsl(var(--muted-foreground))",
-                marginBottom: "0.5rem",
-              }}
-            >
-              In Stock
-            </p>
-            <p style={{ fontSize: "2rem", fontWeight: 700, color: "#10b981" }}>
-              {inStockProducts}
-            </p>
+            <div>
+              <p style={{ fontSize: "0.875rem", color: "#6b7280" }}>In Stock</p>
+              <p style={{ fontSize: "1.5rem", fontWeight: 700, color: "#10b981" }}>
+                {inStockProducts}
+              </p>
+            </div>
+            <CheckCircle size={24} color="#10b981" />
           </div>
           <div
             style={{
               backgroundColor: "hsl(var(--card))",
-              border: "1px solid hsl(var(--border))",
-              borderRadius: "var(--radius)",
+              border: "1px solid var(--border)",
+              borderRadius: "0.75rem",
               padding: "1.5rem",
-              textAlign: "center",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-between",
             }}
           >
-            <p
-              style={{
-                fontSize: "0.875rem",
-                color: "hsl(var(--muted-foreground))",
-                marginBottom: "0.5rem",
-              }}
-            >
-              Low Stock
-            </p>
-            <p style={{ fontSize: "2rem", fontWeight: 700, color: "#f59e0b" }}>
-              {lowStockProducts}
-            </p>
+            <div>
+              <p style={{ fontSize: "0.875rem", color: "#6b7280" }}>Low Stock</p>
+              <p style={{ fontSize: "1.5rem", fontWeight: 700, color: "#f59e0b" }}>
+                {lowStockProducts}
+              </p>
+            </div>
+            <AlertTriangle size={24} color="#f59e0b" />
           </div>
           <div
             style={{
               backgroundColor: "hsl(var(--card))",
-              border: "1px solid hsl(var(--border))",
-              borderRadius: "var(--radius)",
+              border: "1px solid var(--border)",
+              borderRadius: "0.75rem",
               padding: "1.5rem",
-              textAlign: "center",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-between",
             }}
           >
-            <p
-              style={{
-                fontSize: "0.875rem",
-                color: "hsl(var(--muted-foreground))",
-                marginBottom: "0.5rem",
-              }}
-            >
-              Out of Stock
-            </p>
-            <p style={{ fontSize: "2rem", fontWeight: 700, color: "#ef4444" }}>
-              {outOfStockProducts}
-            </p>
+            <div>
+              <p style={{ fontSize: "0.875rem", color: "#6b7280" }}>Out of Stock</p>
+              <p style={{ fontSize: "1.5rem", fontWeight: 700, color: "#ef4444" }}>
+                {outOfStockProducts}
+              </p>
+            </div>
+            <XCircle size={24} color="#ef4444" />
           </div>
           <div
             style={{
               backgroundColor: "hsl(var(--card))",
-              border: "1px solid hsl(var(--border))",
-              borderRadius: "var(--radius)",
+              border: "1px solid var(--border)",
+              borderRadius: "0.75rem",
               padding: "1.5rem",
-              textAlign: "center",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-between",
             }}
           >
-            <p
-              style={{
-                fontSize: "0.875rem",
-                color: "hsl(var(--muted-foreground))",
-                marginBottom: "0.5rem",
-              }}
-            >
-              Inventory Value
-            </p>
-            <p style={{ fontSize: "2rem", fontWeight: 700, color: "#8b5cf6" }}>
-              ₹{totalInventoryValue.toFixed(0)}
-            </p>
-          </div>
-        </div>
-      </div>
-
-      {/* Order Status */}
-      <div style={{ marginBottom: "3rem" }}>
-        <h2
-          style={{
-            fontSize: "1.5rem",
-            fontWeight: 600,
-            marginBottom: "1.5rem",
-          }}
-        >
-          Order Status
-        </h2>
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))",
-            gap: "1rem",
-          }}
-        >
-          <div
-            style={{
-              backgroundColor: "hsl(var(--card))",
-              border: "1px solid hsl(var(--border))",
-              borderRadius: "var(--radius)",
-              padding: "1.5rem",
-              textAlign: "center",
-            }}
-          >
-            <p
-              style={{
-                fontSize: "0.875rem",
-                color: "hsl(var(--muted-foreground))",
-                marginBottom: "0.5rem",
-              }}
-            >
-              ⏳ Processing
-            </p>
-            <p style={{ fontSize: "2rem", fontWeight: 700, color: "#f59e0b" }}>
-              {processingOrders}
-            </p>
-          </div>
-          <div
-            style={{
-              backgroundColor: "hsl(var(--card))",
-              border: "1px solid hsl(var(--border))",
-              borderRadius: "var(--radius)",
-              padding: "1.5rem",
-              textAlign: "center",
-            }}
-          >
-            <p
-              style={{
-                fontSize: "0.875rem",
-                color: "hsl(var(--muted-foreground))",
-                marginBottom: "0.5rem",
-              }}
-            >
-              🚚 In Transit
-            </p>
-            <p style={{ fontSize: "2rem", fontWeight: 700, color: "#3b82f6" }}>
-              {inTransitOrders}
-            </p>
-          </div>
-          <div
-            style={{
-              backgroundColor: "hsl(var(--card))",
-              border: "1px solid hsl(var(--border))",
-              borderRadius: "var(--radius)",
-              padding: "1.5rem",
-              textAlign: "center",
-            }}
-          >
-            <p
-              style={{
-                fontSize: "0.875rem",
-                color: "hsl(var(--muted-foreground))",
-                marginBottom: "0.5rem",
-              }}
-            >
-              ✅ Delivered
-            </p>
-            <p style={{ fontSize: "2rem", fontWeight: 700, color: "#10b981" }}>
-              {deliveredOrders}
-            </p>
+            <div>
+              <p style={{ fontSize: "0.875rem", color: "#6b7280" }}>Value</p>
+              <p style={{ fontSize: "1.5rem", fontWeight: 700, color: "#8b5cf6" }}>
+                ₹{totalInventoryValue.toFixed(0)}
+              </p>
+            </div>
+            <Gem size={24} color="#8b5cf6" />
           </div>
         </div>
       </div>
 
       {/* Recent Orders */}
-      <div style={{ marginBottom: "3rem" }}>
+      <div>
         <div
           style={{
             display: "flex",
@@ -343,20 +261,29 @@ export default function AdminDashboard() {
             marginBottom: "1.5rem",
           }}
         >
-          <h2 style={{ fontSize: "1.5rem", fontWeight: 600 }}>Recent Orders</h2>
+          <h2 style={{ fontSize: "1.25rem", fontWeight: 600, color: "hsl(var(--foreground))" }}>
+            Recent Orders
+          </h2>
           <Link
             href="/admin/orders"
-            className="btn btn-primary"
-            style={{ fontSize: "0.875rem", padding: "0.5rem 1rem" }}
+            style={{
+              fontSize: "0.875rem",
+              color: "#2563eb",
+              fontWeight: 500,
+              textDecoration: "none",
+              display: "flex",
+              alignItems: "center",
+              gap: "0.25rem",
+            }}
           >
-            View All Orders
+            View All Orders <ArrowRight size={16} />
           </Link>
         </div>
         <div
           style={{
             backgroundColor: "hsl(var(--card))",
-            border: "1px solid hsl(var(--border))",
-            borderRadius: "var(--radius)",
+            border: "1px solid var(--border)",
+            borderRadius: "0.75rem",
             overflow: "hidden",
           }}
         >
@@ -365,29 +292,73 @@ export default function AdminDashboard() {
               <thead>
                 <tr
                   style={{
-                    borderBottom: "1px solid hsl(var(--border))",
-                    backgroundColor: "hsl(var(--muted))",
+                    borderBottom: "1px solid var(--border)",
+                    backgroundColor: "#f9fafb",
                   }}
                 >
-                  <th style={{ padding: "1rem", textAlign: "left" }}>
+                  <th
+                    style={{
+                      padding: "1rem",
+                      textAlign: "left",
+                      fontSize: "0.75rem",
+                      fontWeight: 600,
+                      color: "#6b7280",
+                      textTransform: "uppercase",
+                    }}
+                  >
                     Order #
                   </th>
-                  <th style={{ padding: "1rem", textAlign: "left" }}>
+                  <th
+                    style={{
+                      padding: "1rem",
+                      textAlign: "left",
+                      fontSize: "0.75rem",
+                      fontWeight: 600,
+                      color: "#6b7280",
+                      textTransform: "uppercase",
+                    }}
+                  >
                     Customer
                   </th>
-                  <th style={{ padding: "1rem", textAlign: "left" }}>Total</th>
-                  <th style={{ padding: "1rem", textAlign: "left" }}>Status</th>
+                  <th
+                    style={{
+                      padding: "1rem",
+                      textAlign: "left",
+                      fontSize: "0.75rem",
+                      fontWeight: 600,
+                      color: "#6b7280",
+                      textTransform: "uppercase",
+                    }}
+                  >
+                    Total
+                  </th>
+                  <th
+                    style={{
+                      padding: "1rem",
+                      textAlign: "left",
+                      fontSize: "0.75rem",
+                      fontWeight: 600,
+                      color: "#6b7280",
+                      textTransform: "uppercase",
+                    }}
+                  >
+                    Status
+                  </th>
                 </tr>
               </thead>
               <tbody>
                 {recentOrders.map((order) => (
                   <tr
                     key={order.id}
-                    style={{ borderBottom: "1px solid hsl(var(--border))" }}
+                    style={{ borderBottom: "1px solid var(--border)" }}
                   >
-                    <td style={{ padding: "1rem" }}>{order.orderNumber}</td>
-                    <td style={{ padding: "1rem" }}>{order.customerName}</td>
-                    <td style={{ padding: "1rem", fontWeight: 600 }}>
+                    <td style={{ padding: "1rem", fontSize: "0.875rem", fontWeight: 500 }}>
+                      {order.orderNumber}
+                    </td>
+                    <td style={{ padding: "1rem", fontSize: "0.875rem" }}>
+                      {order.customerName}
+                    </td>
+                    <td style={{ padding: "1rem", fontWeight: 600, fontSize: "0.875rem" }}>
                       ₹{order.total.toFixed(2)}
                     </td>
                     <td style={{ padding: "1rem" }}>
@@ -399,16 +370,16 @@ export default function AdminDashboard() {
                           fontWeight: 600,
                           backgroundColor:
                             order.status === "delivered"
-                              ? "#10b98120"
+                              ? "#d1fae5"
                               : order.status === "in-transit"
-                                ? "#3b82f620"
-                                : "#f59e0b20",
+                                ? "#dbeafe"
+                                : "#fef3c7",
                           color:
                             order.status === "delivered"
-                              ? "#10b981"
+                              ? "#059669"
                               : order.status === "in-transit"
-                                ? "#3b82f6"
-                                : "#f59e0b",
+                                ? "#2563eb"
+                                : "#d97706",
                         }}
                       >
                         {order.status}
@@ -421,80 +392,14 @@ export default function AdminDashboard() {
           ) : (
             <p
               style={{
-                padding: "2rem",
+                padding: "3rem",
                 textAlign: "center",
-                color: "hsl(var(--muted-foreground))",
+                color: "#6b7280",
               }}
             >
               No orders yet
             </p>
           )}
-        </div>
-      </div>
-
-      {/* Quick Actions */}
-      <div>
-        <h2
-          style={{
-            fontSize: "1.5rem",
-            fontWeight: 600,
-            marginBottom: "1.5rem",
-          }}
-        >
-          Quick Actions
-        </h2>
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))",
-            gap: "1rem",
-          }}
-        >
-          <Link
-            href="/admin/inventory"
-            className="btn btn-primary"
-            style={{
-              padding: "1.5rem",
-              display: "flex",
-              alignItems: "center",
-              gap: "1rem",
-              fontSize: "1rem",
-              justifyContent: "center",
-            }}
-          >
-            <span style={{ fontSize: "1.5rem" }}>📦</span>
-            Manage Inventory
-          </Link>
-          <Link
-            href="/admin/orders"
-            className="btn btn-primary"
-            style={{
-              padding: "1.5rem",
-              display: "flex",
-              alignItems: "center",
-              gap: "1rem",
-              fontSize: "1rem",
-              justifyContent: "center",
-            }}
-          >
-            <span style={{ fontSize: "1.5rem" }}>📋</span>
-            Manage Orders
-          </Link>
-          <Link
-            href="/admin/users"
-            className="btn btn-primary"
-            style={{
-              padding: "1.5rem",
-              display: "flex",
-              alignItems: "center",
-              gap: "1rem",
-              fontSize: "1rem",
-              justifyContent: "center",
-            }}
-          >
-            <span style={{ fontSize: "1.5rem" }}>👥</span>
-            View Users
-          </Link>
         </div>
       </div>
     </div>

@@ -79,21 +79,48 @@ export default function InwardEntryPage() {
   }
 
   return (
-    <div className="p-6 max-w-2xl mx-auto">
-      <h1 className="text-2xl font-bold mb-6">Stock Inward Entry</h1>
+    <div
+      className="container animate-fade-in"
+      style={{ padding: "4rem 1rem", maxWidth: "800px", margin: "0 auto" }}
+    >
+      <h1 style={{ fontSize: "2.5rem", fontWeight: 700, marginBottom: "2rem" }}>
+        Stock Inward Entry
+      </h1>
 
       <form
         onSubmit={handleSubmit}
-        className="bg-white p-6 rounded-lg shadow-md space-y-6"
+        style={{
+          backgroundColor: "var(--card)",
+          border: "1px solid var(--border)",
+          borderRadius: "var(--radius)",
+          padding: "2rem",
+          display: "flex",
+          flexDirection: "column",
+          gap: "1.5rem",
+        }}
       >
         {/* Supplier Selection */}
         <div>
-          <label className="block text-sm font-medium text-gray-700">
+          <label
+            style={{
+              display: "block",
+              fontSize: "0.875rem",
+              fontWeight: 500,
+              marginBottom: "0.5rem",
+            }}
+          >
             Supplier *
           </label>
           <select
             required
-            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 border p-2"
+            style={{
+              width: "100%",
+              padding: "0.75rem",
+              borderRadius: "var(--radius)",
+              border: "1px solid var(--input)",
+              backgroundColor: "var(--background)",
+              fontSize: "0.875rem",
+            }}
             value={formData.supplierId}
             onChange={(e) =>
               setFormData({ ...formData, supplierId: e.target.value })
@@ -110,12 +137,26 @@ export default function InwardEntryPage() {
 
         {/* Location Selection */}
         <div>
-          <label className="block text-sm font-medium text-gray-700">
+          <label
+            style={{
+              display: "block",
+              fontSize: "0.875rem",
+              fontWeight: 500,
+              marginBottom: "0.5rem",
+            }}
+          >
             Location (Godown) *
           </label>
           <select
             required
-            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 border p-2"
+            style={{
+              width: "100%",
+              padding: "0.75rem",
+              borderRadius: "var(--radius)",
+              border: "1px solid var(--input)",
+              backgroundColor: "var(--background)",
+              fontSize: "0.875rem",
+            }}
             value={formData.locationId}
             onChange={(e) =>
               setFormData({ ...formData, locationId: e.target.value })
@@ -132,12 +173,26 @@ export default function InwardEntryPage() {
 
         {/* Product Selection */}
         <div>
-          <label className="block text-sm font-medium text-gray-700">
+          <label
+            style={{
+              display: "block",
+              fontSize: "0.875rem",
+              fontWeight: 500,
+              marginBottom: "0.5rem",
+            }}
+          >
             Product *
           </label>
           <select
             required
-            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 border p-2"
+            style={{
+              width: "100%",
+              padding: "0.75rem",
+              borderRadius: "var(--radius)",
+              border: "1px solid var(--input)",
+              backgroundColor: "var(--background)",
+              fontSize: "0.875rem",
+            }}
             value={formData.productId}
             onChange={(e) =>
               setFormData({ ...formData, productId: e.target.value })
@@ -154,14 +209,28 @@ export default function InwardEntryPage() {
 
         {/* Quantity */}
         <div>
-          <label className="block text-sm font-medium text-gray-700">
+          <label
+            style={{
+              display: "block",
+              fontSize: "0.875rem",
+              fontWeight: 500,
+              marginBottom: "0.5rem",
+            }}
+          >
             Quantity *
           </label>
           <input
             type="number"
             required
             min="1"
-            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 border p-2"
+            style={{
+              width: "100%",
+              padding: "0.75rem",
+              borderRadius: "var(--radius)",
+              border: "1px solid var(--input)",
+              backgroundColor: "var(--background)",
+              fontSize: "0.875rem",
+            }}
             value={formData.quantity}
             onChange={(e) =>
               setFormData({ ...formData, quantity: e.target.value })
@@ -171,11 +240,26 @@ export default function InwardEntryPage() {
 
         {/* Notes */}
         <div>
-          <label className="block text-sm font-medium text-gray-700">
+          <label
+            style={{
+              display: "block",
+              fontSize: "0.875rem",
+              fontWeight: 500,
+              marginBottom: "0.5rem",
+            }}
+          >
             Notes / Batch No.
           </label>
           <textarea
-            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 border p-2"
+            style={{
+              width: "100%",
+              padding: "0.75rem",
+              borderRadius: "var(--radius)",
+              border: "1px solid var(--input)",
+              backgroundColor: "var(--background)",
+              fontSize: "0.875rem",
+              minHeight: "100px",
+            }}
             rows={3}
             value={formData.notes}
             onChange={(e) =>
@@ -186,7 +270,17 @@ export default function InwardEntryPage() {
 
         <button
           type="submit"
-          className="w-full bg-green-600 text-white py-3 px-4 rounded-md hover:bg-green-700 transition-colors font-semibold"
+          className="btn btn-primary"
+          style={{
+            width: "100%",
+            padding: "1rem",
+            borderRadius: "var(--radius)",
+            fontWeight: 600,
+            cursor: "pointer",
+            backgroundColor: "#10b981", // Green for inward
+            borderColor: "#10b981",
+            color: "white",
+          }}
         >
           Process Inward
         </button>

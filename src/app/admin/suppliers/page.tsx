@@ -67,22 +67,60 @@ export default function SuppliersPage() {
   }
 
   return (
-    <div className="p-6">
-      <h1 className="text-2xl font-bold mb-6">Supplier Management</h1>
+    <div className="container animate-fade-in" style={{ padding: "4rem 1rem" }}>
+      <h1 style={{ fontSize: "2.5rem", fontWeight: 700, marginBottom: "2rem" }}>
+        Supplier Management
+      </h1>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+      <div
+        style={{
+          display: "grid",
+          gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
+          gap: "2rem",
+        }}
+      >
         {/* Create Supplier Form */}
-        <div className="bg-white p-6 rounded-lg shadow-md h-fit">
-          <h2 className="text-xl font-semibold mb-4">Add New Supplier</h2>
-          <form onSubmit={handleSubmit} className="space-y-4">
+        <div
+          style={{
+            backgroundColor: "var(--card)",
+            border: "1px solid var(--border)",
+            borderRadius: "var(--radius)",
+            padding: "1.5rem",
+            height: "fit-content",
+          }}
+        >
+          <h2
+            style={{
+              fontSize: "1.5rem",
+              fontWeight: 600,
+              marginBottom: "1.5rem",
+            }}
+          >
+            Add New Supplier
+          </h2>
+          <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
             <div>
-              <label className="block text-sm font-medium text-gray-700">
+              <label
+                style={{
+                  display: "block",
+                  fontSize: "0.875rem",
+                  fontWeight: 500,
+                  marginBottom: "0.5rem",
+                }}
+              >
                 Name *
               </label>
               <input
                 type="text"
                 required
-                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 border p-2"
+                style={{
+                  width: "100%",
+                  padding: "0.5rem",
+                  borderRadius: "var(--radius)",
+                  border: "1px solid var(--input)",
+                  backgroundColor: "var(--background)",
+                  fontSize: "0.875rem",
+                }}
                 value={formData.name}
                 onChange={(e) =>
                   setFormData({ ...formData, name: e.target.value })
@@ -90,26 +128,54 @@ export default function SuppliersPage() {
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700">
+              <label
+                style={{
+                  display: "block",
+                  fontSize: "0.875rem",
+                  fontWeight: 500,
+                  marginBottom: "0.5rem",
+                }}
+              >
                 Contact Person
               </label>
               <input
                 type="text"
-                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 border p-2"
+                style={{
+                  width: "100%",
+                  padding: "0.5rem",
+                  borderRadius: "var(--radius)",
+                  border: "1px solid var(--input)",
+                  backgroundColor: "var(--background)",
+                  fontSize: "0.875rem",
+                }}
                 value={formData.contactPerson}
                 onChange={(e) =>
                   setFormData({ ...formData, contactPerson: e.target.value })
                 }
               />
             </div>
-            <div className="grid grid-cols-2 gap-4">
+            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1rem" }}>
               <div>
-                <label className="block text-sm font-medium text-gray-700">
+                <label
+                  style={{
+                    display: "block",
+                    fontSize: "0.875rem",
+                    fontWeight: 500,
+                    marginBottom: "0.5rem",
+                  }}
+                >
                   Mobile
                 </label>
                 <input
                   type="text"
-                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 border p-2"
+                  style={{
+                    width: "100%",
+                    padding: "0.5rem",
+                    borderRadius: "var(--radius)",
+                    border: "1px solid var(--input)",
+                    backgroundColor: "var(--background)",
+                    fontSize: "0.875rem",
+                  }}
                   value={formData.mobile}
                   onChange={(e) =>
                     setFormData({ ...formData, mobile: e.target.value })
@@ -117,12 +183,26 @@ export default function SuppliersPage() {
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700">
+                <label
+                  style={{
+                    display: "block",
+                    fontSize: "0.875rem",
+                    fontWeight: 500,
+                    marginBottom: "0.5rem",
+                  }}
+                >
                   Email
                 </label>
                 <input
                   type="email"
-                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 border p-2"
+                  style={{
+                    width: "100%",
+                    padding: "0.5rem",
+                    borderRadius: "var(--radius)",
+                    border: "1px solid var(--input)",
+                    backgroundColor: "var(--background)",
+                    fontSize: "0.875rem",
+                  }}
                   value={formData.email}
                   onChange={(e) =>
                     setFormData({ ...formData, email: e.target.value })
@@ -131,11 +211,26 @@ export default function SuppliersPage() {
               </div>
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700">
+              <label
+                style={{
+                  display: "block",
+                  fontSize: "0.875rem",
+                  fontWeight: 500,
+                  marginBottom: "0.5rem",
+                }}
+              >
                 Address
               </label>
               <textarea
-                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 border p-2"
+                style={{
+                  width: "100%",
+                  padding: "0.5rem",
+                  borderRadius: "var(--radius)",
+                  border: "1px solid var(--input)",
+                  backgroundColor: "var(--background)",
+                  fontSize: "0.875rem",
+                  minHeight: "80px",
+                }}
                 rows={3}
                 value={formData.address}
                 onChange={(e) =>
@@ -145,7 +240,14 @@ export default function SuppliersPage() {
             </div>
             <button
               type="submit"
-              className="w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 transition-colors"
+              className="btn btn-primary"
+              style={{
+                width: "100%",
+                padding: "0.75rem",
+                borderRadius: "var(--radius)",
+                fontWeight: 500,
+                cursor: "pointer",
+              }}
             >
               Add Supplier
             </button>
@@ -153,47 +255,113 @@ export default function SuppliersPage() {
         </div>
 
         {/* Suppliers List */}
-        <div className="bg-white p-6 rounded-lg shadow-md">
-          <h2 className="text-xl font-semibold mb-4">Existing Suppliers</h2>
+        <div
+          style={{
+            backgroundColor: "var(--card)",
+            border: "1px solid var(--border)",
+            borderRadius: "var(--radius)",
+            padding: "1.5rem",
+          }}
+        >
+          <h2
+            style={{
+              fontSize: "1.5rem",
+              fontWeight: 600,
+              marginBottom: "1.5rem",
+            }}
+          >
+            Existing Suppliers
+          </h2>
           {loading ? (
-            <p>Loading...</p>
+            <p style={{ color: "var(--muted-foreground)" }}>Loading...</p>
           ) : (
-            <div className="overflow-x-auto">
-              <table className="min-w-full divide-y divide-gray-200">
-                <thead className="bg-gray-50">
-                  <tr>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+            <div style={{ overflowX: "auto" }}>
+              <table style={{ width: "100%", borderCollapse: "collapse" }}>
+                <thead>
+                  <tr
+                    style={{
+                      borderBottom: "1px solid var(--border)",
+                      backgroundColor: "var(--muted)",
+                    }}
+                  >
+                    <th
+                      style={{
+                        padding: "0.75rem 1rem",
+                        textAlign: "left",
+                        fontSize: "0.75rem",
+                        fontWeight: 500,
+                        textTransform: "uppercase",
+                        color: "var(--muted-foreground)",
+                      }}
+                    >
                       Name
                     </th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    <th
+                      style={{
+                        padding: "0.75rem 1rem",
+                        textAlign: "left",
+                        fontSize: "0.75rem",
+                        fontWeight: 500,
+                        textTransform: "uppercase",
+                        color: "var(--muted-foreground)",
+                      }}
+                    >
                       Contact
                     </th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    <th
+                      style={{
+                        padding: "0.75rem 1rem",
+                        textAlign: "left",
+                        fontSize: "0.75rem",
+                        fontWeight: 500,
+                        textTransform: "uppercase",
+                        color: "var(--muted-foreground)",
+                      }}
+                    >
                       Details
                     </th>
                   </tr>
                 </thead>
-                <tbody className="bg-white divide-y divide-gray-200">
+                <tbody>
                   {suppliers.map((supplier) => (
-                    <tr key={supplier.id}>
-                      <td className="px-6 py-4 whitespace-nowrap">
-                        <div className="text-sm font-medium text-gray-900">
+                    <tr
+                      key={supplier.id}
+                      style={{ borderBottom: "1px solid var(--border)" }}
+                    >
+                      <td style={{ padding: "1rem" }}>
+                        <div style={{ fontSize: "0.875rem", fontWeight: 500 }}>
                           {supplier.name}
                         </div>
-                        <div className="text-sm text-gray-500">
+                        <div
+                          style={{
+                            fontSize: "0.75rem",
+                            color: "var(--muted-foreground)",
+                            marginTop: "0.25rem",
+                          }}
+                        >
                           {supplier.address}
                         </div>
                       </td>
-                      <td className="px-6 py-4 whitespace-nowrap">
-                        <div className="text-sm text-gray-900">
+                      <td style={{ padding: "1rem" }}>
+                        <div style={{ fontSize: "0.875rem" }}>
                           {supplier.contactPerson}
                         </div>
                       </td>
-                      <td className="px-6 py-4 whitespace-nowrap">
-                        <div className="text-sm text-gray-500">
+                      <td style={{ padding: "1rem" }}>
+                        <div
+                          style={{
+                            fontSize: "0.75rem",
+                            color: "var(--muted-foreground)",
+                          }}
+                        >
                           {supplier.mobile}
                         </div>
-                        <div className="text-sm text-gray-500">
+                        <div
+                          style={{
+                            fontSize: "0.75rem",
+                            color: "var(--muted-foreground)",
+                          }}
+                        >
                           {supplier.email}
                         </div>
                       </td>

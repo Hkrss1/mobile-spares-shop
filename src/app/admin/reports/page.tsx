@@ -34,80 +34,204 @@ export default function ReportsPage() {
   if (!data) return <div className="p-6">Failed to load data.</div>;
 
   return (
-    <div className="p-6">
-      <h1 className="text-2xl font-bold mb-6">Smart Inventory Dashboard</h1>
+    <div className="container animate-fade-in" style={{ padding: "4rem 1rem" }}>
+      <h1 style={{ fontSize: "2.5rem", fontWeight: 700, marginBottom: "2rem" }}>
+        Smart Inventory Dashboard
+      </h1>
 
       {/* Key Metrics Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-        <div className="bg-white p-6 rounded-lg shadow-md border-l-4 border-blue-500">
-          <h3 className="text-gray-500 text-sm font-medium">
+      <div
+        style={{
+          display: "grid",
+          gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
+          gap: "1.5rem",
+          marginBottom: "3rem",
+        }}
+      >
+        <div
+          style={{
+            backgroundColor: "var(--card)",
+            border: "1px solid var(--border)",
+            borderRadius: "var(--radius)",
+            padding: "1.5rem",
+            borderLeft: "4px solid #3b82f6",
+          }}
+        >
+          <h3
+            style={{
+              fontSize: "0.875rem",
+              fontWeight: 500,
+              color: "var(--muted-foreground)",
+            }}
+          >
             Total Stock Value
           </h3>
-          <p className="text-3xl font-bold text-gray-900 mt-2">
+          <p style={{ fontSize: "2rem", fontWeight: 700, marginTop: "0.5rem" }}>
             ₹{data.totalStockValue.toLocaleString()}
           </p>
         </div>
-        <div className="bg-white p-6 rounded-lg shadow-md border-l-4 border-green-500">
-          <h3 className="text-gray-500 text-sm font-medium">
+        <div
+          style={{
+            backgroundColor: "var(--card)",
+            border: "1px solid var(--border)",
+            borderRadius: "var(--radius)",
+            padding: "1.5rem",
+            borderLeft: "4px solid #10b981",
+          }}
+        >
+          <h3
+            style={{
+              fontSize: "0.875rem",
+              fontWeight: 500,
+              color: "var(--muted-foreground)",
+            }}
+          >
             Monthly Inwards (Qty)
           </h3>
-          <p className="text-3xl font-bold text-gray-900 mt-2">
+          <p style={{ fontSize: "2rem", fontWeight: 700, marginTop: "0.5rem" }}>
             {data.monthlyInwards}
           </p>
         </div>
-        <div className="bg-white p-6 rounded-lg shadow-md border-l-4 border-orange-500">
-          <h3 className="text-gray-500 text-sm font-medium">
+        <div
+          style={{
+            backgroundColor: "var(--card)",
+            border: "1px solid var(--border)",
+            borderRadius: "var(--radius)",
+            padding: "1.5rem",
+            borderLeft: "4px solid #f97316",
+          }}
+        >
+          <h3
+            style={{
+              fontSize: "0.875rem",
+              fontWeight: 500,
+              color: "var(--muted-foreground)",
+            }}
+          >
             Monthly Outwards (Qty)
           </h3>
-          <p className="text-3xl font-bold text-gray-900 mt-2">
+          <p style={{ fontSize: "2rem", fontWeight: 700, marginTop: "0.5rem" }}>
             {data.monthlyOutwards}
           </p>
         </div>
       </div>
 
       {/* Low Stock Alert */}
-      <div className="bg-white rounded-lg shadow-md overflow-hidden">
-        <div className="px-6 py-4 border-b border-gray-200 bg-red-50">
-          <h3 className="text-lg font-semibold text-red-800">
+      <div
+        style={{
+          backgroundColor: "var(--card)",
+          border: "1px solid var(--border)",
+          borderRadius: "var(--radius)",
+          overflow: "hidden",
+        }}
+      >
+        <div
+          style={{
+            padding: "1rem 1.5rem",
+            borderBottom: "1px solid var(--border)",
+            backgroundColor: "#fef2f2",
+          }}
+        >
+          <h3
+            style={{
+              fontSize: "1.125rem",
+              fontWeight: 600,
+              color: "#991b1b",
+            }}
+          >
             Low Stock Alerts
           </h3>
         </div>
-        <div className="p-6">
+        <div style={{ padding: "1.5rem" }}>
           {data.lowStockItems.length === 0 ? (
-            <p className="text-gray-500">All stock levels are healthy.</p>
+            <p style={{ color: "var(--muted-foreground)" }}>
+              All stock levels are healthy.
+            </p>
           ) : (
-            <table className="min-w-full divide-y divide-gray-200">
-              <thead>
-                <tr>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    Product
-                  </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    Current Stock
-                  </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    Status
-                  </th>
-                </tr>
-              </thead>
-              <tbody className="bg-white divide-y divide-gray-200">
-                {data.lowStockItems.map((item) => (
-                  <tr key={item.id}>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                      {item.name}
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                      {item.quantity}
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap">
-                      <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-100 text-red-800">
-                        Critical
-                      </span>
-                    </td>
+            <div style={{ overflowX: "auto" }}>
+              <table style={{ width: "100%", borderCollapse: "collapse" }}>
+                <thead>
+                  <tr>
+                    <th
+                      style={{
+                        padding: "0.75rem 1rem",
+                        textAlign: "left",
+                        fontSize: "0.75rem",
+                        fontWeight: 500,
+                        textTransform: "uppercase",
+                        color: "var(--muted-foreground)",
+                      }}
+                    >
+                      Product
+                    </th>
+                    <th
+                      style={{
+                        padding: "0.75rem 1rem",
+                        textAlign: "left",
+                        fontSize: "0.75rem",
+                        fontWeight: 500,
+                        textTransform: "uppercase",
+                        color: "var(--muted-foreground)",
+                      }}
+                    >
+                      Current Stock
+                    </th>
+                    <th
+                      style={{
+                        padding: "0.75rem 1rem",
+                        textAlign: "left",
+                        fontSize: "0.75rem",
+                        fontWeight: 500,
+                        textTransform: "uppercase",
+                        color: "var(--muted-foreground)",
+                      }}
+                    >
+                      Status
+                    </th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
+                </thead>
+                <tbody>
+                  {data.lowStockItems.map((item) => (
+                    <tr
+                      key={item.id}
+                      style={{ borderBottom: "1px solid var(--border)" }}
+                    >
+                      <td
+                        style={{
+                          padding: "1rem",
+                          fontSize: "0.875rem",
+                          fontWeight: 500,
+                        }}
+                      >
+                        {item.name}
+                      </td>
+                      <td
+                        style={{
+                          padding: "1rem",
+                          fontSize: "0.875rem",
+                        }}
+                      >
+                        {item.quantity}
+                      </td>
+                      <td style={{ padding: "1rem" }}>
+                        <span
+                          style={{
+                            padding: "0.25rem 0.75rem",
+                            borderRadius: "9999px",
+                            fontSize: "0.75rem",
+                            fontWeight: 600,
+                            backgroundColor: "#fee2e2",
+                            color: "#991b1b",
+                          }}
+                        >
+                          Critical
+                        </span>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
           )}
         </div>
       </div>

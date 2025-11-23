@@ -104,6 +104,20 @@ const products = [
 async function main() {
   console.log("Start seeding ...");
 
+  // Create admin user
+  const adminUser = await prisma.user.upsert({
+    where: { mobile: "9999999999" },
+    update: {},
+    create: {
+      mobile: "9999999999",
+      name: "Admin User",
+      email: "admin@quikfix.com",
+      password: "Admin@123",
+      role: "admin",
+    },
+  });
+  console.log(`Created admin user with id: ${adminUser.id}`);
+
   for (const p of products) {
     // Create or connect category
     const category = await prisma.category.upsert({
