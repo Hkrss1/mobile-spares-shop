@@ -120,6 +120,10 @@ const Navbar: React.FC = () => {
                             <Link
                                 href="/login"
                                 className="bg-primary text-primary-foreground px-6 py-2 rounded-full font-semibold text-sm hover:opacity-90 transition-opacity"
+                                style={{ 
+                                  color: 'var(--primary-foreground)',
+                                  backgroundColor: 'var(--primary)'
+                                }}
                             >
                                 Login
                             </Link>
@@ -191,6 +195,10 @@ const Navbar: React.FC = () => {
                                     href="/login"
                                     onClick={() => setIsMobileMenuOpen(false)}
                                     className="block bg-primary text-primary-foreground px-6 py-3 rounded-lg font-semibold text-center mt-4"
+                                    style={{ 
+                                      color: 'var(--primary-foreground)',
+                                      backgroundColor: 'var(--primary)'
+                                    }}
                                 >
                                     Login
                                 </Link>

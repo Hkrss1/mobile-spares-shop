@@ -65,12 +65,11 @@ export default function LoginPage() {
         style={{
           width: "100%",
           maxWidth: "400px",
-          backgroundColor: "hsl(var(--card))",
+          backgroundColor: "var(--card)",
           padding: "clamp(1.5rem, 5vw, 2.5rem)",
           borderRadius: "var(--radius)",
-          border: "1px solid hsl(var(--border))",
-          boxShadow:
-            "0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)",
+          border: "2px solid var(--border)",
+          boxShadow: "0 8px 16px rgba(0, 0, 0, 0.2), 0 4px 8px rgba(0, 0, 0, 0.15)",
         }}
       >
         <div style={{ textAlign: "center", marginBottom: "2rem" }}>
@@ -83,7 +82,7 @@ export default function LoginPage() {
           >
             Welcome Back
           </h1>
-          <p style={{ color: "hsl(var(--muted-foreground))" }}>
+          <p style={{ color: "var(--muted-foreground)" }}>
             Enter your mobile number to access your account
           </p>
         </div>
@@ -108,7 +107,7 @@ export default function LoginPage() {
                   left: "1rem",
                   top: "50%",
                   transform: "translateY(-50%)",
-                  color: "hsl(var(--muted-foreground))",
+                  color: "var(--muted-foreground)",
                   fontWeight: 500,
                 }}
               >
@@ -126,12 +125,21 @@ export default function LoginPage() {
                   width: "100%",
                   padding: "0.75rem 1rem 0.75rem 3.5rem",
                   borderRadius: "var(--radius)",
-                  border: "1px solid hsl(var(--input))",
-                  backgroundColor: "hsl(var(--background))",
-                  color: "hsl(var(--foreground))",
+                  border: "2px solid var(--border)",
+                  backgroundColor: "var(--background)",
+                  color: "var(--foreground)",
                   fontSize: "1rem",
                   outline: "none",
                   transition: "border-color 0.2s",
+                  boxShadow: "0 0 0 0 transparent",
+                }}
+                onFocus={(e) => {
+                  e.currentTarget.style.borderColor = "var(--primary)";
+                  e.currentTarget.style.boxShadow = "0 0 0 3px rgba(0, 0, 0, 0.1)";
+                }}
+                onBlur={(e) => {
+                  e.currentTarget.style.borderColor = "var(--border)";
+                  e.currentTarget.style.boxShadow = "0 0 0 0 transparent";
                 }}
               />
             </div>
@@ -160,7 +168,7 @@ export default function LoginPage() {
                 href="/forgot-password"
                 style={{
                   fontSize: "0.875rem",
-                  color: "hsl(var(--primary))",
+                  color: "var(--primary)",
                   textDecoration: "none",
                 }}
               >
@@ -178,12 +186,21 @@ export default function LoginPage() {
                 width: "100%",
                 padding: "0.75rem 1rem",
                 borderRadius: "var(--radius)",
-                border: "1px solid hsl(var(--input))",
-                backgroundColor: "hsl(var(--background))",
-                color: "hsl(var(--foreground))",
+                  border: "2px solid var(--border)",
+                backgroundColor: "var(--background)",
+                color: "var(--foreground)",
                 fontSize: "1rem",
                 outline: "none",
                 transition: "border-color 0.2s",
+                boxShadow: "0 0 0 0 transparent",
+              }}
+              onFocus={(e) => {
+                e.currentTarget.style.borderColor = "var(--primary)";
+                e.currentTarget.style.boxShadow = "0 0 0 3px rgba(0, 0, 0, 0.1)";
+              }}
+              onBlur={(e) => {
+                e.currentTarget.style.borderColor = "var(--border)";
+                e.currentTarget.style.boxShadow = "0 0 0 0 transparent";
               }}
             />
           </div>
@@ -209,7 +226,13 @@ export default function LoginPage() {
             type="submit"
             disabled={loading}
             className="btn btn-primary"
-            style={{ width: "100%", fontSize: "1rem", padding: "0.875rem" }}
+            style={{ 
+              width: "100%", 
+              fontSize: "1rem", 
+              padding: "0.875rem",
+              color: "var(--primary-foreground)",
+              backgroundColor: "var(--primary)"
+            }}
           >
             {loading ? "Signing in..." : "Sign In"}
           </button>
@@ -220,13 +243,13 @@ export default function LoginPage() {
             marginTop: "2rem",
             textAlign: "center",
             fontSize: "0.875rem",
-            color: "hsl(var(--muted-foreground))",
+            color: "var(--muted-foreground)",
           }}
         >
           Don&apos;t have an account?{" "}
           <Link
             href="/signup"
-            style={{ color: "hsl(var(--primary))", fontWeight: 600 }}
+            style={{ color: "var(--primary)", fontWeight: 600 }}
           >
             Sign up
           </Link>

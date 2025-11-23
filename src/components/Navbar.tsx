@@ -157,13 +157,17 @@ export default function Navbar() {
               </Link>
 
               {user.role === "admin" && (
-                <Link
-                  href="/admin"
-                  className="btn btn-primary"
-                  style={{ fontSize: "0.875rem", padding: "0.5rem 1rem" }}
-                >
-                  Dashboard
-                </Link>
+              <Link
+                href="/admin"
+                className="btn btn-primary"
+                style={{ 
+                  fontSize: "0.875rem", 
+                  padding: "0.5rem 1rem",
+                  color: "hsl(var(--primary-foreground))"
+                }}
+              >
+                Dashboard
+              </Link>
               )}
 
               <button
@@ -222,7 +226,11 @@ export default function Navbar() {
               <Link
                 href="/login"
                 className="btn btn-primary"
-                style={{ fontSize: "0.875rem", padding: "0.5rem 1rem" }}
+                style={{ 
+                  fontSize: "0.875rem", 
+                  padding: "0.5rem 1rem",
+                  color: "hsl(var(--primary-foreground))"
+                }}
               >
                 Login
               </Link>
@@ -316,14 +324,17 @@ export default function Navbar() {
                 Profile ({user.name})
               </Link>
               {user.role === "admin" && (
-                <Link
-                  href="/admin"
-                  onClick={toggleMenu}
-                  className="btn btn-primary"
-                  style={{ textAlign: "center" }}
-                >
-                  Dashboard
-                </Link>
+              <Link
+                href="/admin"
+                onClick={toggleMenu}
+                className="btn btn-primary"
+                style={{ 
+                  textAlign: "center",
+                  color: "hsl(var(--primary-foreground))"
+                }}
+              >
+                Dashboard
+              </Link>
               )}
               <button
                 onClick={() => {
@@ -354,7 +365,10 @@ export default function Navbar() {
                 href="/login"
                 onClick={toggleMenu}
                 className="btn btn-primary"
-                style={{ textAlign: "center" }}
+                style={{ 
+                  textAlign: "center",
+                  color: "hsl(var(--primary-foreground))"
+                }}
               >
                 Login
               </Link>

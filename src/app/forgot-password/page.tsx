@@ -49,10 +49,11 @@ export default function ForgotPasswordPage() {
     >
       <div
         style={{
-          backgroundColor: "hsl(var(--card))",
-          border: "1px solid hsl(var(--border))",
+          backgroundColor: "var(--card)",
+          border: "2px solid var(--border)",
           borderRadius: "var(--radius)",
           padding: "2.5rem",
+          boxShadow: "0 8px 16px rgba(0, 0, 0, 0.2), 0 4px 8px rgba(0, 0, 0, 0.15)",
         }}
       >
         <h1
@@ -67,7 +68,7 @@ export default function ForgotPasswordPage() {
         </h1>
         <p
           style={{
-            color: "hsl(var(--muted-foreground))",
+            color: "var(--muted-foreground)",
             textAlign: "center",
             marginBottom: "2rem",
           }}
@@ -108,7 +109,13 @@ export default function ForgotPasswordPage() {
             <Link
               href="/login"
               className="btn btn-primary"
-              style={{ width: "100%", display: "block", textAlign: "center" }}
+              style={{ 
+                width: "100%", 
+                display: "block", 
+                textAlign: "center",
+                color: "var(--primary-foreground)",
+                backgroundColor: "var(--primary)"
+              }}
             >
               Back to Login
             </Link>
@@ -133,7 +140,7 @@ export default function ForgotPasswordPage() {
                     left: "1rem",
                     top: "50%",
                     transform: "translateY(-50%)",
-                    color: "hsl(var(--muted-foreground))",
+                    color: "var(--muted-foreground)",
                     fontSize: "0.875rem",
                     fontWeight: 600,
                   }}
@@ -150,17 +157,28 @@ export default function ForgotPasswordPage() {
                     width: "100%",
                     padding: "0.75rem 1rem 0.75rem 3.5rem",
                     borderRadius: "var(--radius)",
-                    border: "1px solid hsl(var(--border))",
-                    backgroundColor: "hsl(var(--background))",
-                    color: "hsl(var(--foreground))",
+                    border: "2px solid var(--border)",
+                    backgroundColor: "var(--background)",
+                    color: "var(--foreground)",
                     fontSize: "1rem",
+                    outline: "none",
+                    transition: "border-color 0.2s",
+                    boxShadow: "0 0 0 0 transparent",
+                  }}
+                  onFocus={(e) => {
+                    e.currentTarget.style.borderColor = "var(--primary)";
+                    e.currentTarget.style.boxShadow = "0 0 0 3px rgba(0, 0, 0, 0.1)";
+                  }}
+                  onBlur={(e) => {
+                    e.currentTarget.style.borderColor = "var(--border)";
+                    e.currentTarget.style.boxShadow = "0 0 0 0 transparent";
                   }}
                 />
               </div>
               <p
                 style={{
                   fontSize: "0.75rem",
-                  color: "hsl(var(--muted-foreground))",
+                  color: "var(--muted-foreground)",
                   marginTop: "0.25rem",
                 }}
               >
@@ -188,7 +206,12 @@ export default function ForgotPasswordPage() {
               type="submit"
               disabled={loading}
               className="btn btn-primary"
-              style={{ width: "100%", marginBottom: "1rem" }}
+              style={{ 
+                width: "100%", 
+                marginBottom: "1rem",
+                color: "var(--primary-foreground)",
+                backgroundColor: "var(--primary)"
+              }}
             >
               {loading ? "Sending..." : "Send Reset Link via WhatsApp"}
             </button>
@@ -197,14 +220,14 @@ export default function ForgotPasswordPage() {
               style={{
                 textAlign: "center",
                 fontSize: "0.875rem",
-                color: "hsl(var(--muted-foreground))",
+                color: "var(--muted-foreground)",
               }}
             >
               Remember your password?{" "}
               <Link
                 href="/login"
                 style={{
-                  color: "hsl(var(--primary))",
+                  color: "var(--primary)",
                   fontWeight: 600,
                   textDecoration: "none",
                 }}
@@ -219,10 +242,10 @@ export default function ForgotPasswordPage() {
           style={{
             marginTop: "2rem",
             padding: "1rem",
-            backgroundColor: "hsl(var(--muted))",
+            backgroundColor: "var(--muted)",
             borderRadius: "var(--radius)",
             fontSize: "0.75rem",
-            color: "hsl(var(--muted-foreground))",
+            color: "var(--muted-foreground)",
           }}
         >
           <strong>📱 How it works:</strong>
