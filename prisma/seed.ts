@@ -111,9 +111,8 @@ async function main() {
     create: {
       mobile: "9999999999",
       name: "Admin User",
-      email: "admin@quikfix.com",
       password: "Admin@123",
-      role: "admin",
+      role: "ADMIN",
     },
   });
   console.log(`Created admin user with id: ${adminUser.id}`);
