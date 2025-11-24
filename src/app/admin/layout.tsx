@@ -35,12 +35,14 @@ export default function AdminLayout({
   children: React.ReactNode;
 }) {
   const pathname = usePathname();
-  const [isCollapsed, setIsCollapsed] = useState(false);
+  const [isCollapsed, setIsCollapsed] = useState(true);
 
   return (
     <div style={{ display: "flex", minHeight: "100vh" }}>
       {/* Sidebar */}
       <aside
+        onMouseEnter={() => setIsCollapsed(false)}
+        onMouseLeave={() => setIsCollapsed(true)}
         style={{
           width: isCollapsed ? "64px" : "280px",
           backgroundColor: "#000000", // Black background
@@ -53,36 +55,10 @@ export default function AdminLayout({
           left: 0,
           height: "100vh",
           transition: "width 0.3s ease",
-          zIndex: 50,
+          zIndex: 100,
         }}
       >
-        <div
-          style={{
-            padding: isCollapsed ? "1.5rem 0.5rem" : "1.5rem",
-            borderBottom: "1px solid #333",
-            display: "flex",
-            justifyContent: isCollapsed ? "center" : "space-between",
-            alignItems: "center",
-          }}
-        >
-          {!isCollapsed && (
-            <h1 style={{ fontSize: "1.25rem", fontWeight: 700, color: "#ffffff" }}>
-              Admin Panel
-            </h1>
-          )}
-          <button
-            onClick={() => setIsCollapsed(!isCollapsed)}
-            style={{
-              background: "transparent",
-              border: "none",
-              color: "#ffffff",
-              cursor: "pointer",
-              padding: "0.25rem",
-            }}
-          >
-            {isCollapsed ? <ChevronRight size={20} /> : <ChevronLeft size={20} />}
-          </button>
-        </div>
+
 
         <nav style={{ flex: 1, padding: "1rem 0.5rem" }}>
           <ul style={{ listStyle: "none", padding: 0, margin: 0, display: "flex", flexDirection: "column", gap: "0.5rem" }}>
@@ -106,10 +82,20 @@ export default function AdminLayout({
                       color: isActive ? "#000000" : "#ffffff", // Black text on active, white otherwise
                       backgroundColor: isActive ? "#ffffff" : "transparent", // White bg on active
                       transition: "all 0.2s",
+                      whiteSpace: "nowrap", // Prevent text wrapping during transition
+                      overflow: "hidden",
                     }}
                   >
-                    <item.icon size={20} />
-                    {!isCollapsed && <span>{item.name}</span>}
+                    <item.icon size={20} style={{ minWidth: "20px" }} />
+                    <span
+                      style={{
+                        opacity: isCollapsed ? 0 : 1,
+                        transition: "opacity 0.2s ease",
+                        width: isCollapsed ? 0 : "auto",
+                      }}
+                    >
+                      {item.name}
+                    </span>
                   </Link>
                 </li>
               );
@@ -136,16 +122,22 @@ export default function AdminLayout({
                 alignItems: "center",
                 justifyContent: "center",
                 color: "#fff",
+                minWidth: "2.5rem", // Prevent shrinking
               }}
             >
               <Users size={20} />
             </div>
-            {!isCollapsed && (
-              <div style={{ overflow: "hidden" }}>
-                <p style={{ fontSize: "0.875rem", fontWeight: 600, color: "#ffffff" }}>Admin</p>
-                <p style={{ fontSize: "0.75rem", color: "#9ca3af", whiteSpace: "nowrap", textOverflow: "ellipsis", overflow: "hidden" }}>admin@example.com</p>
-              </div>
-            )}
+            <div
+              style={{
+                overflow: "hidden",
+                opacity: isCollapsed ? 0 : 1,
+                transition: "opacity 0.2s ease",
+                width: isCollapsed ? 0 : "auto",
+              }}
+            >
+              <p style={{ fontSize: "0.875rem", fontWeight: 600, color: "#ffffff" }}>Admin</p>
+              <p style={{ fontSize: "0.75rem", color: "#9ca3af", whiteSpace: "nowrap", textOverflow: "ellipsis", overflow: "hidden" }}>admin@example.com</p>
+            </div>
           </div>
         </div>
       </aside>

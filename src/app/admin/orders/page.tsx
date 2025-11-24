@@ -48,16 +48,16 @@ export default function AdminOrdersPage() {
 
       {orders.length === 0 ? (
         <div style={{ textAlign: "center", padding: "4rem 1rem" }}>
-          <p style={{ color: "hsl(var(--muted-foreground))" }}>
+          <p style={{ color: "var(--muted-foreground)" }}>
             No orders yet.
           </p>
         </div>
       ) : (
         <div
           style={{
-            backgroundColor: "hsl(var(--card))",
+            backgroundColor: "var(--card)",
             borderRadius: "var(--radius)",
-            border: "1px solid hsl(var(--border))",
+            border: "1px solid var(--border)",
             overflow: "hidden",
           }}
         >
@@ -71,8 +71,8 @@ export default function AdminOrdersPage() {
             <thead>
               <tr
                 style={{
-                  borderBottom: "1px solid hsl(var(--border))",
-                  backgroundColor: "hsl(var(--muted))",
+                  borderBottom: "1px solid var(--border)",
+                  backgroundColor: "var(--muted)",
                 }}
               >
                 <th style={{ padding: "1rem" }}>Order #</th>
@@ -90,7 +90,7 @@ export default function AdminOrdersPage() {
                 return (
                   <tr
                     key={order.id}
-                    style={{ borderBottom: "1px solid hsl(var(--border))" }}
+                    style={{ borderBottom: "1px solid var(--border)" }}
                   >
                     <td style={{ padding: "1rem", fontWeight: 600 }}>
                       {order.orderNumber}
@@ -100,7 +100,7 @@ export default function AdminOrdersPage() {
                       <div
                         style={{
                           fontSize: "0.75rem",
-                          color: "hsl(var(--muted-foreground))",
+                          color: "var(--muted-foreground)",
                         }}
                       >
                         +91 {order.customerMobile}
@@ -133,7 +133,7 @@ export default function AdminOrdersPage() {
                           style={{
                             padding: "0.5rem",
                             borderRadius: "var(--radius)",
-                            border: "1px solid hsl(var(--border))",
+                            border: "1px solid var(--border)",
                             backgroundColor: statusStyle.bg,
                             color: statusStyle.color,
                             fontWeight: 600,
@@ -154,7 +154,7 @@ export default function AdminOrdersPage() {
                           <span
                             style={{
                               fontSize: "0.75rem",
-                              color: "hsl(var(--muted-foreground))",
+                              color: "var(--muted-foreground)",
                             }}
                           >
                             By:{" "}
@@ -174,9 +174,9 @@ export default function AdminOrdersPage() {
                             style={{
                               padding: "0.5rem",
                               borderRadius: "var(--radius)",
-                              border: "1px solid hsl(var(--border))",
-                              backgroundColor: "hsl(var(--background))",
-                              color: "hsl(var(--foreground))",
+                              border: "1px solid var(--border)",
+                              backgroundColor: "var(--background)",
+                              color: "var(--foreground)",
                               width: "200px",
                             }}
                           />
@@ -192,7 +192,7 @@ export default function AdminOrdersPage() {
                             }}
                             style={{
                               padding: "0.5rem 1rem",
-                              backgroundColor: "hsl(var(--primary))",
+                              backgroundColor: "var(--primary)",
                               color: "white",
                               border: "none",
                               borderRadius: "var(--radius)",
@@ -210,7 +210,7 @@ export default function AdminOrdersPage() {
                               target="_blank"
                               rel="noopener noreferrer"
                               style={{
-                                color: "hsl(var(--primary))",
+                                color: "var(--primary)",
                                 textDecoration: "underline",
                               }}
                             >
@@ -218,7 +218,7 @@ export default function AdminOrdersPage() {
                             </a>
                           ) : (
                             <span
-                              style={{ color: "hsl(var(--muted-foreground))" }}
+                              style={{ color: "var(--muted-foreground)" }}
                             >
                               No link
                             </span>
@@ -236,7 +236,7 @@ export default function AdminOrdersPage() {
                           disabled={order.status === "cancelled"}
                           style={{
                             padding: "0.5rem 1rem",
-                            backgroundColor: "hsl(var(--secondary))",
+                            backgroundColor: "var(--secondary)",
                             border: "none",
                             borderRadius: "var(--radius)",
                             cursor:

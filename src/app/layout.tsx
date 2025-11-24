@@ -25,7 +25,7 @@ export default function RootLayout({
           <OrderProvider>
             <CartProvider>
               <Navbar />
-              <main style={{ flex: "1", position: "relative", zIndex: 1 }}>
+              <main style={{ flex: "1", position: "relative" }}>
                 {children}
               </main>
               <div style={{ position: "relative", zIndex: 1 }}>

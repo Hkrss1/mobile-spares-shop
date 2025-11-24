@@ -1,7 +1,7 @@
-import ProductGrid from "@/components/ProductGrid";
+import ProductListing from "@/components/products/ProductListing";
 import { prisma } from "@/lib/prisma";
 import { Prisma } from "@prisma/client";
-import Link from "next/link";
+
 
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
@@ -58,37 +58,10 @@ export default async function ProductsPage({ searchParams }: PageProps) {
         description: p.description,
         brandId: p.brandId,
         brand: p.brand ? { id: p.brand.id, name: p.brand.name } : null,
-        category: { id: p.category.id, name: p.category.name },
+        category: p.category.name,
     }));
 
     return (
-        <div className="min-h-screen pt-24 pb-12">
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div className="mb-8">
-                    <h1 className="text-4xl font-bold tracking-tight mb-2">
-                        {searchQuery ? `Search Results for "${searchQuery}"` : "All Products"}
-                    </h1>
-                    <p className="text-muted-foreground">
-                        {formattedProducts.length} {formattedProducts.length === 1 ? "product" : "products"} found
-                    </p>
-                </div>
-
-                <ProductGrid products={formattedProducts} />
-
-                {formattedProducts.length === 0 && (
-                    <div className="text-center py-16">
-                        <p className="text-xl text-muted-foreground mb-4">
-                            No products found{searchQuery && ` for "${searchQuery}"`}
-                        </p>
-                        <Link
-                            href="/products"
-                            className="text-primary hover:underline font-medium"
-                        >
-                            View all products
-                        </Link>
-                    </div>
-                )}
-            </div>
-        </div>
+        <ProductListing initialProducts={formattedProducts} />
     );
 }

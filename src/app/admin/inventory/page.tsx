@@ -631,7 +631,15 @@ export default function AdminInventoryPage() {
       )}
 
       {/* Brand Filter */}
-      <div style={{ marginBottom: "1.5rem" }}>
+      <div
+        style={{
+          backgroundColor: "var(--card)",
+          border: "1px solid var(--border)",
+          borderRadius: "var(--radius)",
+          padding: "1.5rem",
+          marginBottom: "2rem",
+        }}
+      >
         <label
           style={{
             display: "block",
@@ -651,6 +659,8 @@ export default function AdminInventoryPage() {
             border: "1px solid var(--border)",
             backgroundColor: "var(--background)",
             color: "var(--foreground)",
+            width: "100%",
+            maxWidth: "300px",
           }}
         >
           <option value="">All Brands</option>

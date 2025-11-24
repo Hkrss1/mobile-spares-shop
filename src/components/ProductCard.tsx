@@ -27,13 +27,13 @@ const ProductCard: React.FC<ProductCardProps> = React.memo(({ product }) => {
         style={{
           backgroundColor: "hsl(var(--card))",
           borderRadius: "16px",
-          border: "none",
+          border: "1px solid var(--border)",
           overflow: "hidden",
           transition: "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
           height: "100%",
           display: "flex",
           flexDirection: "column",
-          boxShadow: "0 0 0 0.5px rgba(0, 0, 0, 0.04), 0 1px 2px 0 rgba(0, 0, 0, 0.05)",
+          boxShadow: "none",
         }}
         className="product-card"
         onMouseEnter={(e) => {
@@ -43,7 +43,7 @@ const ProductCard: React.FC<ProductCardProps> = React.memo(({ product }) => {
         }}
         onMouseLeave={(e) => {
           e.currentTarget.style.transform = "translateY(0)";
-          e.currentTarget.style.boxShadow = "0 0 0 0.5px rgba(0, 0, 0, 0.04), 0 1px 2px 0 rgba(0, 0, 0, 0.05)";
+          e.currentTarget.style.boxShadow = "none";
         }}
       >
         <div
