@@ -110,7 +110,7 @@ const Hero: React.FC = () => {
                         <motion.div
                             animate={{ y: [-10, 10, -10] }}
                             transition={{ repeat: Infinity, duration: 3 }}
-                            className="absolute top-20 right-10 lg:right-0 bg-transparent backdrop-blur-sm p-4 rounded-2xl shadow-xl border border-border z-20"
+                            className="absolute top-20 right-10 lg:right-0 bg-transparent backdrop-blur-sm p-4 rounded-2xl shadow-xl border border-border z-20 will-change-transform"
                         >
                             <div className="flex items-center gap-3">
                                 <div className="bg-green-100 dark:bg-green-900/30 p-2 rounded-lg text-green-600 dark:text-green-400">
@@ -126,7 +126,7 @@ const Hero: React.FC = () => {
                         <motion.div
                             animate={{ y: [10, -10, 10] }}
                             transition={{ repeat: Infinity, duration: 4 }}
-                            className="absolute bottom-40 left-6 bg-transparent backdrop-blur-sm p-4 rounded-2xl shadow-xl border border-border z-20"
+                            className="absolute bottom-40 left-6 bg-transparent backdrop-blur-sm p-4 rounded-2xl shadow-xl border border-border z-20 will-change-transform"
                         >
                             <div className="flex items-center gap-3">
                                 <div className="bg-orange-100 dark:bg-orange-900/30 p-2 rounded-lg text-orange-600 dark:text-orange-400">

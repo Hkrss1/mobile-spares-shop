@@ -15,7 +15,7 @@ const Navbar: React.FC = () => {
     const [isDark, setIsDark] = useState(false);
     const [searchQuery, setSearchQuery] = useState('');
     const { count } = useCart();
-    const { user } = useAuth();
+    const { user, logout } = useAuth();
     const router = useRouter();
 
     // Initialize dark mode from localStorage
@@ -120,9 +120,9 @@ const Navbar: React.FC = () => {
                             <Link
                                 href="/login"
                                 className="bg-primary text-primary-foreground px-6 py-2 rounded-full font-semibold text-sm hover:opacity-90 transition-opacity"
-                                style={{ 
-                                  color: 'var(--primary-foreground)',
-                                  backgroundColor: 'var(--primary)'
+                                style={{
+                                    color: 'var(--primary-foreground)',
+                                    backgroundColor: 'var(--primary)'
                                 }}
                             >
                                 Login
@@ -189,15 +189,24 @@ const Navbar: React.FC = () => {
                                     {user.role === 'admin' && (
                                         <Link href="/admin" onClick={() => setIsMobileMenuOpen(false)} className="block px-3 py-2 rounded-md text-base font-medium hover:bg-accent">Admin Dashboard</Link>
                                     )}
+                                    <button
+                                        onClick={() => {
+                                            logout();
+                                            setIsMobileMenuOpen(false);
+                                        }}
+                                        className="w-full text-left px-3 py-2 rounded-md text-base font-medium text-red-500 hover:bg-red-50 dark:hover:bg-red-900/10"
+                                    >
+                                        Logout
+                                    </button>
                                 </div>
                             ) : (
                                 <Link
                                     href="/login"
                                     onClick={() => setIsMobileMenuOpen(false)}
                                     className="block bg-primary text-primary-foreground px-6 py-3 rounded-lg font-semibold text-center mt-4"
-                                    style={{ 
-                                      color: 'var(--primary-foreground)',
-                                      backgroundColor: 'var(--primary)'
+                                    style={{
+                                        color: 'var(--primary-foreground)',
+                                        backgroundColor: 'var(--primary)'
                                     }}
                                 >
                                     Login

@@ -1,5 +1,7 @@
 import { NextResponse } from "next/server";
+import { cookies } from "next/headers";
 import { prisma } from "@/lib/prisma";
+import { signJWT } from "@/lib/jwt";
 
 // Force Node.js runtime (required for Prisma)
 export const runtime = "nodejs";
@@ -68,6 +70,23 @@ export async function POST(request: Request) {
     });
 
     console.log("[SIGNUP] User created successfully:", user.id);
+
+    // Generate JWT
+    const token = await signJWT({
+      id: user.id,
+      role: user.role.toLowerCase(),
+      name: user.name,
+    });
+
+    // Set Cookie
+    const cookieStore = await cookies();
+    cookieStore.set("auth_token", token, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: "strict",
+      maxAge: 60 * 60 * 24, // 24 hours
+      path: "/",
+    });
 
     return NextResponse.json({
       id: user.id,

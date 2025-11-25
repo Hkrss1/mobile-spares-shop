@@ -133,20 +133,18 @@ export default function ProductListing({ initialProducts, categories = DEFAULT_C
                 {/* Product Grid */}
                 <div className="flex-1">
                     <motion.div
-                        layout
                         className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6"
                     >
                         <AnimatePresence>
                             {filteredProducts.map((product) => (
                                 <motion.div
-                                    layout
                                     initial={{ opacity: 0, scale: 0.9 }}
                                     animate={{ opacity: 1, scale: 1 }}
                                     exit={{ opacity: 0, scale: 0.9 }}
                                     key={product.id}
                                     onMouseEnter={() => setHoveredProduct(product.id)}
                                     onMouseLeave={() => setHoveredProduct(null)}
-                                    className="group bg-card/40 backdrop-blur-md rounded-3xl border border-border overflow-hidden hover:border-primary/30 transition-all duration-500 hover:shadow-2xl hover:shadow-primary/5 cursor-pointer relative"
+                                    className="group bg-card/40 backdrop-blur-sm rounded-3xl border border-border overflow-hidden hover:border-primary/30 transition-all duration-500 hover:shadow-2xl hover:shadow-primary/5 cursor-pointer relative will-change-transform"
                                 >
                                     <Link href={`/products/${product.id}`} className="absolute inset-0 z-0" />
 

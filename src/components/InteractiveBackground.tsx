@@ -28,7 +28,8 @@ const InteractiveBackground: React.FC = () => {
                     repeat: Infinity,
                     ease: "linear"
                 }}
-                className="absolute top-[10%] left-[10%] w-[500px] h-[500px] rounded-full bg-blue-500/20 dark:bg-blue-600/10 blur-[100px]"
+                className="absolute top-[10%] left-[10%] w-[500px] h-[500px] rounded-full bg-blue-500/20 dark:bg-blue-600/10 blur-[60px] will-change-transform backface-hidden"
+                style={{ transform: 'translate3d(0,0,0)' }}
             />
 
             {/* Blob 2 - Purple Accent (Bottom Right) */}
@@ -43,7 +44,8 @@ const InteractiveBackground: React.FC = () => {
                     repeat: Infinity,
                     ease: "linear"
                 }}
-                className="absolute bottom-[20%] right-[10%] w-[600px] h-[600px] rounded-full bg-purple-500/20 dark:bg-purple-600/10 blur-[120px]"
+                className="absolute bottom-[20%] right-[10%] w-[600px] h-[600px] rounded-full bg-purple-500/20 dark:bg-purple-600/10 blur-[80px] will-change-transform backface-hidden"
+                style={{ transform: 'translate3d(0,0,0)' }}
             />
 
             {/* Blob 3 - Subtle Cyan (Top Right) */}
@@ -57,7 +59,8 @@ const InteractiveBackground: React.FC = () => {
                     repeat: Infinity,
                     ease: "easeInOut"
                 }}
-                className="absolute top-[20%] right-[20%] w-[400px] h-[400px] rounded-full bg-cyan-400/15 dark:bg-cyan-500/10 blur-[90px]"
+                className="absolute top-[20%] right-[20%] w-[400px] h-[400px] rounded-full bg-cyan-400/15 dark:bg-cyan-500/10 blur-[50px] will-change-transform backface-hidden"
+                style={{ transform: 'translate3d(0,0,0)' }}
             />
         </div>
     );
