@@ -127,6 +127,7 @@ model Order {
   createdAt      DateTime    @default(now())
   items          OrderItem[]
   transactions   InventoryTransaction[]
+  paymentId      String?
 }
 
 model OrderItem {

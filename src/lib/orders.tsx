@@ -37,6 +37,7 @@ interface OrderContextType {
     customerMobile: string,
     items: OrderItem[],
     total: number,
+    paymentDetails?: any
   ) => Promise<Order | null>;
   updateOrderStatus: (
     orderId: string,
@@ -84,6 +85,7 @@ export function OrderProvider({ children }: { children: React.ReactNode }) {
       customerMobile: string,
       items: OrderItem[],
       total: number,
+      paymentDetails?: any
     ): Promise<Order | null> => {
       try {
         const res = await fetch("/api/orders", {
@@ -94,6 +96,7 @@ export function OrderProvider({ children }: { children: React.ReactNode }) {
             customerMobile,
             items,
             total,
+            paymentDetails,
           }),
         });
 

@@ -7,10 +7,89 @@ import { useOrders } from "@/lib/orders";
 import Link from "next/link";
 import Image from "next/image";
 
+import Script from "next/script";
+import { useRouter } from "next/navigation";
+
 export default function CartPage() {
   const { items, removeItem, updateQuantity, total, clearCart } = useCart();
   const { user } = useAuth();
   const { createOrder } = useOrders();
+  const router = useRouter();
+
+  const handlePayment = async () => {
+    if (!user) {
+      alert("Please login to place an order");
+      router.push("/login");
+      return;
+    }
+
+    try {
+      // 1. Create Order on Razorpay
+      const res = await fetch("/api/payment/create-order", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ amount: total }),
+      });
+
+      if (!res.ok) {
+        alert("Failed to initiate payment");
+        return;
+      }
+
+      const order = await res.json();
+
+      // 2. Initialize Razorpay
+      const options = {
+        key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID, // Ensure this is set in .env.local
+        amount: order.amount,
+        currency: order.currency,
+        name: "Mobile Spares Shop",
+        description: "Order Payment",
+        order_id: order.id,
+        handler: async function (response: any) {
+          // 3. On Success, Create Order in Backend
+          const orderItems = items.map((item) => ({
+            id: item.id,
+            name: item.name,
+            price: item.price,
+            quantity: item.quantity,
+            image: item.image,
+          }));
+
+          const newOrder = await createOrder(
+            user.name,
+            user.mobile,
+            orderItems,
+            total,
+            response // Pass payment details
+          );
+
+          if (newOrder) {
+            clearCart();
+            router.push(`/orders/${newOrder.id}`);
+          } else {
+            alert("Payment successful but order creation failed. Please contact support.");
+          }
+        },
+        prefill: {
+          name: user.name,
+          contact: user.mobile,
+        },
+        theme: {
+          color: "#3399cc",
+        },
+      };
+
+      const rzp1 = new (window as any).Razorpay(options);
+      rzp1.on("payment.failed", function (response: any) {
+        alert(response.error.description);
+      });
+      rzp1.open();
+    } catch (error) {
+      console.error("Payment Error:", error);
+      alert("Something went wrong. Please try again.");
+    }
+  };
 
   if (items.length === 0) {
     return (
@@ -38,6 +117,7 @@ export default function CartPage() {
 
   return (
     <div className="container animate-fade-in" style={{ padding: "4rem 1rem" }}>
+      <Script src="https://checkout.razorpay.com/v1/checkout.js" />
       <h1 style={{ fontSize: "2rem", fontWeight: 700, marginBottom: "2rem" }}>
         Shopping Cart
       </h1>
@@ -258,57 +338,9 @@ export default function CartPage() {
             <button
               className="btn btn-primary"
               style={{ width: "100%" }}
-              onClick={async () => {
-                if (!user) {
-                  alert("Please login to place an order");
-                  window.location.href = "/login";
-                  return;
-                }
-
-                // Create order in system
-                const orderItems = items.map((item) => ({
-                  id: item.id,
-                  name: item.name,
-                  price: item.price,
-                  quantity: item.quantity,
-                  image: item.image,
-                }));
-
-                const order = await createOrder(
-                  user.name,
-                  user.mobile,
-                  orderItems,
-                  total,
-                );
-
-                if (order) {
-                  // Format order details for WhatsApp
-                  const orderDetails = items
-                    .map(
-                      (item, index) =>
-                        `${index + 1}. ${item.name}\n   Qty: ${item.quantity} × ₹${item.price.toFixed(2)} = ₹${(item.quantity * item.price).toFixed(2)}`,
-                    )
-                    .join("\n\n");
-
-                  const message = `🛒 *New Order from QuikFix*\n\n*Order #${order.orderNumber}*\n*Customer:* ${user.name}\n*Mobile:* +91${user.mobile}\n\n${orderDetails}\n\n━━━━━━━━━━━━━━━━\n💰 *Total: ₹${total.toFixed(2)}*\n\nPlease confirm my order and provide payment details.`;
-
-                  // Encode message for URL
-                  const encodedMessage = encodeURIComponent(message);
-
-                  // WhatsApp API URL
-                  const whatsappURL = `https://wa.me/917488177051?text=${encodedMessage}`;
-
-                  // Clear cart after order
-                  clearCart();
-
-                  // Redirect to WhatsApp (more reliable than window.open on mobile)
-                  window.location.href = whatsappURL;
-                } else {
-                  alert("Failed to create order. Please try again.");
-                }
-              }}
+              onClick={handlePayment}
             >
-              Proceed to Checkout via WhatsApp
+              Pay Now
             </button>
 
             <p
@@ -319,7 +351,7 @@ export default function CartPage() {
                 textAlign: "center",
               }}
             >
-              You&apos;ll be redirected to WhatsApp to complete your order
+              Secure payment via Razorpay
             </p>
           </div>
         </div>

@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
+import crypto from "crypto";
 
 export async function GET(request: Request) {
   try {
@@ -43,7 +44,7 @@ interface OrderItemInput {
 export async function POST(request: Request) {
   try {
     const body = await request.json();
-    const { customerName, customerMobile, total, items } = body;
+    const { customerName, customerMobile, total, items, paymentDetails } = body;
 
     if (!customerName || !customerMobile || !items || items.length === 0) {
       return NextResponse.json(
@@ -61,7 +62,27 @@ export async function POST(request: Request) {
     }
     const locationId = location.id;
 
-    // 2. Process Order in Transaction
+    // 2. Verify Payment (if provided)
+    let paymentId = null;
+    if (paymentDetails) {
+      const { razorpay_order_id, razorpay_payment_id, razorpay_signature } = paymentDetails;
+
+      const body = razorpay_order_id + "|" + razorpay_payment_id;
+      const expectedSignature = crypto
+        .createHmac("sha256", process.env.RAZORPAY_KEY_SECRET!)
+        .update(body.toString())
+        .digest("hex");
+
+      if (expectedSignature !== razorpay_signature) {
+        return NextResponse.json(
+          { error: "Invalid payment signature" },
+          { status: 400 }
+        );
+      }
+      paymentId = razorpay_payment_id;
+    }
+
+    // 3. Process Order in Transaction
     const result = await prisma.$transaction(async (tx) => {
       // Check Stock for all items first
       for (const item of items as OrderItemInput[]) {
@@ -90,6 +111,7 @@ export async function POST(request: Request) {
           customerMobile,
           total: parseFloat(total),
           status: "processing",
+          paymentId: paymentId,
           items: {
             create: items.map((item: OrderItemInput) => ({
               name: item.name,
