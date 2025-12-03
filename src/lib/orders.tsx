@@ -108,8 +108,12 @@ export function OrderProvider({ children }: { children: React.ReactNode }) {
           const newOrder = await res.json();
           setOrders((prev) => [newOrder, ...prev]);
           return newOrder;
+        } else {
+          const errorData = await res.json();
+          console.error("Order creation failed:", errorData);
+          alert(`Order creation failed: ${errorData.error || 'Unknown error'}`);
+          return null;
         }
-        return null;
       } catch (error) {
         console.error("Failed to create order:", error);
         return null;

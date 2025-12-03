@@ -177,12 +177,21 @@ export async function POST(request: Request) {
     return NextResponse.json(result);
   } catch (error) {
     console.error("Error creating order:", error);
+    console.error("Error stack:", error instanceof Error ? error.stack : 'N/A');
+    console.error("Error details:", JSON.stringify(error, null, 2));
+
     const message = error instanceof Error ? error.message : "Internal server error";
     if (message.includes("Insufficient stock")) {
       return NextResponse.json({ error: message }, { status: 400 });
     }
+
+    // Return more detailed error for debugging
     return NextResponse.json(
-      { error: "Internal server error" },
+      {
+        error: "Failed to create order",
+        details: message,
+        timestamp: new Date().toISOString()
+      },
       { status: 500 },
     );
   }

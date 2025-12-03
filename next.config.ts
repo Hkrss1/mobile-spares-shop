@@ -16,8 +16,23 @@ const nextConfig: NextConfig = {
   // Ensure experimental features are enabled for server components
   experimental: {
     serverActions: {
-      bodySizeLimit: "2mb",
+      bodySizeLimit: "3mb", // Increased from 2mb to handle order creation with images
     },
+  },
+
+  // Headers for API routes to work with CloudFront
+  async headers() {
+    return [
+      {
+        source: '/api/:path*',
+        headers: [
+          { key: 'Access-Control-Allow-Credentials', value: 'true' },
+          { key: 'Access-Control-Allow-Origin', value: '*' },
+          { key: 'Access-Control-Allow-Methods', value: 'GET,POST,PUT,DELETE,PATCH,OPTIONS' },
+          { key: 'Access-Control-Allow-Headers', value: 'Content-Type,Authorization' },
+        ],
+      },
+    ];
   },
   images: {
     remotePatterns: [
