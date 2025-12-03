@@ -32,7 +32,8 @@ export default function CartPage() {
       });
 
       if (!res.ok) {
-        alert("Failed to initiate payment");
+        const data = await res.json();
+        alert(data.error || "Failed to initiate payment");
         return;
       }
 

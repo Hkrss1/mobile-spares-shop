@@ -8,6 +8,19 @@ const razorpay = new Razorpay({
 
 export async function POST(request: Request) {
   try {
+    if (!process.env.RAZORPAY_KEY_ID || !process.env.RAZORPAY_KEY_SECRET) {
+      console.error("Razorpay keys are missing in environment variables");
+      return NextResponse.json(
+        { error: "Server configuration error: Missing Payment Keys" },
+        { status: 500 }
+      );
+    }
+
+    const razorpay = new Razorpay({
+      key_id: process.env.RAZORPAY_KEY_ID,
+      key_secret: process.env.RAZORPAY_KEY_SECRET,
+    });
+
     const body = await request.json();
     const { amount, currency = "INR" } = body;
 
@@ -30,7 +43,7 @@ export async function POST(request: Request) {
   } catch (error) {
     console.error("Error creating Razorpay order:", error);
     return NextResponse.json(
-      { error: "Error creating order" },
+      { error: "Error creating order", details: error instanceof Error ? error.message : String(error) },
       { status: 500 }
     );
   }
