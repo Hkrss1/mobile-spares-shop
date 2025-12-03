@@ -91,6 +91,12 @@ export function OrderProvider({ children }: { children: React.ReactNode }) {
       paymentDetails?: any
     ): Promise<Order | null> => {
       try {
+        // Send only minimal data to reduce payload size (avoid CloudFront 403)
+        const minimalItems = items.map(item => ({
+          id: item.id,
+          quantity: item.quantity
+        }));
+
         const res = await fetch("/api/orders", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -98,7 +104,7 @@ export function OrderProvider({ children }: { children: React.ReactNode }) {
             customerName,
             customerMobile,
             address,
-            items,
+            items: minimalItems, // Only IDs and quantities (~1KB vs 145KB)
             total,
             paymentDetails,
           }),

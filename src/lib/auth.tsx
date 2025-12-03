@@ -91,6 +91,12 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     } catch (error) {
       console.error("Logout failed:", error);
     }
+
+    // Clear user-specific cart on logout
+    if (user?.mobile) {
+      localStorage.removeItem(`mss_cart_${user.mobile}`);
+    }
+
     setUser(null);
     localStorage.removeItem("mss_user");
     router.push("/login");

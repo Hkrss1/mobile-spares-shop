@@ -15,6 +15,11 @@ export interface CartItem extends Product {
   quantity: number;
 }
 
+// Helper to get user-specific cart key
+function getCartKey(userId?: string | null): string {
+  return userId ? `mss_cart_${userId}` : "mss_cart_guest";
+}
+
 interface CartContextType {
   items: CartItem[];
   addItem: (product: Product) => void;
@@ -30,11 +35,26 @@ const CartContext = createContext<CartContextType | undefined>(undefined);
 export function CartProvider({ children }: { children: React.ReactNode }) {
   const [items, setItems] = useState<CartItem[]>([]);
   const [toastMessage, setToastMessage] = useState<string | null>(null);
+  const [userId, setUserId] = useState<string | null>(null);
 
-  // Load cart from local storage on mount
+  // Initialize user from localStorage and load their cart
   useEffect(() => {
-    // Initialize cart from localStorage
-    const savedCart = localStorage.getItem("mss_cart");
+    const storedUser = localStorage.getItem("mss_user");
+    if (storedUser) {
+      try {
+        const parsedUser = JSON.parse(storedUser);
+        setUserId(parsedUser.mobile);
+      } catch (error) {
+        console.error("Failed to parse user:", error);
+      }
+    }
+  }, []);
+
+  // Load cart when userId changes (login/logout)
+  useEffect(() => {
+    const cartKey = getCartKey(userId);
+    const savedCart = localStorage.getItem(cartKey);
+
     if (savedCart) {
       try {
         const parsedCart = JSON.parse(savedCart);
@@ -52,23 +72,29 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
           setItems(parsedCart as CartItem[]);
         } else {
           console.warn("Old cart format detected, clearing cart");
-          localStorage.removeItem("mss_cart");
+          localStorage.removeItem(cartKey);
+          setItems([]);
         }
       } catch (error) {
         console.error("Failed to parse cart data:", error);
-        localStorage.removeItem("mss_cart");
+        localStorage.removeItem(cartKey);
+        setItems([]);
       }
+    } else {
+      // No cart for this user, start fresh
+      setItems([]);
     }
-  }, []);
+  }, [userId]);
 
-  // Debounced save to localStorage
+  // Debounced save to localStorage with user-specific key
   useEffect(() => {
     const timeoutId = setTimeout(() => {
-      localStorage.setItem("mss_cart", JSON.stringify(items));
+      const cartKey = getCartKey(userId);
+      localStorage.setItem(cartKey, JSON.stringify(items));
     }, 300); // 300ms debounce
 
     return () => clearTimeout(timeoutId);
-  }, [items]);
+  }, [items, userId]);
 
   const addItem = useCallback((product: Product) => {
     setItems((currentItems) => {

@@ -33,8 +33,15 @@ export async function GET(request: Request) {
   }
 }
 
-interface OrderItemInput {
+// Minimal order item input (CloudFront optimization)
+interface MinimalOrderItemInput {
   id: string; // Product ID
+  quantity: number;
+}
+
+// Legacy full order item input (backward compatibility)
+interface OrderItemInput {
+  id: string; // Product ID  
   name: string;
   price: number;
   quantity: number;
@@ -82,10 +89,41 @@ export async function POST(request: Request) {
       paymentId = razorpay_payment_id;
     }
 
-    // 3. Process Order in Transaction
+    // 3. Fetch product details if minimal items provided
+    const itemsWithDetails: OrderItemInput[] = [];
+
+    for (const item of items) {
+      if ('name' in item && 'price' in item && 'image' in item) {
+        // Legacy format - already has full details
+        itemsWithDetails.push(item as OrderItemInput);
+      } else {
+        // Minimal format - fetch from database
+        const product = await prisma.product.findUnique({
+          where: { id: item.id },
+          include: { category: true }
+        });
+
+        if (!product) {
+          return NextResponse.json(
+            { error: `Product not found: ${item.id}` },
+            { status: 400 }
+          );
+        }
+
+        itemsWithDetails.push({
+          id: product.id,
+          name: product.name,
+          price: product.price,
+          quantity: item.quantity,
+          image: product.image
+        });
+      }
+    }
+
+    // 4. Process Order in Transaction
     const result = await prisma.$transaction(async (tx) => {
       // Check Stock for all items first
-      for (const item of items as OrderItemInput[]) {
+      for (const item of itemsWithDetails) {
         const stockLevel = await tx.stockLevel.findUnique({
           where: {
             productId_locationId: {
@@ -114,7 +152,7 @@ export async function POST(request: Request) {
           status: "processing",
           paymentId: paymentId,
           items: {
-            create: items.map((item: OrderItemInput) => ({
+            create: itemsWithDetails.map((item) => ({
               name: item.name,
               price: parseFloat(String(item.price)),
               quantity: parseInt(String(item.quantity)),
@@ -126,7 +164,7 @@ export async function POST(request: Request) {
       });
 
       // Deduct Stock and Create Transactions
-      for (const item of items as OrderItemInput[]) {
+      for (const item of itemsWithDetails) {
         await tx.stockLevel.update({
           where: {
             productId_locationId: {
