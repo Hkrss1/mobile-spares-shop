@@ -132,14 +132,6 @@ export default function AdminInventoryPage() {
 
       if (res.ok) {
         const created = await res.json();
-        // Set initial stock if provided
-        if (newProduct.stock) {
-          await fetch(`/api/products/${created.id}/stock`, {
-            method: "PATCH",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ quantity: parseInt(newProduct.stock), locationId: "loc_main" }),
-          });
-        }
         window.location.reload();
       } else {
         const error = await res.json();

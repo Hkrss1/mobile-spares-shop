@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Filter, ChevronDown, Check, Search, ShoppingBag, Star, X } from 'lucide-react';
 import Link from 'next/link';
+import { useCart } from '@/lib/cart';
 
 // Types for our props
 interface Product {
@@ -30,6 +31,7 @@ export default function ProductListing({ initialProducts, categories = DEFAULT_C
     const [selectedModels, setSelectedModels] = useState<string[]>([]);
     const [isMobileFiltersOpen, setIsMobileFiltersOpen] = useState(false);
     const [hoveredProduct, setHoveredProduct] = useState<string | null>(null);
+    const { addItem } = useCart();
 
     const toggleModel = (model: string) => {
         setSelectedModels(prev =>
@@ -124,8 +126,8 @@ export default function ProductListing({ initialProducts, categories = DEFAULT_C
                             <div className="h-full w-1/2 bg-primary ml-1/4"></div>
                         </div>
                         <div className="flex justify-between text-xs text-muted-foreground mt-2">
-                            <span>$0</span>
-                            <span>$500+</span>
+                            <span>₹0</span>
+                            <span>₹500+</span>
                         </div>
                     </div>
                 </div>
@@ -178,7 +180,14 @@ export default function ProductListing({ initialProducts, categories = DEFAULT_C
                                                 onClick={(e) => {
                                                     e.preventDefault();
                                                     e.stopPropagation();
-                                                    // Add to cart logic here
+                                                    addItem({
+                                                        id: product.id,
+                                                        name: product.name,
+                                                        price: product.price,
+                                                        image: product.image,
+                                                        category: { id: 'cat-1', name: product.category },
+                                                        stock: 10 // Default stock if not provided
+                                                    } as any);
                                                 }}
                                                 className="w-full bg-primary/90 hover:bg-primary backdrop-blur text-primary-foreground py-3 rounded-2xl font-semibold text-sm shadow-lg flex items-center justify-center gap-2 transition-all"
                                             >
@@ -201,7 +210,7 @@ export default function ProductListing({ initialProducts, categories = DEFAULT_C
                                             {product.name}
                                         </h3>
                                         <div className="flex items-baseline gap-1">
-                                            <span className="text-xs text-muted-foreground">$</span>
+                                            <span className="text-xs text-muted-foreground">₹</span>
                                             <span className="text-xl font-bold tracking-tight">{Math.floor(product.price)}</span>
                                             <span className="text-xs font-bold tracking-tight">.{(product.price % 1).toFixed(2).substring(2)}</span>
                                         </div>

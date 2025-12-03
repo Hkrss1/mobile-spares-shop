@@ -44,9 +44,9 @@ interface OrderItemInput {
 export async function POST(request: Request) {
   try {
     const body = await request.json();
-    const { customerName, customerMobile, total, items, paymentDetails } = body;
+    const { customerName, customerMobile, address, total, items, paymentDetails } = body;
 
-    if (!customerName || !customerMobile || !items || items.length === 0) {
+    if (!customerName || !customerMobile || !items || items.length === 0 || !address) {
       return NextResponse.json(
         { error: "Missing required fields" },
         { status: 400 },
@@ -109,6 +109,7 @@ export async function POST(request: Request) {
           orderNumber: `ORD-${Date.now().toString().substring(5)}`,
           customerName,
           customerMobile,
+          shippingAddress: address, // Pass the full object
           total: parseFloat(total),
           status: "processing",
           paymentId: paymentId,
@@ -153,6 +154,25 @@ export async function POST(request: Request) {
 
       return order;
     });
+
+    // 3. Create Shiprocket Order (Async - don't block response)
+    // Cast result to any to avoid type error if client is outdated
+    if ((result as any).shippingAddress) {
+      // Import dynamically to avoid circular deps if any, or just standard import
+      const { createShiprocketOrder } = await import("@/lib/shiprocket");
+
+      // We need to fetch the full order with items to send to Shiprocket
+      const fullOrder = await prisma.order.findUnique({
+        where: { id: result.id },
+        include: { items: true }
+      });
+
+      if (fullOrder) {
+        createShiprocketOrder(fullOrder).then((srData) => {
+          console.log("Shiprocket Order Created:", srData);
+        }).catch(err => console.error("Shiprocket Error:", err));
+      }
+    }
 
     return NextResponse.json(result);
   } catch (error) {

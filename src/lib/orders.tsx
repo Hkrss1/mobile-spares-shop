@@ -28,6 +28,7 @@ export interface Order {
   cancelledBy?: "user" | "admin";
   trackingLink?: string;
   createdAt: string;
+  shippingAddress: any;
 }
 
 interface OrderContextType {
@@ -35,6 +36,7 @@ interface OrderContextType {
   createOrder: (
     customerName: string,
     customerMobile: string,
+    address: any,
     items: OrderItem[],
     total: number,
     paymentDetails?: any
@@ -83,6 +85,7 @@ export function OrderProvider({ children }: { children: React.ReactNode }) {
     async (
       customerName: string,
       customerMobile: string,
+      address: any,
       items: OrderItem[],
       total: number,
       paymentDetails?: any
@@ -94,6 +97,7 @@ export function OrderProvider({ children }: { children: React.ReactNode }) {
           body: JSON.stringify({
             customerName,
             customerMobile,
+            address,
             items,
             total,
             paymentDetails,

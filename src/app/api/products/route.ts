@@ -42,8 +42,7 @@ export async function GET() {
 export async function POST(request: Request) {
   try {
     const body = await request.json();
-    const { name, price, categoryId, brandId, description, image, specs } =
-      body;
+    const { name, price, categoryId, brandId, description, image, specs, stock } = body;
 
     if (!name || !price || !categoryId || !image) {
       return NextResponse.json(
@@ -52,25 +51,63 @@ export async function POST(request: Request) {
       );
     }
 
-    const product = await prisma.product.create({
-      data: {
-        name,
-        price: parseFloat(price),
-        categoryId,
-        brandId: brandId || null,
-        description: description || "",
-        image,
-        specs: specs || {},
-      },
-      include: {
-        category: true,
-        brand: true,
-      },
+    // 1. Get Default Location
+    let location = await prisma.location.findFirst();
+    if (!location) {
+      location = await prisma.location.create({
+        data: { name: "Main Warehouse", address: "Default Address" },
+      });
+    }
+    const locationId = location.id;
+
+    const result = await prisma.$transaction(async (tx) => {
+      // 2. Create Product
+      const product = await tx.product.create({
+        data: {
+          name,
+          price: parseFloat(price),
+          categoryId,
+          brandId: brandId || null,
+          description: description || "",
+          image,
+          specs: specs || {},
+        },
+        include: {
+          category: true,
+          brand: true,
+        },
+      });
+
+      // 3. Create Stock Level (if stock provided)
+      const initialStock = stock ? parseInt(stock) : 0;
+      if (initialStock > 0) {
+        await tx.stockLevel.create({
+          data: {
+            productId: product.id,
+            locationId: locationId,
+            quantity: initialStock,
+          },
+        });
+
+        // 4. Create Inward Transaction
+        await tx.inventoryTransaction.create({
+          data: {
+            type: "INWARD",
+            quantity: initialStock,
+            productId: product.id,
+            locationId: locationId,
+            performedBy: "ADMIN", // TODO: Get actual user
+            notes: "Initial Stock",
+          },
+        });
+      }
+
+      return product;
     });
 
     return NextResponse.json({
-      ...product,
-      stock: 0,
+      ...result,
+      stock: stock ? parseInt(stock) : 0,
     });
   } catch (error) {
     console.error("Error creating product:", error);

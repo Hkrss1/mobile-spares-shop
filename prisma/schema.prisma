@@ -29,6 +29,26 @@ model User {
   role      Role     @default(USER)
   isActive  Boolean  @default(true)
   createdAt DateTime @default(now())
+  addresses Address[]
+}
+
+model Address {
+  id              String   @id @default(cuid())
+  userId          String
+  user            User     @relation(fields: [userId], references: [id])
+  name            String
+  mobile          String
+  pincode         String
+  locality        String
+  address         String
+  city            String
+  state           String
+  landmark        String?
+  alternateMobile String?
+  type            String   @default("HOME") // HOME, WORK
+  isDefault       Boolean  @default(false)
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
 }
 
 model Brand {
@@ -120,6 +140,7 @@ model Order {
   orderNumber    String      @unique
   customerName   String
   customerMobile String
+  shippingAddress Json?
   total          Float
   status         String      @default("processing")
   cancelledBy    String?     // "user" | "admin"

@@ -58,12 +58,45 @@ const ProductDetails: React.FC<ProductDetailProps> = ({ product, relatedProducts
         e.currentTarget.style.setProperty('--y', `${y}%`);
     };
 
-    const checkDelivery = () => {
-        if (!pincode) return;
+    const [deliveryEstimate, setDeliveryEstimate] = useState<{ date: string; courier: string } | null>(null);
+
+    const checkDelivery = async () => {
+        if (!pincode || pincode.length !== 6) {
+            setDeliveryStatus('invalid');
+            return;
+        }
+
         setDeliveryStatus('checking');
-        setTimeout(() => {
-            setDeliveryStatus(pincode.length === 6 ? 'available' : 'invalid');
-        }, 1500);
+        setDeliveryEstimate(null);
+
+        try {
+            const res = await fetch(`/api/delivery/serviceability?pincode=${pincode}`);
+            if (res.ok) {
+                const data = await res.json();
+                if (data.estimated_delivery_date) {
+                    setDeliveryEstimate({
+                        date: new Date(data.estimated_delivery_date).toLocaleDateString("en-US", { weekday: 'short', month: 'short', day: 'numeric' }),
+                        courier: data.courier_name
+                    });
+                    setDeliveryStatus('available');
+                } else {
+                    // Fallback
+                    const days = pincode.startsWith("11") ? 2 : 5;
+                    const date = new Date();
+                    date.setDate(date.getDate() + days);
+                    setDeliveryEstimate({
+                        date: date.toLocaleDateString("en-US", { weekday: 'short', month: 'short', day: 'numeric' }),
+                        courier: "Standard Delivery"
+                    });
+                    setDeliveryStatus('available');
+                }
+            } else {
+                setDeliveryStatus('invalid');
+            }
+        } catch (error) {
+            console.error("Delivery check failed", error);
+            setDeliveryStatus('invalid');
+        }
     };
 
     const handleAddToCart = () => {
@@ -145,17 +178,17 @@ const ProductDetails: React.FC<ProductDetailProps> = ({ product, relatedProducts
                             </div>
 
                             <div className="flex items-end gap-3 mb-2">
-                                <span className="text-4xl font-bold text-primary">${currentProduct.price.toFixed(2)}</span>
+                                <span className="text-4xl font-bold text-primary">₹{currentProduct.price.toFixed(2)}</span>
                                 {currentProduct.originalPrice && (
                                     <>
-                                        <span className="text-xl text-muted-foreground line-through decoration-destructive/50 mb-1">${currentProduct.originalPrice.toFixed(2)}</span>
+                                        <span className="text-xl text-muted-foreground line-through decoration-destructive/50 mb-1">₹{currentProduct.originalPrice.toFixed(2)}</span>
                                         <span className="mb-2 px-2 py-0.5 bg-destructive/10 text-destructive text-xs font-bold rounded-md">
                                             {Math.round((1 - currentProduct.price / currentProduct.originalPrice) * 100)}% OFF
                                         </span>
                                     </>
                                 )}
                             </div>
-                            <p className="text-sm text-muted-foreground">Inclusive of all taxes. Free shipping on orders over $100.</p>
+                            <p className="text-sm text-muted-foreground">Inclusive of all taxes. Free shipping on orders over ₹500.</p>
                         </div>
 
                         <hr className="border-border mb-8" />
@@ -188,10 +221,15 @@ const ProductDetails: React.FC<ProductDetailProps> = ({ product, relatedProducts
                             </div>
                             {/* Delivery Status Messages */}
                             <div className="mt-3 min-h-[20px]">
-                                {deliveryStatus === 'available' && (
-                                    <motion.div initial={{ opacity: 0, y: -5 }} animate={{ opacity: 1, y: 0 }} className="flex items-center gap-2 text-green-600 text-sm">
-                                        <CheckCircle2 size={14} />
-                                        <span>Estimated delivery by <span className="font-bold">Monday, Oct 24</span></span>
+                                {deliveryStatus === 'available' && deliveryEstimate && (
+                                    <motion.div initial={{ opacity: 0, y: -5 }} animate={{ opacity: 1, y: 0 }} className="flex flex-col gap-1 text-sm">
+                                        <div className="flex items-center gap-2 text-green-600">
+                                            <CheckCircle2 size={14} />
+                                            <span>Estimated delivery by <span className="font-bold">{deliveryEstimate.date}</span></span>
+                                        </div>
+                                        <div className="text-xs text-muted-foreground ml-6">
+                                            via {deliveryEstimate.courier}
+                                        </div>
                                     </motion.div>
                                 )}
                                 {deliveryStatus === 'invalid' && (
@@ -224,8 +262,8 @@ const ProductDetails: React.FC<ProductDetailProps> = ({ product, relatedProducts
                                 onClick={handleAddToCart}
                                 disabled={product.stock === 0}
                                 className={`flex-1 py-3 px-6 rounded-xl font-bold text-lg shadow-lg transition-all flex items-center justify-center gap-2 ${product.stock > 0
-                                        ? 'bg-primary text-primary-foreground shadow-primary/25 hover:opacity-90 hover:scale-[1.02] active:scale-[0.98]'
-                                        : 'bg-muted text-muted-foreground cursor-not-allowed'
+                                    ? 'bg-primary text-primary-foreground shadow-primary/25 hover:opacity-90 hover:scale-[1.02] active:scale-[0.98]'
+                                    : 'bg-muted text-muted-foreground cursor-not-allowed'
                                     }`}
                             >
                                 <ShoppingBag size={20} /> {product.stock > 0 ? 'Add to Cart' : 'Out of Stock'}

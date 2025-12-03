@@ -68,7 +68,7 @@ const Footer: React.FC = () => {
 
                 <div className="border-t border-border pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
                     <p className="text-sm text-muted-foreground">
-                        © 2024 QuikFix. All rights reserved.
+                        © 2025 QuikFix. All rights reserved.
                     </p>
                     <div className="flex gap-6 text-sm text-muted-foreground">
                         <a href="#" className="hover:text-foreground">Privacy Policy</a>

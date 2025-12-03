@@ -30,6 +30,23 @@ export default function AdminOrdersPage() {
     }
   };
 
+  const formatDate = (dateString: string) => {
+    return new Date(dateString).toLocaleDateString("en-IN", {
+      day: "numeric",
+      month: "short",
+      year: "numeric",
+    });
+  };
+
+  const getEstimatedDelivery = (dateString: string) => {
+    const date = new Date(dateString);
+    date.setDate(date.getDate() + 5); // Assume 5 days for now
+    return date.toLocaleDateString("en-IN", {
+      day: "numeric",
+      month: "short",
+    });
+  };
+
   return (
     <div className="container animate-fade-in" style={{ padding: "4rem 1rem" }}>
       <div
@@ -59,6 +76,7 @@ export default function AdminOrdersPage() {
             borderRadius: "var(--radius)",
             border: "1px solid var(--border)",
             overflow: "hidden",
+            overflowX: "auto", // Handle wide tables
           }}
         >
           <table
@@ -66,6 +84,7 @@ export default function AdminOrdersPage() {
               width: "100%",
               borderCollapse: "collapse",
               textAlign: "left",
+              minWidth: "1000px", // Ensure minimum width for readability
             }}
           >
             <thead>
@@ -76,10 +95,13 @@ export default function AdminOrdersPage() {
                 }}
               >
                 <th style={{ padding: "1rem" }}>Order #</th>
+                <th style={{ padding: "1rem" }}>Date</th>
                 <th style={{ padding: "1rem" }}>Customer</th>
+                <th style={{ padding: "1rem", width: "20%" }}>Address</th>
                 <th style={{ padding: "1rem" }}>Items</th>
                 <th style={{ padding: "1rem" }}>Total</th>
                 <th style={{ padding: "1rem" }}>Status</th>
+                <th style={{ padding: "1rem" }}>Est. Delivery</th>
                 <th style={{ padding: "1rem" }}>Tracking</th>
                 <th style={{ padding: "1rem" }}>Actions</th>
               </tr>
@@ -95,6 +117,9 @@ export default function AdminOrdersPage() {
                     <td style={{ padding: "1rem", fontWeight: 600 }}>
                       {order.orderNumber}
                     </td>
+                    <td style={{ padding: "1rem", fontSize: "0.875rem" }}>
+                      {formatDate(order.createdAt)}
+                    </td>
                     <td style={{ padding: "1rem" }}>
                       <div>{order.customerName}</div>
                       <div
@@ -105,6 +130,21 @@ export default function AdminOrdersPage() {
                       >
                         +91 {order.customerMobile}
                       </div>
+                    </td>
+                    <td style={{ padding: "1rem", fontSize: "0.875rem" }}>
+                      {order.shippingAddress ? (
+                        <div>
+                          <p style={{ fontWeight: 600 }}>{order.shippingAddress.name}</p>
+                          <p style={{ color: "var(--muted-foreground)" }}>
+                            {order.shippingAddress.address}, {order.shippingAddress.locality}
+                          </p>
+                          <p style={{ color: "var(--muted-foreground)" }}>
+                            {order.shippingAddress.city}, {order.shippingAddress.state} - {order.shippingAddress.pincode}
+                          </p>
+                        </div>
+                      ) : (
+                        <span style={{ color: "var(--muted-foreground)" }}>N/A</span>
+                      )}
                     </td>
                     <td style={{ padding: "1rem" }}>
                       {order.items.length} item
@@ -163,6 +203,9 @@ export default function AdminOrdersPage() {
                         )}
                       </div>
                     </td>
+                    <td style={{ padding: "1rem", fontSize: "0.875rem" }}>
+                      {getEstimatedDelivery(order.createdAt)}
+                    </td>
                     <td style={{ padding: "1rem" }}>
                       {editingOrder === order.id ? (
                         <div style={{ display: "flex", gap: "0.5rem" }}>
@@ -177,7 +220,7 @@ export default function AdminOrdersPage() {
                               border: "1px solid var(--border)",
                               backgroundColor: "var(--background)",
                               color: "var(--foreground)",
-                              width: "200px",
+                              width: "150px",
                             }}
                           />
                           <button
@@ -248,8 +291,8 @@ export default function AdminOrdersPage() {
                           }}
                         >
                           {editingOrder === order.id
-                            ? "Cancel Edit"
-                            : "Add Tracking"}
+                            ? "Cancel"
+                            : "Track"}
                         </button>
                         {order.status !== "cancelled" && (
                           <button
