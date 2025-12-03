@@ -318,7 +318,12 @@ export default function CartPage() {
       rzp1.open();
     } catch (error) {
       console.error("Payment Error:", error);
-      alert("Something went wrong. Please try again.");
+      console.error("Error details:", {
+        razorpayAvailable: typeof window.Razorpay !== 'undefined',
+        razorpayKeyDefined: !!process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID,
+        errorMessage: error instanceof Error ? error.message : String(error)
+      });
+      alert(`Payment initialization failed: ${error instanceof Error ? error.message : 'Unknown error'}. Check console for details.`);
       setIsProcessing(false);
     }
   }, [user, selectedAddress, total, items, createOrder, clearCart, router]);
